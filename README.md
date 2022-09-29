@@ -99,5 +99,5 @@ This brings any changes that have been made in the main branch, and grap the cha
 After this, you have to create a new PULL request on your branch. https://github.com/pokerfce/UniversityWebsite/branches
 Here, you can put some detailed information if needed and just validate it.
 
-I'll check it out and verify it and confirm it.
+I'll check it out, verify it and confirm it.
 
