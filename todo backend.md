@@ -3,6 +3,7 @@ TODO:
 
 - add group to github projects 
 - set up initial Class (MySQL)
+- add tutorial github link: https://www.youtube.com/watch?v=jhtbhSpV5YA
 - create database in phpmyadmin and export it
 - add files to README (like images in drive, or figma)
 - create all classes (+setters and getters)
