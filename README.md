@@ -18,7 +18,7 @@
 - create all classes (+setters and getters)
 
 - create register function 
-  ```http
+  ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
   - insert class Utilisateur 
