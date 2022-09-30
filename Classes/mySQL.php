@@ -1,7 +1,7 @@
 <?php
     abstract class mySql {
         private const _serveur = "localhost";
-        private const _dbb = "pinteg_universityweb";
+        private const _dbb = "university";
         private const _login = "root";
         private const _mdp = "";
         private static $_cnx;
@@ -18,7 +18,7 @@
             return true;
         }
 
-        public static function stop_connection() {
+        public static function close_connection() {
             self::$_cnx = null;
         }
 
@@ -31,12 +31,15 @@
             $result = $prep->execute($array);
 
             if (!$result) {
-                die("Statement Error, because ". print_r(self::$_cnx->errorInfo(),true)); 
+
+                die("Statement Error (query: ".$query.", ".var_dump($array).") because ". print_r(self::$_cnx->errorInfo(),true)); 
                 return false; 
             }
 
             if ($return === false) { // DEFAULT: just checking if query worked
                 return true;
+            } else if ($return == 0) { // checks if there are any elements
+                return $prep->rowCount() > 0;
             } else if ($return == 1) { // fetch first element (for SELECT)
                 return $prep->rowCount() > 0? $prep->fetch() : -1;
             } else if ($return == 2) { // fetch all elements (for SELECT)

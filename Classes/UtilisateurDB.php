@@ -7,13 +7,13 @@
 
         public static function getIState() { 
             // checks if inscription is OPEN or CLOSED (boolean)
-
             MySql::start_connection();
             $result = MySql::request(
-                "SELECT allowInscription FROM utilisateur", array(), 1
+                "SELECT inscription FROM website_config", array(), 1
             );
             MySql::close_connection();
-            return $result["allowInscription"];
+            // var_dump($result);
+            return $result["inscription"];
         }
 
         public static function userExists($CIN) {
@@ -21,27 +21,27 @@
             $resultUser = MySql::request(
                 "SELECT CIN FROM utilisateur WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
-                1
+                0
             );
             MySql::close_connection();
             // "Erreur! Cette CIN déja inscrit auparavant!"
-            return ($resultUser == -1);
+            return $resultUser;
         }
 
         public static function listeExists($CIN) {
             MySql::start_connection();
             $resultList = MySql::request(
-                "SELECT CIN, roleID FROM inscription_list WHERE CIN = :CIN",
+                "SELECT CIN, role FROM liste_inscription WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 1
             );
-            MySql::stop_connection();
+            MySql::close_connection();
             
             // "Erreur! Cette CIN n'existe pas dans la liste!"
             if ($resultList == -1) {
-                return true;
+                return false;
             } else {
-                return $resultList["roleID"];
+                return $resultList["role"];
             }
         }
 
@@ -62,7 +62,7 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
 
         public static function update($user) {
@@ -78,6 +78,6 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
     }

@@ -12,6 +12,6 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
     }

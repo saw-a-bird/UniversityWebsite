@@ -9,19 +9,19 @@
             MySql::request(
                 "UPDATE website_config SET allowInscription = NOT allowInscription", array()
             );
-            mySql::stop_connection();
+            mySql::close_connection();
         }
 
          public static function addToList($cin, $role) {
             mySql::start_connection();
-            $query = "INSERT INTO list_inscription(cin, roleID) VALUES (:cin, :roleID)"; 
+            $query = "INSERT INTO list_inscription(cin, role) VALUES (:cin, :role)"; 
             $secureArray = array( 
                 ":cin" => $cin,
-                ":roleID" => $role
+                ":role" => $role
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
 
         public static function removeFromList($cin) {
@@ -32,12 +32,12 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
 
         public static function clearList() {
             mySql::start_connection();
             MySql::request("TRUNCATE TABLE list_inscription", array());
-            mySql::stop_connection();
+            mySql::close_connection();
         }
     }
