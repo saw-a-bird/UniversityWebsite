@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>inscri form</title>
-    <link rel="stylesheet" href="css/iscri_form.css">
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="Assets/css/iscri_form.css">
+    <link rel="stylesheet" href="Assets/css/general.css">
 </head>
 <body>
          <!--logo and name--> 
     <div>
-        <img src="pic/LOGO.png" alt="LOGO" id="logo">
+        <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
     <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
     </div>
     <!--form-->
@@ -59,7 +59,7 @@
     </div>
 
     <!--the img-->
-    <img src="pic/person_form.png" alt="person" id="form_img">
+    <img src="Assets/imgs/person_form.png" alt="person" id="form_img">
 
 </body>
 </html>
