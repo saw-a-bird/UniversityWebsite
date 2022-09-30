@@ -1,0 +1,8 @@
+colors : 
+#2AD2F4
+#B1740F
+#FDB833
+
+fonts :
+Futura 
+Proxima Nova

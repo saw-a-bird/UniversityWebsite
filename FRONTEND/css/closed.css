@@ -1,0 +1,51 @@
+#titre_close{
+    position: absolute;
+
+top: 160px;
+left: 295px;
+
+font-family: 'Proxima Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 46px;
+line-height: 10px;
+/* or 22% */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+
+
+}
+
+#s_titre_close{
+    position: absolute;
+
+top: 245px;
+left: 580px;
+
+font-family: 'Proxima Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 10px;
+/* or 38% */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #222E50;
+
+}
+
+#img_close{
+    position: absolute;
+    height: 558.69px;
+    width:340.45px ;
+    bottom: 0px;
+    right: 175px;
+}
+

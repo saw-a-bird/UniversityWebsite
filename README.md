@@ -16,14 +16,16 @@
 
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
-- [ ] create all classes (+setters and getters)
-
+- [ ] create all classes
+- [ ] set up Matricule SQL Sequence (matriculeSeq, instead of auto-generation)
 - [ ] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
-  - insert class Utilisateur 
-  - insert class Etudiant (department) or Enseignant or Parent
+  - get nextval from matriculeSeq
+  - insert class Utilisateur (set matricule)
+  - insert class Etudiant (matricule, department) or Enseignant or Parent
+  INFO: role is set in the constructor 
   ```
 
 - [ ] activation link
@@ -53,6 +55,12 @@
   ```
   - get tables (etudiant, enseignant)
   - add/remove to table (CIN, role)
+  ```
+
+- [ ] parent interface
+  ```
+  - get table etudiants
+  - add/remove to table (CIN) >> student have to confirm before add.
   ```
 
 - [ ] logout 
@@ -102,3 +110,4 @@ Here, you can put some detailed information if needed and just validate it.
 
 I'll check it out, verify it and confirm it.
 
+After the branch is merged, it'll be deleted from github.

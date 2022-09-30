@@ -1,0 +1,110 @@
+/* main content*/
+
+
+/* text */
+#bienvenue{
+    position: absolute;
+width: 659px;
+height: 104px;
+left: 385px;
+top: 50px;
+
+font-family: 'Proxima Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 136px;
+line-height: 10px;
+/* or 7% */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+#title_2{
+    position: absolute;
+
+top: 315px;
+left: 550px;
+
+font-family: 'Futura LtCn BT';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 10px;
+/* identical to box height, or 25% */
+
+text-align: center;
+
+color: #E8EBEA;
+
+}
+
+
+/* form */
+
+#cin{
+    position: absolute;
+width: 360px;
+height: 45px;
+left: 535px;
+top: 420px;
+
+background: #FFFFFF;
+border: 4px solid #B1740F;
+border-radius: 45px;
+}
+
+#part1_conn{
+    font-family: 'Proxima Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 10px;
+/* identical to box height, or 45% */
+
+align-items: center;
+text-align: center;
+color: #FFFFFF;
+}
+
+#part2_conn{
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 10px;
+    /* identical to box height, or 42% */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 4px;
+    color: #FDB833;
+}  
+
+#alt_connect{
+    position: absolute;
+width: 416px;
+height: 10px;
+left: 515px;
+top: 485px;
+
+display: flex;
+align-items: center;
+text-align: center;
+
+}
+
+/*background img*/
+
+#b_img{
+    position: absolute;
+width: 386px;
+height: 402px;
+right: 0px;
+bottom: 0px;
+}

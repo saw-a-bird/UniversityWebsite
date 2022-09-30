@@ -1,0 +1,88 @@
+#container{
+    position: absolute;
+width: 440px;
+height: 701px;
+left: 525px;
+top: 35px;
+
+background: #FFFFFF;
+box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+border-radius: 45px;
+}
+
+#f{
+    margin-left: 95px;
+    margin-top: 24px;
+}
+
+
+.lab_form{
+
+font-family: 'Futura Hv BT';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 10px;
+/* or 56% */
+
+display: flex;
+align-items: center;
+text-align: center;
+margin-top: 20px;
+color: #B1740F;
+}
+
+.lab_in_txt{
+    width: 233px;
+    margin-top: 20px;
+    border-top: 0px;
+    border-left:0px ;
+    border-right:0px ;
+}
+
+.drop_form{
+    width: 128px;
+height: 35px;
+margin-top: 20px;
+border: 3px solid #B1740F;
+}
+
+#lab_in_date{
+    background: #FFFFFF;
+border: 3px solid #B1740F;
+border-radius: 45px;
+width: 191px;
+height: 28.69px;
+margin-top: 20px;
+}
+
+#Confirmer{
+    font-family: 'Futura Hv BT';
+font-style: normal;
+font-weight: 400;
+font-size: 17px;
+line-height: 10px;
+/* identical to box height, or 59% */
+
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+background: #FDB833;
+border: 3px solid #101D42;
+border-radius: 45px;
+height: 45px;
+width: 150px;
+padding-left: 30px;
+margin-top: 10px;
+margin-left: 40px;
+}
+
+#form_img{
+    position: absolute;
+width: 308px;
+height: 537.19px;
+left: 120px;
+bottom: 0px;
+}
