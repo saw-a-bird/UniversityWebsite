@@ -12,13 +12,18 @@
 <body>
    <?php 
    
-   
+   require_once("Classes/UtilisateurDB.php");
+    $enabled_inscription = UtilisateurDB::getIState();
+    
     if (isset($_POST["INSCRIPTION_CIN"])){
 
         $cin = $_POST["INSCRIPTION_CIN"];
-        require_once("../Classes/UtilisateurDB.php");
     
-        if (UtilisateurDB::userExists($cin)) {
+        if ($enabled_inscription == 0) {
+            header("Location: closed.html");
+        } else if (!is_numeric($cin)) {
+            $error = "Erreur! Entrer seulement des nombres!";
+        } else if (UtilisateurDB::userExists($cin)) {
             $error = "Erreur! Cette CIN déja inscrit auparavant!";
         } else {
             $result = UtilisateurDB::listeExists($cin);
@@ -26,7 +31,8 @@
                 $error = "Erreur! Cette CIN n'existe pas dans la liste!";
             } else {
                 session_start();
-                $_SESSION["INSCRIPTION_ROLE"] = $result;
+                $_SESSION["REGISTRATION_ROLE"] = $result;
+                header("Location: form.php");
                 session_write_close();
             }
         }
@@ -45,8 +51,15 @@
         <p id="bienvenue">BIENVENUE</p>
         <p id="title_2">Presenter votre CIN pour incrire </p>
         <form action="" method="post">
-            <input id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN">
-            <p id = "error_message"> $error </p>
+            <input id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN" <?php if ($enabled_inscription == 0) echo "disabled";
+            ?>>
+
+            <?php 
+                if (isset($error)) {
+                    echo "<p id = 'error_message'> $error </p>";
+                }
+            ?>
+            
         </form>
         <p id="alt_connect"><span id="part1_conn">Déja inscrit? Appuier ici pour </span><a href="" id="part2_conn"> se connecter.</a></p>
     </div>

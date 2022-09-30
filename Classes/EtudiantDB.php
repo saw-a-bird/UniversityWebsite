@@ -13,18 +13,18 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
 
         public static function update($etd) {
             mySql::start_connection();
-            $query = "UPDATE etudiant SET departmentID = :depID WHERE marticule = :marticule"; 
+            $query = "UPDATE etudiant SET department = :department WHERE marticule = :marticule"; 
             $secureArray = array( 
-                ":depID" => $etd->getDepartmentID(),
+                ":department" => $etd->getDepartmentID(),
                 ":marticule" => $etd->getMatricule()
             );
 
             MySql::request($query, $secureArray);
-            mySql::stop_connection();
+            mySql::close_connection();
         }
     }

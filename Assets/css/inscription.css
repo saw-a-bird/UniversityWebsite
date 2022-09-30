@@ -99,6 +99,18 @@ text-align: center;
 
 }
 
+#error_message {
+    position: absolute;
+    width: 360px;
+    height: 45px;
+    left: 535px;
+    top: 380px;
+    color:red;
+    /* background: #FFFFFF; */
+    /* border: 4px solid #B1740F; */
+    /* border-radius: 45px; */
+}
+
 /*background img*/
 
 #b_img{

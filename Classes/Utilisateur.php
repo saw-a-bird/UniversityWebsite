@@ -10,7 +10,7 @@
         private $dateInscription;
         private $email;
         private $role = 0;
-        private $numMatricule;
+        private $matricule;
         private $password;
         private $isActive;
 
@@ -89,16 +89,6 @@
         public function setRole($role){
             $this->role = $role;
         }
-
-
-    
-        public function getNumMatricule(){
-            return $this->numMatricule;
-        }
-    
-        public function setNumMatricule($numMatricule){
-            $this->numMatricule = $numMatricule;
-        }
     
         public function getPassword(){
             return $this->password;
@@ -120,4 +110,24 @@
             STATIC METHODS
         */
 
+
+        /**
+         * Get the value of matricule
+         */ 
+        public function getMatricule()
+        {
+                return $this->matricule;
+        }
+
+        /**
+         * Set the value of matricule
+         *
+         * @return  self
+         */ 
+        public function setMatricule($matricule)
+        {
+                $this->matricule = $matricule;
+
+                return $this;
+        }
     }

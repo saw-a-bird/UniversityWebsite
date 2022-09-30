@@ -3,7 +3,7 @@
 class Roles
 {
     private const roleArray = array(
-        0 => 'Administratuer',
+        0 => 'Administrateur',
         1 => 'Enseignant',
         2 => 'Parent', 
         3 => 'Etudiant'
