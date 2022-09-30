@@ -6,24 +6,22 @@
         // METHODS
         public static function insert($etd) {
             mySql::start_connection();
-            $query = "INSERT INTO etudiant(CIN, filiere, department) VALUES (:CIN, :filiere, :department)"; //isActive for later
+            $query = "INSERT INTO etudiant(matricule, department) VALUES (:matricule, :department)"; //isActive for later
             $secureArray = array( 
-                ":CIN" => $etd->CIN,
-                ":departmentID" => $etd->departmentID,
-                ":filiereID" => $etd->filiereID
+                ":matricule" => $etd->getMatricule(),
+                ":department" => $etd->getDepartmentID()
             );
 
             MySql::request($query, $secureArray);
             mySql::stop_connection();
         }
 
-        public static function update($user) {
+        public static function update($etd) {
             mySql::start_connection();
-            $query = "UPDATE etudiant SET filiereID = ?, departmentID = ? WHERE CIN = ?"; //isActive for later
+            $query = "UPDATE etudiant SET departmentID = :depID WHERE marticule = :marticule"; //isActive for later
             $secureArray = array( 
-                $user->filiereID,
-                $user->departmentID,
-                $user->CIN
+                ":depID" => $etd->getDepartmentID(),
+                ":marticule" => $etd->getMatricule()
             );
 
             MySql::request($query, $secureArray);

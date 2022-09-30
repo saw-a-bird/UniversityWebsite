@@ -1,23 +1,24 @@
 
 # TODO
 
-
 ### Frontend:
-- interface enseignant
-- interface parent
-- interface admin (table etudiant and table enseignant, add and remove buttons)
-- interface user
-- register page (inscription page, also main page)
-- login page
-- closed inscription page
-- forgot password page (email)
+- [ ] interface enseignant
+- [ ] interface parent
+- [ ] interface admin (table etudiant and table enseignant, add and remove buttons)
+- [ ] interface user
+- [X] register page (inscription page, also main page)
+- [X] register form page
+- [ ] login page
+- [X] closed inscription page
+- [ ] forgot password page (email)
 
 ### Backend:
 
-- set up initial Class (MySQL)
-- create all classes (+setters and getters)
+- [X] set up diagramme de clases
+- [X] set up connection Class (MySQL)
+- [ ] create all classes (+setters and getters)
 
-- create register function 
+- [ ] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
@@ -25,36 +26,36 @@
   - insert class Etudiant (department) or Enseignant or Parent
   ```
 
-- activation link
+- [ ] activation link
   ```
   - generate token and send email
   - onValidation: set isActive true + message
   - activation link not accepted in 24hours
   ```
 
-- create login function 
+- [ ]  create login function 
   ```
   - use email + password
   - save login to SESSION
   - redirect to specific interface per role
   ```
 
-- forgot password button 
+- [ ] forgot password button 
   ```
   - email from form
   - send confirmation email
   - password edit
   ```
 
-- modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
+- [ ] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
 
-- admin interface
+- [ ] admin interface
   ```
   - get tables (etudiant, enseignant)
   - add/remove to table (CIN, role)
   ```
 
-- logout 
+- [ ] logout 
   ```
   - remove login from SESSION
   - redirect to main page (inscription page)
@@ -99,5 +100,5 @@ This brings any changes that have been made in the main branch, and grap the cha
 After this, you have to create a new PULL request on your branch. https://github.com/pokerfce/UniversityWebsite/branches
 Here, you can put some detailed information if needed and just validate it.
 
-I'll check it out and verify it and confirm it.
+I'll check it out, verify it and confirm it.
 

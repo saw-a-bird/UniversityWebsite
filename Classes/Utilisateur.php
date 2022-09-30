@@ -9,7 +9,7 @@
         private $dateNaissance;
         private $dateInscription;
         private $email;
-        private $role;
+        private $role = 0;
         private $numMatricule;
         private $password;
         private $isActive;
