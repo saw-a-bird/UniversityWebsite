@@ -1,0 +1,31 @@
+/* general*/
+body{
+    background-color: #2AD2F4;
+}
+
+/*logo and name*/
+#nom_uni{
+    position: absolute;
+
+left: 100px;
+top: 20px;
+
+font-family: 'Proxima Nova';
+font-style: normal;
+font-weight: 400;
+font-size: 28px;
+line-height: 10px;
+/* or 36% */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+#logo{
+    position: absolute;
+    left: 12px;
+    top: 10px;
+}
