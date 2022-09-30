@@ -3,18 +3,20 @@
 
 
 ### Frontend:
-- interface enseignant
-- interface parent
-- interface admin (table etudiant and table enseignant, add and remove buttons)
-- interface user
-- register page (inscription page, also main page)
-- login page
-- closed inscription page
-- forgot password page (email)
+- [ ] interface enseignant
+- [ ] interface parent
+- [ ] interface admin (table etudiant and table enseignant, add and remove buttons)
+- [ ] interface user
+- [X] register page (inscription page, also main page)
+- [X] register form page
+- [ ] login page
+- [X] closed inscription page
+- [ ] forgot password page (email)
 
 ### Backend:
 
-- set up initial Class (MySQL)
+- [X] set up diagramme de clases
+- [X] set up connection Class (MySQL)
 - create all classes (+setters and getters)
 
 - create register function 
