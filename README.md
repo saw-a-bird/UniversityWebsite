@@ -17,9 +17,9 @@
 
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
-- create all classes (+setters and getters)
+- [ ] create all classes (+setters and getters)
 
-- create register function 
+- [ ] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
@@ -27,36 +27,36 @@
   - insert class Etudiant (department) or Enseignant or Parent
   ```
 
-- activation link
+- [ ] activation link
   ```
   - generate token and send email
   - onValidation: set isActive true + message
   - activation link not accepted in 24hours
   ```
 
-- create login function 
+- [ ]  create login function 
   ```
   - use email + password
   - save login to SESSION
   - redirect to specific interface per role
   ```
 
-- forgot password button 
+- [ ] forgot password button 
   ```
   - email from form
   - send confirmation email
   - password edit
   ```
 
-- modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
+- [ ] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
 
-- admin interface
+- [ ] admin interface
   ```
   - get tables (etudiant, enseignant)
   - add/remove to table (CIN, role)
   ```
 
-- logout 
+- [ ] logout 
   ```
   - remove login from SESSION
   - redirect to main page (inscription page)
