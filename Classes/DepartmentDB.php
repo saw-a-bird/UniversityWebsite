@@ -6,7 +6,7 @@
         // METHODS
          public static function insert($dep) {
             mySql::start_connection();
-            $query = "INSERT INTO department(nom) VALUES (:nom)"; //isActive for later
+            $query = "INSERT INTO department(nom) VALUES (:nom)"; 
             $secureArray = array( 
                 ":nom" => $dep->getNom(),
             );

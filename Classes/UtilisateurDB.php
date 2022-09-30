@@ -4,6 +4,18 @@
     class UtilisateurDB extends MySql {
 
         // INCRIPTION CHECKERS
+
+        public static function getIState() { 
+            // checks if inscription is OPEN or CLOSED (boolean)
+
+            MySql::start_connection();
+            $result = MySql::request(
+                "SELECT allowInscription FROM utilisateur", array(), 1
+            );
+            MySql::close_connection();
+            return $result["allowInscription"];
+        }
+
         public static function userExists($CIN) {
             MySql::start_connection();
             $resultUser = MySql::request(
@@ -36,7 +48,7 @@
         // METHODS
         public static function insert($user) {
             mySql::start_connection();
-            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, password, role) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :password, :role)"; //isActive for later
+            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, password, role) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :password, :role)"; 
             $secureArray = array( 
                 ":CIN" => $user->CIN,
                 ":nom" => $user->nom,
@@ -55,7 +67,7 @@
 
         public static function update($user) {
             mySql::start_connection();
-            $query = "UPDATE utilisateur SET nom = ?, prenom = ?, sexe = ?, adresse = ?, dateNaissance = ? WHERE CIN = ?"; //isActive for later
+            $query = "UPDATE utilisateur SET nom = ?, prenom = ?, sexe = ?, adresse = ?, dateNaissance = ? WHERE CIN = ?"; 
             $secureArray = array( 
                 $user->nom,
                 $user->prenom,

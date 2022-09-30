@@ -6,7 +6,7 @@
         // METHODS
         public static function insert($etd) {
             mySql::start_connection();
-            $query = "INSERT INTO etudiant(matricule, department) VALUES (:matricule, :department)"; //isActive for later
+            $query = "INSERT INTO etudiant(matricule, department) VALUES (:matricule, :department)"; 
             $secureArray = array( 
                 ":matricule" => $etd->getMatricule(),
                 ":department" => $etd->getDepartmentID()
@@ -18,7 +18,7 @@
 
         public static function update($etd) {
             mySql::start_connection();
-            $query = "UPDATE etudiant SET departmentID = :depID WHERE marticule = :marticule"; //isActive for later
+            $query = "UPDATE etudiant SET departmentID = :depID WHERE marticule = :marticule"; 
             $secureArray = array( 
                 ":depID" => $etd->getDepartmentID(),
                 ":marticule" => $etd->getMatricule()

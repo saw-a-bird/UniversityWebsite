@@ -81,10 +81,16 @@
         public function getRole(){
             return $this->role;
         }
+
+        public function getRoleName(){
+            return Roles::getName($this->role);
+        }
     
         public function setRole($role){
             $this->role = $role;
         }
+
+
     
         public function getNumMatricule(){
             return $this->numMatricule;

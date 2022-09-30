@@ -1,10 +1,8 @@
 <?php
 
-
     class Department {
         private $id;
         private $nom;
-
         
         /**
          * Get ID of department

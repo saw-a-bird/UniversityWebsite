@@ -12,45 +12,27 @@
 <body>
    <?php 
    
-if (isset($_POST['submit'])){
-    $user=$_POST['username'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $Cpw=$_POST['Cpassword'];
-    $type=$_POST['usertype'];
+   
+    if (isset($_POST["INSCRIPTION_CIN"])){
 
-    $sql =  "SELECT email from user where email='$email'";
-    $result=mysqli_query($data,$sql);
-
-
-
-
-    if ($result) {
-        if ($result->num_rows > 0) {
-            while ($row = $result -> fetch_array(MYSQLI_ASSOC)) {
-                if(!empty($row["email"])){
-                    header("Location: index.php?nom=".$user."&email=".$email."&v=true");
-                    return;
-                }
-            }
-        }
-        if ($password != $Cpw){
-            header("Location: index.php?nom=".$user."&email=".$email."&p=true");
-            return;
+        $cin = $_POST["INSCRIPTION_CIN"];
+        require_once("../Classes/UtilisateurDB.php");
+    
+        if (UtilisateurDB::userExists($cin)) {
+            $error = "Erreur! Cette CIN déja inscrit auparavant!";
         } else {
-            $sql="INSERT INTO `user`(`username`, `email`, `usertype`, `password`)VALUES('$user','$email','$type','$password')";
-            $result=mysqli_query($data,$sql);
-            if ($result){
-                header("Location: index.php");
-            }
-            else{
-                echo "User Not inserted";
+            $result = UtilisateurDB::listeExists($cin);
+            if ($result == false) {
+                $error = "Erreur! Cette CIN n'existe pas dans la liste!";
+            } else {
+                session_start();
+                $_SESSION["INSCRIPTION_ROLE"] = $result;
+                session_write_close();
             }
         }
     }
-}
 
-?>
+    ?>
 
     <!--logo and name--> 
     <div>
@@ -62,8 +44,9 @@ if (isset($_POST['submit'])){
     <div>
         <p id="bienvenue">BIENVENUE</p>
         <p id="title_2">Presenter votre CIN pour incrire </p>
-        <form action="" method="post" name="cin_form">
-            <input id="cin" type="text" name="cin" placeholder="CIN">
+        <form action="" method="post">
+            <input id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN">
+            <p id = "error_message"> $error </p>
         </form>
         <p id="alt_connect"><span id="part1_conn">Déja inscrit? Appuier ici pour </span><a href="" id="part2_conn"> se connecter.</a></p>
     </div>
