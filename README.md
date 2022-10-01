@@ -8,7 +8,7 @@
 - [ ] interface user
 - [X] register page (inscription page, also main page)
 - [X] register form page
-- [ ] login page
+- [X] login page
 - [X] closed inscription page
 - [ ] forgot password page (email)
 
@@ -16,9 +16,8 @@
 
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
-- [ ] create all classes
-- [ ] set up Matricule SQL Sequence (matriculeSeq, instead of auto-generation)
-- [ ] create register function 
+- [X] create all classes
+- [X] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
@@ -28,14 +27,14 @@
   INFO: role is set in the constructor 
   ```
 
-- [ ] activation link
+- [X] activation link
   ```
   - generate token and send email
   - onValidation: set isActive true + message
   - activation link not accepted in 24hours
   ```
 
-- [ ]  create login function 
+- [X]  create login function 
   ```
   - use email + password
   - save login to SESSION
