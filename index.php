@@ -12,6 +12,7 @@
 <body>
    <?php 
       session_start();
+      $_SESSION["login"] = null;
       if (isset($_SESSION["login"])) {
         header("location: Pipes/login_redirect.php");
       }
@@ -25,20 +26,15 @@
     
         if ($enabled_inscription == 0) {
             header("Location: closed.html");
-        } else if (!is_numeric($cin)) {
+        } elseif (!is_numeric($cin)) {
             $error = "Erreur! Entrer seulement des nombres!";
-        } else if ($utilisateurDB->userExists($cin) == true) {
+        } elseif ($utilisateurDB->userExists($cin) == true) {
             $error = "Erreur! Cette CIN déja inscrit auparavant!";
         } else {
             $_SESSION["INSCRIPTION_CIN"] = $cin;
-            
-            $role = $utilisateurDB->listeExists($cin);
-            if ($role == false) {
-                $role = 2;
-            }
-
             header("Location: form.php");
         }
+
         $utilisateurDB = null;
     }
 

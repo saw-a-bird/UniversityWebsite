@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2022 at 09:07 PM
+-- Generation Time: Oct 01, 2022 at 08:28 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -32,6 +32,16 @@ CREATE TABLE `department` (
   `nom` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`id`, `nom`) VALUES
+(1, 'A'),
+(2, 'B'),
+(3, 'C'),
+(4, 'D');
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +63,13 @@ CREATE TABLE `etudiant` (
   `department` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `etudiant`
+--
+
+INSERT INTO `etudiant` (`matricule`, `department`) VALUES
+(14, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +82,13 @@ CREATE TABLE `liste_inscription` (
   `isSubscribed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `liste_inscription`
+--
+
+INSERT INTO `liste_inscription` (`cin`, `role`, `isSubscribed`) VALUES
+(111, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -76,22 +100,25 @@ CREATE TABLE `utilisateur` (
   `CIN` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
-  `sexe` varchar(10) NOT NULL,
+  `sexe` tinyint(1) NOT NULL,
   `email` varchar(30) NOT NULL,
   `adresse` varchar(30) NOT NULL,
   `password` varchar(20) NOT NULL,
   `dateNaissance` date NOT NULL,
   `dateInscription` datetime NOT NULL DEFAULT current_timestamp(),
   `isActive` tinyint(1) NOT NULL DEFAULT 0,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `activationCode` varchar(100) NOT NULL,
+  `activationExpiry` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`matricule`, `CIN`, `nom`, `prenom`, `sexe`, `email`, `adresse`, `password`, `dateNaissance`, `dateInscription`, `isActive`, `role`) VALUES
-(1, 1111, 'Website', 'Admin', 'Masculin', 'admin@gmail.com', 'adrrr', 'test', '2022-09-01', '2022-09-30 20:06:49', 1, 0);
+INSERT INTO `utilisateur` (`matricule`, `CIN`, `nom`, `prenom`, `sexe`, `email`, `adresse`, `password`, `dateNaissance`, `dateInscription`, `isActive`, `role`, `activationCode`, `activationExpiry`) VALUES
+(1, 1111, 'Website', 'Admin', 1, 'admin@gmail.com', 'adrrr', 'test', '2022-09-01', '2022-09-30 20:06:49', 1, 0, '', '2022-10-01 00:49:39'),
+(14, 111, 'S', 'S', 1, 'gamezrookie@gmail.com', 'S', 'U88G2L8R', '2022-10-06', '2022-10-01 19:24:29', 1, 3, '9f3c1b910bad125aa7d6348f772e07c8', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -143,7 +170,9 @@ ALTER TABLE `liste_inscription`
 -- Indexes for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`matricule`);
+  ADD PRIMARY KEY (`matricule`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `CIN` (`CIN`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -153,19 +182,19 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `liste_inscription`
 --
 ALTER TABLE `liste_inscription`
-  MODIFY `cin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

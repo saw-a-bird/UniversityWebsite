@@ -1,8 +1,8 @@
 #titre_close{
     position: absolute;
 
-top: 160px;
-left: 295px;
+top: 23%;
+left: 21%;
 
 font-family: 'Proxima Nova';
 font-style: normal;
@@ -23,8 +23,8 @@ color: #FFFFFF;
 #s_titre_close{
     position: absolute;
 
-top: 245px;
-left: 580px;
+top: 35%;
+left: 38%;
 
 font-family: 'Proxima Nova';
 font-style: normal;
@@ -45,7 +45,7 @@ color: #222E50;
     position: absolute;
     height: 558.69px;
     width:340.45px ;
-    bottom: 0px;
-    right: 175px;
+    bottom: 0%;
+    right: 12%;
 }
 

@@ -8,6 +8,19 @@
         public function __construct($recipient) {
             $this->recipient = $recipient;
         }
+        
+        private $debug = true;
+        function send($subject, $message) {
+            $return = mail($this->recipient, $subject, nl2br($message), self::EMAIL_HEADERS);
+            // if ($this->debug) {
+            //     if($return == true) {
+            //         print_r('Message was sent SUCCESSFULLY.');
+            //     } else {
+            //         print_r('MAIL ERROR: '.error_get_last()['message']);
+            //     }
+            // }
+
+        }
 
         function send_activation_email() {
             function generate_activation_code(): string {
@@ -27,10 +40,10 @@
                     MESSAGE;
 
             // send the email
-            mail($this->recipient, $subject, nl2br($message), self::EMAIL_HEADERS);
-            
+            $this->send($subject, $message);
             return $activation_code;
         }
+        
 
         function send_new_password() {
             function create_random_password() {
@@ -55,7 +68,7 @@
                     MESSAGE;
 
             // send the email
-            mail($this->recipient, $subject, nl2br($message), self::EMAIL_HEADERS);
+            $this->send($subject, $message);
             return $new_password;
         }
     }

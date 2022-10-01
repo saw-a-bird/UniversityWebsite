@@ -21,11 +21,15 @@
         $utilisateurDB = new UtilisateurDB();
         // first of all, for security purposes and to get role.
 
+        if ($utilisateurDB->getIState() == 0) {
+            header("Location: closed.html");
+        }
+        
         $cin = $_SESSION["INSCRIPTION_CIN"];
         if ($utilisateurDB->userExists($cin) == true) {
             header("Location: index.php");
         }
-        
+
         $role = $utilisateurDB->listeExists($cin);
         if ($role == false) {
             $role = 2;
@@ -75,8 +79,7 @@
                     $user->setCIN($cin)
                         ->setNom($_POST["nom"])
                         ->setPrenom($_POST["prenom"])
-                        ->setAdresse($_POST["prenom"])
-                        ->setEmail($post_email)
+                        ->setAdresse($_POST["adresse"])
                         ->setEmail($post_email)
                         ->setSexe($post_sexe)
                         ->setDateNaissance($_POST["date_dn"]);
@@ -88,7 +91,6 @@
                     $emailer = new Emailer($post_email);
                     $user->setActivationCode($emailer->send_activation_email());
                     
-                                        
                     // insert objects
                     $utilisateurDB->insert($user);
                     $utilisateurDB = null;
@@ -102,10 +104,10 @@
                     }
 
                     //SUCCESS CREATION
-                    header("Location: login.php?m=0&email=".$post_email);
+                    header("Location: login.php?m=0");
                 }
             } else {
-                $generalErrors = "La formulaire est erroné, verifier ton informations.";
+                $generalErrors = "La formulaire est erroné, verifier tes informations.";
             }
         }
 
@@ -193,10 +195,23 @@
                 
             </script>
 
-           <input type="submit" value="Confirmer" id="Confirmer" name = "confirmbtn">
+            <label for="terms" class = "terms_conditions">  
+                <input type="checkbox" id="terms" name="terms" value="terms" onclick="checkTerms(this)" required> <span id="term_t">Accepter termes de confidentalités </span>
+            </label>
+
+           <input type="submit" value="Confirmer" id="Confirmer" name = "confirmbtn" disabled>
+
+           <script>
+            var termsCheckbox = document.getElementById("terms");
+                var confirmBtn = document.getElementById("Confirmer");
+
+               function checkTerms() {
+                    confirmBtn.disabled = !termsCheckbox.checked;
+                }
+            </script>
         </form>
     </div>
-
+    <div style = "margin-top:20px"  > </div>
     <!--the img-->
     <img src="Assets/imgs/person_form.png" alt="person" id="form_img">
 
