@@ -3,39 +3,46 @@
 
     class UtilisateurDB extends MySql {
 
-        // INCRIPTION CHECKERS
+        /*
+            VERIFY AND QUERY METHODS
+        */
 
-        public static function getIState() { 
+        public function getIState() { 
             // checks if inscription is OPEN or CLOSED (boolean)
-            MySql::start_connection();
+            
             $result = MySql::request(
                 "SELECT inscription FROM website_config", array(), 1
             );
-            MySql::close_connection();
             // var_dump($result);
             return $result["inscription"];
         }
 
-        public static function userExists($CIN) {
-            MySql::start_connection();
+        public function userExists($CIN) {
             $resultUser = MySql::request(
                 "SELECT CIN FROM utilisateur WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 0
             );
-            MySql::close_connection();
             // "Erreur! Cette CIN déja inscrit auparavant!"
             return $resultUser;
         }
 
-        public static function listeExists($CIN) {
-            MySql::start_connection();
+        public function emailExists($email, $return = 0) {
+            $resultUser = MySql::request(
+                "SELECT * FROM utilisateur WHERE email = :email",
+                array(':email' => $email),
+                $return
+            );
+            // "Erreur! Cette CIN déja inscrit auparavant!"
+            return $resultUser;
+        }
+
+        public function listeExists($CIN) {
             $resultList = MySql::request(
                 "SELECT CIN, role FROM liste_inscription WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 1
             );
-            MySql::close_connection();
             
             // "Erreur! Cette CIN n'existe pas dans la liste!"
             if ($resultList == -1) {
@@ -45,28 +52,27 @@
             }
         }
 
-        // METHODS
-        public static function insert($user) {
-            mySql::start_connection();
-            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, password, role) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :password, :role)"; 
+        /*
+            MAIN CRUD METHODS
+        */
+        public function insert(Utilisateur $user) {
+            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, role, activationCode) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :role, :activationCode)"; 
             $secureArray = array( 
-                ":CIN" => $user->CIN,
-                ":nom" => $user->nom,
-                ":prenom" => $user->prenom,
-                ":sexe" => $user->sexe,
-                ":adresse" => $user->adresse,
-                ":dateNaissance" => $user->dateNaissance,
-                ":email" => $user->email,
-                ":password" => password_hash($user->password, PASSWORD_DEFAULT),
-                ":role" => $user->role
+                ":CIN" => $user->getCIN(),
+                ":nom" => $user->getNom(),
+                ":prenom" => $user->getPrenom(),
+                ":sexe" => $user->getSexe(),
+                ":adresse" => $user->getAdresse(),
+                ":dateNaissance" => $user->getDateNaissance(),
+                ":email" => $user->getEmail(),  
+                ":role" => $user->getRole(),
+                ":activationCode" => $user->getActivationCode()
             );
 
-            MySql::request($query, $secureArray);
-            mySql::close_connection();
+            $user->setMatricule(MySql::request($query, $secureArray, 3));
         }
 
-        public static function update($user) {
-            mySql::start_connection();
+        public function update($user) {
             $query = "UPDATE utilisateur SET nom = ?, prenom = ?, sexe = ?, adresse = ?, dateNaissance = ? WHERE CIN = ?"; 
             $secureArray = array( 
                 $user->nom,
@@ -78,6 +84,62 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::close_connection();
+        }
+
+        public function delete($matricule) {
+            $query = "DELETE FROM utilisateur WHERE matricule = :matricule"; 
+            $secureArray = array( 
+                ":matricule" => $matricule
+            );
+
+            MySql::request($query, $secureArray);
+        }
+        /*
+            SECONDARY CRUD METHODS
+        */
+
+        public function verify_activation_code(string $activationCode, string $email) {
+            $responseUser = MySql::request(
+                'SELECT CIN, activationCode, DATEDIFF(activationExpiry, now()) as isExpired
+                 FROM utilisateur
+                 WHERE isActive = 0 AND email = :email',
+                array( 
+                    ":email" => $email
+                ),
+                1
+            );
+
+            if ($responseUser != -1) {
+                // error: ALREADY EXPIRED
+                if ((int)$responseUser["isExpired"] === 1) {
+                    self::delete($responseUser['matricule']);
+                    return 0;
+                }
+                
+                // verify the password
+                if ($activationCode == $responseUser['activationCode']) {
+                    return $responseUser; // IF VALID, return user;
+                }
+            }
+            
+            return -1; // error: USER NOT FOUND
+        }
+        
+
+        public function activate_user($CIN, $password) {
+            MySql::request(
+                "UPDATE utilisateur SET isActive = 1, password = :PASS, activationExpiry = NULL WHERE CIN = :CIN",
+                array( 
+                    ":CIN" => $CIN,
+                    ":PASS" => $password
+                )
+            );
+
+            MySql::request(
+                "UPDATE liste_inscription SET isSubscribed = 1 WHERE CIN = :CIN",
+                array( 
+                    ":CIN" => $CIN
+                )
+            );
         }
     }
