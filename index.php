@@ -43,7 +43,7 @@
     <!--logo and name--> 
     <div>
         <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-    <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
+        <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
     </div>
 
     <!--the form and title--> 

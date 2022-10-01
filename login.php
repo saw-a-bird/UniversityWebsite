@@ -11,7 +11,7 @@ Proxima Nova -->
 <html>
     <head>
         <link rel="stylesheet" href="Assets/css/login.css">
-        </head>
+      </head>
 <body>
     <section>
         <div class="imgcontainer">
@@ -54,18 +54,19 @@ Proxima Nova -->
         // check if email exists.
         require_once("Classes/UtilisateurDB.php");
         $utilisateurDB = new UtilisateurDB();
-        if ($user = $utilisateurDB->emailExists($email, 1)) {
-          if ($_POST["password"] == $user["password"]) {
+        $user = $utilisateurDB->emailExists($email, 1);
+        if ($user != -1) {
+          if ($_POST["password"] === $user["password"]) {
             if ($user["isActive"] == 1) {
               $_SESSION['login'] = array("matricule" => $user["matricule"], "role" => $user["role"]);
               
                 header("location: Pipes/login_redirect.php");
 
             } else {
-              $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.";
+              $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
             }
           } else {
-            $message = "<p class = 'red_alert'>Error. Veuiller à verifier notre credentials.";
+            $message = "<p class = 'red_alert'>Error. Veuiller à verifier notre credentials.</p>";
           }
         } else {
           $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";

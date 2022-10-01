@@ -1,0 +1,70 @@
+
+body {
+    background-color: #01d4ff;
+}
+
+.content{
+    width:1200px;
+    margin: auto;
+    color: #fff;
+    height: auto;
+    position: relative;}
+    
+    
+    .content h1{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 50px;
+    padding-left: 20px;
+    margin-top: 9%;
+    margin-left: 500px;
+    letter-spacing: 2px;
+     }
+    
+    
+    
+    .content span{
+        color:rgb(252, 238, 240);
+        font-size:60px;
+        margin-left: -100px;
+      
+    }
+    h4{
+        margin-top: -70px;
+        margin-left: 600px;
+        color: white;
+        font-size: 20px;
+    }
+    .content img{
+        padding-left: 450px;
+        color: #fff;
+    }
+    
+    .website_title{
+    margin-top: -50px;
+       margin-left:80px;
+      color: white;
+     
+    }
+    
+    
+    .deconnection {
+        margin-top: -50px;
+       margin-left:1300px;
+      color: white;
+     
+    }
+    .logo img{
+        margin-top: -10px;
+    padding:1%;
+    width: 70px;
+    
+    
+    }
+    
+     a{
+        text-decoration: none;
+       padding-top: -1000px;
+     
+      color: white;
+    }
+    
