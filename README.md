@@ -110,3 +110,25 @@ Here, you can put some detailed information if needed and just validate it.
 I'll check it out, verify it and confirm it.
 
 After the branch is merged, it'll be deleted from github.
+
+
+# HOW TO ADD EMAIL:
+
+Go to ```C:\xampp\sendmail``` and open ```sendmail.ini  ```
+
+Modify these parameters
+
+  ```
+smtp_server=smtp.gmail.com
+smtp_port=587
+smtp_ssl=tls
+error_logfile=error.log
+debug_logfile=debug.log
+auth_username=joe.localhost1@gmail.com
+auth_password=jwssmhaexympwgpl
+  ```
+
+I already taken care of the server-side code.
+
+If this didn't work, please immediately DM me.
+
