@@ -11,7 +11,7 @@ border-radius: 45px;
 }
 
 #f{
-    margin-left: 95px;
+    margin-left: 70px;
     margin-top: 24px;
 }
 
@@ -75,8 +75,8 @@ border-radius: 45px;
 height: 45px;
 width: 150px;
 padding-left: 30px;
-margin-top: 10px;
-margin-left: 40px;
+margin-top: 20px;
+margin-left: 175px;
 }
 
 #form_img{
@@ -85,4 +85,15 @@ width: 308px;
 height: 537.19px;
 left: 120px;
 bottom: 0px;
+}
+
+.hide {
+    display:none
+}
+
+._error {
+    display: block;
+    color: red;
+    margin-top: 10px;
+    margin-right: 10px;
 }

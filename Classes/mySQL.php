@@ -1,11 +1,19 @@
 <?php
-    abstract class mySql {
+    class mySql {
         private const _serveur = "localhost";
         private const _dbb = "university";
         private const _login = "root";
         private const _mdp = "";
         private static $_cnx;
 
+        function __construct() {
+            MySql::start_connection();
+        }
+
+        function __destruct() {
+            MySql::close_connection();
+        }
+        
         public static function start_connection() {
             try {
                 self::$_cnx = new PDO("mysql:host=".self::_serveur.";dbname=".self::_dbb, self::_login, self::_mdp);

@@ -1,18 +1,20 @@
 <?php
 
     class Utilisateur {
+        private $matricule;
         private $CIN;
+        private $email;
         private $nom;
         private $prenom;
         private $sexe;
         private $adresse;
         private $dateNaissance;
         private $dateInscription;
-        private $email;
-        private $role = 0;
-        private $matricule;
         private $password;
         private $isActive;
+        private $role = 0;
+        private $activationCode;
+        private $activationExpiry;
 
         public function getCIN(){
             return $this->CIN;
@@ -20,6 +22,7 @@
     
         public function setCIN($CIN){
             $this->CIN = $CIN;
+            return $this;
         }
     
         public function getNom(){
@@ -28,6 +31,7 @@
     
         public function setNom($nom){
             $this->nom = $nom;
+            return $this;
         }
     
         public function getPrenom(){
@@ -36,6 +40,7 @@
     
         public function setPrenom($prenom){
             $this->prenom = $prenom;
+            return $this;
         }
     
         public function getSexe(){
@@ -44,6 +49,7 @@
     
         public function setSexe($sexe){
             $this->sexe = $sexe;
+            return $this;
         }
     
         public function getAdresse(){
@@ -52,6 +58,7 @@
     
         public function setAdresse($adresse){
             $this->adresse = $adresse;
+            return $this;
         }
     
         public function getDateNaissance(){
@@ -60,6 +67,7 @@
     
         public function setDateNaissance($dateNaissance){
             $this->dateNaissance = $dateNaissance;
+            return $this;
         }
     
         public function getDateInscription(){
@@ -68,7 +76,9 @@
     
         public function setDateInscription($dateInscription){
             $this->dateInscription = $dateInscription;
+            return $this;
         }
+        
     
         public function getEmail(){
             return $this->email;
@@ -76,6 +86,7 @@
     
         public function setEmail($email){
             $this->email = $email;
+            return $this;
         }
     
         public function getRole(){
@@ -88,6 +99,7 @@
     
         public function setRole($role){
             $this->role = $role;
+            return $this;
         }
     
         public function getPassword(){
@@ -96,6 +108,7 @@
     
         public function setPassword($password){
             $this->password = $password;
+            return $this;
         }
     
         public function getIsActive(){
@@ -104,6 +117,7 @@
     
         public function setIsActive($isActive){
             $this->isActive = $isActive;
+            return $this;
         }
 
         /*
@@ -127,6 +141,46 @@
         public function setMatricule($matricule)
         {
                 $this->matricule = $matricule;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of activationCode
+         */ 
+        public function getActivationCode()
+        {
+                return $this->activationCode;
+        }
+
+        /**
+         * Set the value of activationCode
+         *
+         * @return  self
+         */ 
+        public function setActivationCode($activationCode)
+        {
+                $this->activationCode = $activationCode;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of activationExpiry
+         */ 
+        public function getActivationExpiry()
+        {
+                return $this->activationExpiry;
+        }
+
+        /**
+         * Set the value of activationExpiry
+         *
+         * @return  self
+         */ 
+        public function setActivationExpiry($activationExpiry)
+        {
+                $this->activationExpiry = $activationExpiry;
 
                 return $this;
         }

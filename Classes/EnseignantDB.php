@@ -4,27 +4,23 @@
     class EnseignantDB extends MySql {
 
         // METHODS
-        public static function insert($ensg) {
-            mySql::start_connection();
+        public static function insert($enseignant) {
             $query = "INSERT INTO enseignant(matricule) VALUES (:matricule)"; 
             $secureArray = array( 
-                ":matricule" => $ensg->getMatricule()
-                // ":matiere" => $ensg->getMatiere()
+                ":matricule" => $enseignant->getMatricule()
+                // ":matiere" => $enseignant->getMatiere()
             );
 
             MySql::request($query, $secureArray);
-            mySql::close_connection();
         }
 
-        public static function update($ensg) {
-            // mySql::start_connection();
+        public static function update($enseignant) {
             // $query = "UPDATE enseignant SET matiere = :matiere WHERE marticule = :marticule"; 
             // $secureArray = array( 
-            //     // ":matiere" => $ensg->getMatiere(),
-            //     ":marticule" => $ensg->getMatricule()
+            //     ":marticule" => $enseignant->getMatricule()
+            //     ":matiere" => $enseignant->getMatiere(),
             // );
 
             // MySql::request($query, $secureArray);
-            // mySql::close_connection();
         }
     }

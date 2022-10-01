@@ -4,8 +4,7 @@
     class EtudiantDB extends MySql {
 
         // METHODS
-        public static function insert($etd) {
-            mySql::start_connection();
+        public function insert($etd) {
             $query = "INSERT INTO etudiant(matricule, department) VALUES (:matricule, :department)"; 
             $secureArray = array( 
                 ":matricule" => $etd->getMatricule(),
@@ -13,11 +12,9 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::close_connection();
         }
 
-        public static function update($etd) {
-            mySql::start_connection();
+        public function update($etd) {
             $query = "UPDATE etudiant SET department = :department WHERE marticule = :marticule"; 
             $secureArray = array( 
                 ":department" => $etd->getDepartmentID(),
@@ -25,6 +22,5 @@
             );
 
             MySql::request($query, $secureArray);
-            mySql::close_connection();
         }
     }

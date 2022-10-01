@@ -11,31 +11,35 @@
 </head>
 <body>
    <?php 
-   
+      session_start();
+      if (isset($_SESSION["login"])) {
+        header("location: Pipes/login_redirect.php");
+      }
+
    require_once("Classes/UtilisateurDB.php");
-    $enabled_inscription = UtilisateurDB::getIState();
+   $utilisateurDB = new UtilisateurDB();
+    $enabled_inscription = $utilisateurDB->getIState();
     
     if (isset($_POST["INSCRIPTION_CIN"])){
-
         $cin = $_POST["INSCRIPTION_CIN"];
     
         if ($enabled_inscription == 0) {
             header("Location: closed.html");
         } else if (!is_numeric($cin)) {
             $error = "Erreur! Entrer seulement des nombres!";
-        } else if (UtilisateurDB::userExists($cin)) {
+        } else if ($utilisateurDB->userExists($cin) == true) {
             $error = "Erreur! Cette CIN déja inscrit auparavant!";
         } else {
-            $result = UtilisateurDB::listeExists($cin);
-            if ($result == false) {
-                $error = "Erreur! Cette CIN n'existe pas dans la liste!";
-            } else {
-                session_start();
-                $_SESSION["REGISTRATION_ROLE"] = $result;
-                header("Location: form.php");
-                session_write_close();
+            $_SESSION["INSCRIPTION_CIN"] = $cin;
+            
+            $role = $utilisateurDB->listeExists($cin);
+            if ($role == false) {
+                $role = 2;
             }
+
+            header("Location: form.php");
         }
+        $utilisateurDB = null;
     }
 
     ?>
@@ -61,7 +65,7 @@
             ?>
             
         </form>
-        <p id="alt_connect"><span id="part1_conn">Déja inscrit? Appuier ici pour </span><a href="" id="part2_conn"> se connecter.</a></p>
+        <p id="alt_connect"><span id="part1_conn">Déja inscrit? Appuier ici pour </span><a href="login.php" id="part2_conn"> se connecter.</a></p>
     </div>
 
     <!--background img--> 
