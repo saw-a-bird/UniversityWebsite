@@ -1,10 +1,17 @@
 <?php
 session_start();
 
-if ($_SESSION["login"]["role"] == 1) { // enseignant
-    header("location: ../enseignant.php");
-} elseif ($_SESSION["login"]["role"] == 2) { // parent
-    header("location: ../parent.php");
-} elseif ($_SESSION["login"]["role"] == 3) { // parent
-    header("location: ../utilisateur.php");
+switch ($_SESSION["login"]["role"]) {
+    case 3:
+        header("location: ../etudiant.php");
+        break;
+    case 1:
+        header("location: ../enseignant.php");
+        break;
+    case 2:
+        header("location: ../parent.php");
+        break;
+    case 0:
+        header("location: ../admin.php");
+        break;
 }

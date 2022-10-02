@@ -12,23 +12,25 @@ body {
     
     
     .content h1{
-    font-family:'Times New Roman', Times, serif;
+    font-family:
+    'Times New Roman', Times, serif;
     font-size: 50px;
     padding-left: 20px;
     margin-top: 9%;
-    margin-left: 500px;
+    margin-left: 420px;
     letter-spacing: 2px;
-     }
+        margin-bottom: 40px;
+    }
     
     
     
     .content span{
-        color:rgb(252, 238, 240);
-        font-size:60px;
-        margin-left: -100px;
-      
+        color:
+        rgb(252, 238, 240);
+        font-size: 25px;
+        /* margin-left: -100px; */
     }
-    h4{
+    .content h4{
         margin-top: -70px;
         margin-left: 600px;
         color: white;
@@ -39,32 +41,72 @@ body {
         color: #fff;
     }
     
+    .header_div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .seperated_div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      .seperated_div div {
+        width: 50%;
+      }
+
+      .buttons_div {
+        display:flex;
+        justify-content: right;
+        margin-right: 70px;
+      }
+
+      .buttons_div > * {
+        margin-left: 20px
+      }
     .website_title{
-    margin-top: -50px;
-       margin-left:80px;
-      color: white;
-     
+      color: white;  
     }
     
     
-    .deconnection {
+    .go_back a {
+      color: rgb(237 230 140);
+      font-weight: bold;
+    }
+
+    .deconnection.absolute {
         margin-top: -50px;
-       margin-left:1300px;
+        margin-left:1300px;
+    }
+    .deconnection a {
       color: white;
-     
+      
     }
-    .logo img{
-        margin-top: -10px;
-    padding:1%;
-    width: 70px;
-    
-    
-    }
-    
-     a{
+
+    a{
         text-decoration: none;
-       padding-top: -1000px;
-     
-      color: white;
+    }
+
+    .logo img{
+        /* margin-top: -10px; */
+        padding:1%;
+        width: 70px;
     }
     
+
+    .user_ability_list {
+        display:flex;
+        flex-direction: column;
+    }
+
+    .user_ability_list > div{
+        height:120px;
+        margin-bottom:20px
+    }
+
+    .user_ability_list > div > img{
+        width:120px;
+        height:120px;
+    }

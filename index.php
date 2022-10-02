@@ -12,7 +12,6 @@
 <body>
    <?php 
       session_start();
-      $_SESSION["login"] = null;
       if (isset($_SESSION["login"])) {
         header("location: Pipes/login_redirect.php");
       }

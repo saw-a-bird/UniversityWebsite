@@ -94,6 +94,16 @@
 
             MySql::request($query, $secureArray);
         }
+
+        /* QUERY METHODS */
+        public function getUserByMatricule($matricule) {
+            return MySql::request(
+                "SELECT * FROM utilisateur WHERE matricule = :matricule",
+                array(':matricule' => $matricule),
+                1
+            );
+        }
+
         /*
             SECONDARY CRUD METHODS
         */

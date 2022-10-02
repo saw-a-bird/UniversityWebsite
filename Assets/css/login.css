@@ -48,6 +48,7 @@ input[type=text], input[type=password] {
     text-align: center; 
   }
   span.log{
+    margin-bottom:40px;
     color:white;
     font: 70pt Proxima Nova;
   }
@@ -55,11 +56,15 @@ input[type=text], input[type=password] {
     text-align: center;
     
   }
-  .logright{
-    text-align: end;
-    justify-content: space-around;
-}
 
+  .login_imgs{
+    bottom: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 20px;
+}
 
 .green_alert {
   width: 600px;

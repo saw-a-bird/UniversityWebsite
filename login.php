@@ -10,8 +10,8 @@ Proxima Nova -->
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="Assets/css/login.css">
-      </head>
+      <link rel="stylesheet" href="Assets/css/login.css">
+    </head>
 <body>
     <section>
         <div class="imgcontainer">
@@ -58,9 +58,9 @@ Proxima Nova -->
         if ($user != -1) {
           if ($_POST["password"] === $user["password"]) {
             if ($user["isActive"] == 1) {
-              $_SESSION['login'] = array("matricule" => $user["matricule"], "role" => $user["role"]);
-              
-                header("location: Pipes/login_redirect.php");
+
+              $_SESSION["login"] = array("matricule" => $user["matricule"], "role" => $user["role"]);
+              header("location: Pipes/login_redirect.php");
 
             } else {
               $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
@@ -77,10 +77,10 @@ Proxima Nova -->
           $message = "<p class = 'red_alert'>Error. La formulaire est erroné.</p>";
         }
       }
-
     ?>
+    
     <form class="formulaire" method = "post">  
-        <div>
+        <div style = "margin-bottom: 30px;">
             <span class="log"> Log-In</span>
         </div>
         <div class="container">
@@ -99,10 +99,12 @@ Proxima Nova -->
         <section>
             <footer>
           <p class="psw">vous n'avez pas un compte? appuier ici pour <a href="index.php">s'inscrire.</a>
-            <br>vous avez oublié votre password? appuier <a href="forgot_password.php">ICI </a>
+            <!-- <br>vous avez oublié votre password? appuier <a href="forgot_password.php">ICI </a> -->
           </p>
-          <img src="Assets/imgs/p_login_left.png" alt="logleft" class="logleft">
-          <img src="Assets/imgs/p_login_right.png" alt="logright" class="logright">
+          <div class = "login_imgs">
+            <img src="Assets/imgs/p_login_left.png" alt="logleft" class="logleft">
+            <img src="Assets/imgs/p_login_right.png" alt="logright" class="logright">
+          </div>
     </footer>
     </section>
 

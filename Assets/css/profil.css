@@ -1,0 +1,70 @@
+.verticalLine {
+    border-left: 3px solid #925c16;
+    height: 350ox;
+}
+
+.cd {
+    padding-top: 30px;
+    padding-left: 250px;
+    margin-bottom: 40px;
+}
+
+.cadre {
+    padding-top:50px;
+    padding-left: 30px;
+    background-color:
+    rgb(216, 216, 231);
+    border-radius: 15px;
+    width: 1000px;
+    height: 600px;
+    font-size: 20px;
+}
+
+.pg {margin-left: 80px;}
+
+.pd {
+margin-left: 400px;
+margin-top: -405px;
+}
+
+.btnn{
+    margin-bottom: -80px;
+    margin-left: 100px;
+}
+.btn{
+    margin-top: -50px;
+    margin-left: 100px;
+}
+
+.flex-box {
+    display:flex;
+    margin: 20px 0;
+}
+
+.flex-box > .form_ {
+    width:50%
+}
+
+.form_ > ul {
+    list-style:none
+}
+
+.form_ span {
+    /* font-weight: bolder; */
+    font-family: 'Futura Hv BT';
+    font-style: normal;
+    font-weight: bold;
+    color: #B1740F;
+    font-size: 20px;
+}
+
+.img_container {
+    display:
+    flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.img_container h2 {
+    margin-left: 20px
+}

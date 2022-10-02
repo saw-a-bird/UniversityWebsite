@@ -23,4 +23,13 @@
 
             MySql::request($query, $secureArray);
         }
+
+        /* QUERY METHODS */
+        public function get($matricule) {
+            return MySql::request(
+                "SELECT * FROM etudiant WHERE matricule = :matricule",
+                array(':matricule' => $matricule),
+                1
+            );
+        }
     }
