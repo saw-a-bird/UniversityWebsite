@@ -11,7 +11,7 @@
                 ":department" => $etd->getDepartmentID()
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public function update($etd) {
@@ -21,12 +21,12 @@
                 ":marticule" => $etd->getMatricule()
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         /* QUERY METHODS */
         public function get($matricule) {
-            return MySql::request(
+            return $this->request(
                 "SELECT * FROM etudiant WHERE matricule = :matricule",
                 array(':matricule' => $matricule),
                 1

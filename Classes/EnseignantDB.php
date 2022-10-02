@@ -11,7 +11,7 @@
                 // ":matiere" => $enseignant->getMatiere()
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public static function update($enseignant) {
@@ -21,6 +21,6 @@
             //     ":matiere" => $enseignant->getMatiere(),
             // );
 
-            // MySql::request($query, $secureArray);
+            // $this->request($query, $secureArray);
         }
     }

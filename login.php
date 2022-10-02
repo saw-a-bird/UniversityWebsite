@@ -88,7 +88,7 @@ Proxima Nova -->
       
           <label for="password"></label>
           <input type="password" placeholder="Password" name="password" required><br>
-          <button type="submit" name = "loginbtn">Login</button> 
+          <button type="submit" name = "loginbtn" class = "login_btn">Login</button> 
           
         </div>
         </form>

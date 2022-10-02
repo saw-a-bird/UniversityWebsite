@@ -4,9 +4,10 @@
     class AdminDB extends MySql {
 
         // METHODS
-        public function changeIState() {
-            MySql::request(
-                "UPDATE website_config SET allowInscription = NOT allowInscription", array()
+        public function changeIState($state) {
+            $this->request(
+                "UPDATE website_config SET inscription = :state", 
+                array(":state" => $state)
             );
         }
 
@@ -18,7 +19,7 @@
                 ":role" => $role
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public function removeFromList($cin) {
@@ -27,16 +28,16 @@
                 ":cin" => $cin
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public function clearList() {
-            MySql::request("TRUNCATE TABLE liste_inscription", array());
+            $this->request("TRUNCATE TABLE liste_inscription", array());
         }
 
         /* QUERY LIST */
 
         public function getIList() {
-            return MySql::request("SELECT * from liste_inscription", array(), 2);
+            return $this->request("SELECT * from liste_inscription", array(), 2);
         }
     }

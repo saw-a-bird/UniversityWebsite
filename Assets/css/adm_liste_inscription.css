@@ -1,5 +1,5 @@
 body {
-    height:110vh;
+    height:105vh;
 }
 
 .cadre {
@@ -29,7 +29,7 @@ body {
     border-radius: 10px;
   }
 
-.table_adm {
+#table_adm {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
@@ -37,7 +37,7 @@ body {
     font-size: 20px;
 }
 
-.table_adm > thead {
+#table_adm > thead {
     border-bottom: 3px solid black;
     color:rgb(206, 140, 41);
     font-weight: bold;
@@ -69,7 +69,7 @@ td {
     width: 97px
 }
 
-#filterby_form {
+#search_filter_form {
     width: 128px;
 }
 
@@ -88,6 +88,10 @@ td {
     border-radius: 20px;
 }
 
+._btn:not(:disabled) {
+    cursor:pointer
+}
+
 .valider_btn {
     border-color: #cbcbcb;
     color: white;
@@ -95,9 +99,42 @@ td {
     background-color: rgb(84, 169, 84);
 }
 
+.valider_btn:disabled {
+    background-color:rgb(160 216 160);
+}
+
+
 .search_btn {
+    border-color: #858585;
+    color: #595959;
+    padding: 6px 10px 3px;
+    background-color: rgb(239 239 239);
+}
+
+.cadre {
+    background-color: rgb(234 234 255 / 83%);
+    width:1200px;
+}
+
+.adm_btns {
+    margin: auto 20px 0;
+}
+
+.adm_btns button {
+    margin: 0 20px 0 0;
+    padding: 6px 30px 3px;
+    font-weight:bold;
+}
+
+.add_btn {
+    border-color: #cbcbcb;
+    color:  #494949;
+    background-color: rgb(143 207 143);
+}
+
+.reset_btn {
     border-color: #cbcbcb;
     color: #5b5b5b;
-    padding: 6px 10px 3px;
-    background-color: rgb(206 206 206);
+    background-color: rgb(255 183 183);
+
 }

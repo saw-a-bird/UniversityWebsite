@@ -10,15 +10,17 @@
         public function getIState() { 
             // checks if inscription is OPEN or CLOSED (boolean)
             
-            $result = MySql::request(
-                "SELECT inscription FROM website_config", array(), 1
+            $result = $this->request(
+                "SELECT inscription FROM website_config", 
+                array(), 
+                1
             );
-            // var_dump($result);
+            
             return $result["inscription"];
         }
 
         public function userExists($CIN) {
-            $resultUser = MySql::request(
+            $resultUser = $this->request(
                 "SELECT CIN FROM utilisateur WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 0
@@ -28,7 +30,7 @@
         }
 
         public function emailExists($email, $return = 0) {
-            $resultUser = MySql::request(
+            $resultUser = $this->request(
                 "SELECT * FROM utilisateur WHERE email = :email",
                 array(':email' => $email),
                 $return
@@ -38,7 +40,7 @@
         }
 
         public function listeExists($CIN) {
-            $resultList = MySql::request(
+            $resultList = $this->request(
                 "SELECT CIN, role FROM liste_inscription WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 1
@@ -69,7 +71,7 @@
                 ":activationCode" => $user->getActivationCode()
             );
 
-            $user->setMatricule(MySql::request($query, $secureArray, 3));
+            $user->setMatricule($this->request($query, $secureArray, 3));
         }
 
         public function update($user) {
@@ -83,7 +85,7 @@
                 $user->CIN
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public function delete($matricule) {
@@ -92,12 +94,12 @@
                 ":matricule" => $matricule
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         /* QUERY METHODS */
         public function getUserByMatricule($matricule) {
-            return MySql::request(
+            return $this->request(
                 "SELECT * FROM utilisateur WHERE matricule = :matricule",
                 array(':matricule' => $matricule),
                 1
@@ -109,7 +111,7 @@
         */
 
         public function verify_activation_code(string $activationCode, string $email) {
-            $responseUser = MySql::request(
+            $responseUser = $this->request(
                 'SELECT CIN, activationCode, DATEDIFF(activationExpiry, now()) as isExpired
                  FROM utilisateur
                  WHERE isActive = 0 AND email = :email',
@@ -137,7 +139,7 @@
         
 
         public function activate_user($CIN, $password) {
-            MySql::request(
+            $this->request(
                 "UPDATE utilisateur SET isActive = 1, password = :PASS, activationExpiry = NULL WHERE CIN = :CIN",
                 array( 
                     ":CIN" => $CIN,
@@ -145,7 +147,7 @@
                 )
             );
 
-            MySql::request(
+            $this->request(
                 "UPDATE liste_inscription SET isSubscribed = 1 WHERE CIN = :CIN",
                 array( 
                     ":CIN" => $CIN

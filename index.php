@@ -53,8 +53,13 @@
         <p id="bienvenue">BIENVENUE</p>
         <p id="title_2">Presenter votre CIN pour incrire </p>
         <form action="" method="post">
-            <input maxlength="8" id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN" <?php if ($enabled_inscription == 0) echo "disabled";
-            ?>>
+            <?php if ($enabled_inscription == 0) {
+                echo "<input maxlength='8' id='cin' type='text' name='INSCRIPTION_CIN' placeholder='L&lsquo;inscription est fermee' disabled />";        
+            } else {
+                echo"<input maxlength='8' id='cin' type='text' name='INSCRIPTION_CIN' placeholder='CIN' />";
+            }
+            ?>
+
 
             <?php 
                 if (isset($error)) {

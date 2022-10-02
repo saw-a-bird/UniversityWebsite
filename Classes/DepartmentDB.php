@@ -10,7 +10,7 @@
                 ":nom" => $dep->getNom(),
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         public function delete($id) {
@@ -19,7 +19,7 @@
                 ":id" => $id,
             );
 
-            MySql::request($query, $secureArray);
+            $this->request($query, $secureArray);
         }
 
         /* QUERY METHODS */
@@ -29,6 +29,6 @@
                 ":id" => $id,
             );
 
-            return MySql::request($query, $secureArray, 1)["nom"];
+            return $this->request($query, $secureArray, 1)["nom"];
         }
     }

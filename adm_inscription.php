@@ -10,11 +10,17 @@
     include("Pipes/get_login.php");
     include("config.php");
  
-    include("Classes/AdminDB.php");
+    require_once("Classes/AdminDB.php");
     $adminDB = new AdminDB();
     $users = $adminDB->getIList();
+    $adminDB = null;
 
-    include("Classes/Roles.php");
+    require_once("Classes/UtilisateurDB.php");
+    $utilisateurDB = new UtilisateurDB();
+    $state = $utilisateurDB->getIState();
+    $utilisateurDB = null;
+
+    require_once("Classes/Roles.php");
 ?>
 
 <div class="logo">  
@@ -35,27 +41,27 @@
     <div class = "cadre_header">
         <div class = "forms">
             <div>Inscription:   
-                <select id="inscription_select" class="drop_form" name="role">
+                <select id="inscription_select" class="drop_form" name="role" onchange="selectIState()">
+                    <option value="0">Fermé</option>
                     <option value="1">Ouvert</option>
-                    <option value="2">Fermé</option>
                 </select>
-                <button type = "button" class = "_btn valider_btn"> Valider </button>
+                <button type = "button" id = "valider_btn" class = "_btn valider_btn" onclick="changeIState()" disabled> Changer </button>
             </div> 
             <div>Search:   
-                <select id="filterby_form" class="drop_form" name="role">
+                <select id="search_filter_form" class="drop_form" name="role">
                     <option value="1">CIN</option>
                     <option value="2">Nom et prenom</option>
                 </select>
-                <input type="text" class="lab_in_txt" name = "CIN" placeholder = "something..." required>
-                <button type = "button" class = "_btn search_btn"> Search </button>
+                <input id= "search_input" type="text" class="lab_in_txt" name = "CIN" placeholder = "something..." required>
+                <button type = "button" class = "_btn search_btn" onclick="search()"> Search </button>
             </div> 
         </div>
-        <div class = "adm_buttons">
-            <button> Ajouter </button>
-            <button> Réinitialiser </button>
+        <div class = "adm_btns">
+            <a href = "inscr_ajouter_form.php"><button class = "_btn add_btn"> Ajouter </button></a>
+            <a href = "Pipes/inscr_reset.php" onclick="return confirm('DELETION: Are you sure you want to remove ALL items in the inscriptions table?');"><button class = "_btn reset_btn"> Réinitialiser </button> </a>
         </div>
     </div>
-    <table class="table_adm scrollable-table">
+    <table id ="table_adm" class="scrollable-table">
         <thead>
             <tr> 
                 <th style = "width:20%"><span class = "table_header">CIN</span></th>
@@ -67,23 +73,67 @@
         </thead>
         <tbody>
             <?php
-                foreach ($users as $key => $user) {
-                    echo "
-                        <tr>
-                            <td>".$user["cin"]."</td>
-                            <td>".$user["nomprenom"]."</td>
-                            <td>".Roles::getName($user["role"])."</td>
-                            <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
-                            <td><button>Supprimer</button></td>
-                        </tr>
-                    ";
+                if (is_array($users)) {
+                    foreach ($users as $key => $user) {
+                        echo "
+                            <tr>
+                                <td>".$user["cin"]."</td>
+                                <td>".$user["nomprenom"]."</td>
+                                <td>".Roles::getName($user["role"])."</td>
+                                <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
+                                <td><button>Supprimer</button></td>
+                            </tr>
+                        ";
+                    }
                 }
             ?>
         </tbody>
     </table>
 </div>
 
+<script>
+    var website_link = "<?= HOST ?>";
+    var IState = <?= $state ?>;
+    var inscription_select = document.getElementById("inscription_select");
+    inscription_select.options[IState].selected = true;
+    
+    var valider_btn = document.getElementById("valider_btn");
 
+    function selectIState() {
+        valider_btn.disabled = (inscription_select.selectedIndex == IState);
+    }
 
+    function changeIState() {
+        if (confirm("WARNING!!!! Are you sure you want to "+(IState == 1? "OPEN": "CLOSE")+" inscription to this website?")) {
+            window.location.href = website_link+"Pipes/change_state.php?state="+(IState+1); // (0+1) % 2 = 1 // (1+1) % 2 = 0
+        }
+    }
+
+    var table = document.getElementById("table_adm");
+    var tr = table.getElementsByTagName("tr");
+    var input = document.getElementById("search_input");
+    var filterSelect = document.getElementById("search_filter_form");
+
+    function search() {
+    // Declare variables
+        var textInput, td, i, txtValue, filterBy;
+        textInput = input.value.toUpperCase();
+        filterBy = filterSelect.selectedIndex;
+
+        // Loop through all table rows, and hide those who don't match the search query
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[filterBy];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(textInput) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
