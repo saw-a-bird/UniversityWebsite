@@ -10,10 +10,12 @@
 </head>
 <body>
     <?php
-      session_start();
-      if (isset($_SESSION["login"])) {
-        header("location: Pipes/login_redirect.php");
-      }
+        session_start();
+        include("config.php");
+
+        if (isset($_SESSION["login"])) {
+            header("location: Pipes/login_redirect.php");
+        }
 
         // check if CIN exists (in LIST if role is not admin or parent)
         // remove CIN from SESSION after validation (security)
@@ -115,7 +117,7 @@
          <!--logo and name--> 
     <div>
         <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-    <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
+    <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
     </div>
     <!--form-->
     <div id="container">

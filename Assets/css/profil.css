@@ -12,8 +12,8 @@
 .cadre {
     padding-top:50px;
     padding-left: 30px;
-    background-color:
-    rgb(216, 216, 231);
+    background-color:rgb(216, 216, 231);
+    box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
     border-radius: 15px;
     width: 1000px;
     height: 600px;

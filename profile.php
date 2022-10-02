@@ -7,13 +7,14 @@
 <?php
     session_start();
     include("Pipes/get_login.php");
+    include("config.php");
 ?>
 
 <div class="logo">  
     <div class = "seperated_div">
         <div class = "header_div">
             <img src="Assets/imgs/LOGO.png">
-            <h2 class = "website_title"> NOM DE L’INSTITUTE </h2>
+            <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <div class = "buttons_div">
             <h3 class = "go_back"> <a href="Pipes/login_redirect.php">Go back</a></h3>

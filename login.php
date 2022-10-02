@@ -13,72 +13,69 @@ Proxima Nova -->
       <link rel="stylesheet" href="Assets/css/login.css">
     </head>
 <body>
-    <section>
-        <div class="imgcontainer">
-            <header id="header">NOM DE L'INSTITUT</header>
-            <img src="Assets/imgs/logo.png" alt="logo" class="logo">
-           
-          </div>
+    
+  <?php
 
-    </section>
-    <section>
+    session_start();
+    include("config.php");
+    if (isset($_SESSION["login"])) {
+      header("location: Pipes/login_redirect.php");
+    }
 
-    <?php
-
-      session_start();
-      if (isset($_SESSION["login"])) {
-        header("location: Pipes/login_redirect.php");
-      }
-
-      if (isset($_GET["m"])) {
-        switch ($_GET["m"]) {
-          case 0:
-            $message = "<p class = 'green_alert'>Compte est créé avec succes. Nous avons envoyé un e-mail avec un lien de confirmation à votre adresse e-mail.</p>";
+    if (isset($_GET["m"])) {
+      switch ($_GET["m"]) {
+        case 0:
+          $message = "<p class = 'green_alert'>Compte est créé avec succes. Nous avons envoyé un e-mail avec un lien de confirmation à votre adresse e-mail.</p>";
+          break;
+        case 1:
+            $message = "<p class = 'red_alert'>Cette email n'existe pas dans la base de donnée.</p>";
             break;
-          case 1:
-              $message = "<p class = 'red_alert'>Cette email n'existe pas dans la base de donnée.</p>";
-              break;
-          case 2: 
-              $message = "<p class = 'red_alert'>Cette lien de confirmation est déja expiré. Veuillez à créé un nouveau compte.</p>";
-              break;
-            case 3: 
-              $message = "<p class = 'green_alert'>Succes. La lien de confirmation est valide. Nous avons envoyé un e-mail avec ton mot de passe à votre adresse e-mail.</p>";
-              break;
-        }
+        case 2: 
+            $message = "<p class = 'red_alert'>Cette lien de confirmation est déja expiré. Veuillez à créé un nouveau compte.</p>";
+            break;
+          case 3: 
+            $message = "<p class = 'green_alert'>Succes. La lien de confirmation est valide. Nous avons envoyé un e-mail avec ton mot de passe à votre adresse e-mail.</p>";
+            break;
       }
+    }
 
     if (isset($_POST["loginbtn"])) {
-      $email = $_POST["email"];
-      $password = $_POST["password"];
-      if (isset($email, $password)) {
-        // check if email exists.
-        require_once("Classes/UtilisateurDB.php");
-        $utilisateurDB = new UtilisateurDB();
-        $user = $utilisateurDB->emailExists($email, 1);
-        if ($user != -1) {
-          if ($_POST["password"] === $user["password"]) {
-            if ($user["isActive"] == 1) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    if (isset($email, $password)) {
+      // check if email exists.
+      require_once("Classes/UtilisateurDB.php");
+      $utilisateurDB = new UtilisateurDB();
+      $user = $utilisateurDB->emailExists($email, 1);
+      if ($user != -1) {
+        if ($_POST["password"] === $user["password"]) {
+          if ($user["isActive"] == 1) {
 
-              $_SESSION["login"] = array("matricule" => $user["matricule"], "role" => $user["role"]);
-              header("location: Pipes/login_redirect.php");
+            $_SESSION["login"] = array("matricule" => $user["matricule"], "role" => $user["role"]);
+            header("location: Pipes/login_redirect.php");
 
-            } else {
-              $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
-            }
           } else {
-            $message = "<p class = 'red_alert'>Error. Veuiller à verifier notre credentials.</p>";
+            $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
           }
         } else {
-          $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
+          $message = "<p class = 'red_alert'>Error. Veuiller à verifier notre credentials.</p>";
         }
-            // check is active  (Error. Cette compte n'est pas encore active.)
-
-        } else {
-          $message = "<p class = 'red_alert'>Error. La formulaire est erroné.</p>";
-        }
+      } else {
+        $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
       }
-    ?>
-    
+          // check is active  (Error. Cette compte n'est pas encore active.)
+
+      } else {
+        $message = "<p class = 'red_alert'>Error. La formulaire est erroné.</p>";
+      }
+    }
+  ?>
+
+    <div class="imgcontainer">
+      <header id="header"><?= NOM_SITE ?></header>
+      <img src="Assets/imgs/logo.png" alt="logo" class="logo">
+    </div>
+
     <form class="formulaire" method = "post">  
         <div style = "margin-bottom: 30px;">
             <span class="log"> Log-In</span>
@@ -95,18 +92,18 @@ Proxima Nova -->
           
         </div>
         </form>
-        </section>
-        <section>
-            <footer>
-          <p class="psw">vous n'avez pas un compte? appuier ici pour <a href="index.php">s'inscrire.</a>
-            <!-- <br>vous avez oublié votre password? appuier <a href="forgot_password.php">ICI </a> -->
+        <div style = "margin-bottom:auto;">
+          <p class="psw">
+              Vous n'avez pas un compte? appuier ici pour <a href="index.php">s'inscrire.</a>
+              <!-- <br>vous avez oublié votre password? appuier <a href="forgot_password.php">ICI </a> -->
           </p>
-          <div class = "login_imgs">
-            <img src="Assets/imgs/p_login_left.png" alt="logleft" class="logleft">
-            <img src="Assets/imgs/p_login_right.png" alt="logright" class="logright">
-          </div>
-    </footer>
-    </section>
+      </div>
+
+        <div class = "login_imgs">
+          <img src="Assets/imgs/p_login_left.png" alt="logleft" class="logleft">
+          <img src="Assets/imgs/p_login_right.png" alt="logright" class="logright">
+        </div>
+
 
 
 </body>

@@ -16,6 +16,7 @@
         header("location: Pipes/login_redirect.php");
       }
 
+      include("config.php");
    require_once("Classes/UtilisateurDB.php");
    $utilisateurDB = new UtilisateurDB();
     $enabled_inscription = $utilisateurDB->getIState();
@@ -42,7 +43,7 @@
     <!--logo and name--> 
     <div>
         <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-        <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
+        <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
     </div>
 
     <!--the form and title--> 

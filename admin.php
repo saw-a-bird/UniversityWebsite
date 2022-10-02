@@ -7,11 +7,12 @@
     <?php
         session_start();
         include("Pipes/get_login.php");
+        include("config.php");
     ?>
     <div class="logo">  
         <div class = "header_div">
             <img src="Assets/imgs/LOGO.png">
-            <h2 class = "website_title"> NOM DE L’INSTITUTE </h2>
+            <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <h3 class = "deconnection absolute"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
     </div>

@@ -4,42 +4,34 @@
 /* text */
 #bienvenue{
     position: absolute;
-width: 659px;
-height: 104px;
-left: 26%;
-top: 4%;
-
-font-family: 'Proxima Nova';
-font-style: normal;
-font-weight: 400;
-font-size: 136px;
-line-height: 10px;
+    width: 659px;
+    height: 104px;
+    left: 23%;
+    top: 4%;
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 136px;
+    line-height: 10px;
 /* or 7% */
-
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
 }
 
 #title_2{
     position: absolute;
-
-top: 38%;
-left: 36%;
-
-font-family: 'Futura LtCn BT';
-font-style: normal;
-font-weight: 400;
-font-size: 40px;
-line-height: 10px;
+    top: 38%;
+    left: 33%;
+    font-family: 'Futura LtCn BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 10px;
 /* identical to box height, or 25% */
-
-text-align: center;
-
-color: #E8EBEA;
-
+    text-align: center;
+    color: #E8EBEA;
 }
 
 
@@ -101,15 +93,13 @@ color: #FFFFFF;
 
 #alt_connect{
     position: absolute;
-width: 416px;
-height: 10px;
-left: 37%;
-top: 60%;
-
-display: flex;
-align-items: center;
-text-align: center;
-
+    width: 416px;
+    height: 10px;
+    left: 36.4%;
+    top: 60%;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 /*background img*/
