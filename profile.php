@@ -8,6 +8,19 @@
     session_start();
     include("Pipes/get_login.php");
     include("config.php");
+ 
+    include("Classes/Utilisateur.php");
+    $sexe = Utilisateur::getSexeName($user["sexe"]);
+
+    if (isset($user["department"])) {
+        include("Classes/DepartmentDB.php");
+        $departmentDB = new DepartmentDB();
+        $department = $departmentDB->getNom($user["department"]);
+        $departmentDB = null;
+    }
+
+    include("Classes/Roles.php");
+    $role = Roles::getName($user["role"]);
 ?>
 
 <div class="logo">  
@@ -56,7 +69,7 @@
                     <br>
             
                     <li>
-                    <span>Sexe:</span>  <?= $user["sexe"] ?>
+                    <span>Sexe:</span>  <?= $sexe ?>
                     </li>
                     <br>
                     <br>
@@ -80,13 +93,13 @@
                     <br>
                     <br>
 
-                    <li> <span>Role:</span> <?= $user["role"] ?></li>
+                    <li> <span>Role:</span> <?= $role ?></li>
                     <br>
                     <br>
 
                     <?php 
                         if ($user["role"] == 3) {
-                            echo "<li> <span>Department:</span> ".$user["department"]." </li>
+                            echo "<li> <span>Department:</span> ".$department." </li>
                             <br>
                             <br>";
                         }

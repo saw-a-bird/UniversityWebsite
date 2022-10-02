@@ -117,7 +117,7 @@
          <!--logo and name--> 
     <div>
         <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-    <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
+        <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
     </div>
     <!--form-->
     <div id="container">
@@ -202,6 +202,7 @@
             </label>
 
            <input type="submit" value="Confirmer" id="Confirmer" name = "confirmbtn" disabled>
+           <a class = "go_back_btn" href = "index.php"> <p >  Go back </p> </a>
 
            <script>
             var termsCheckbox = document.getElementById("terms");

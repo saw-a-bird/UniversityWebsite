@@ -46,6 +46,10 @@
         public function getSexe(){
             return $this->sexe;
         }
+
+        static public function getSexeName($sexeID) {
+            return $sexeID == 1 ? "Masculin" : "Feminin";
+        }
     
         public function setSexe($sexe){
             $this->sexe = $sexe;

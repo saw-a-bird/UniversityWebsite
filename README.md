@@ -16,8 +16,9 @@
 
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
-- [X] create all classes
-- [X] create register function 
+- [ ] create all classes
+- [ ] set up Matricule SQL Sequence (matriculeSeq, instead of auto-generation)
+- [ ] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
@@ -27,14 +28,14 @@
   INFO: role is set in the constructor 
   ```
 
-- [X] activation link
+- [ ] activation link
   ```
   - generate token and send email
   - onValidation: set isActive true + message
   - activation link not accepted in 24hours
   ```
 
-- [X]  create login function 
+- [ ]  create login function 
   ```
   - use email + password
   - save login to SESSION
@@ -81,7 +82,7 @@ First of all, you have to clone the project in a directory of your choosing.
 After that, for every modification you're going to do, addition you're going to add. Create a new branch of the project:
   ```
   ## for BRANCH_NAME, let's follow the same standards to avoid confusion: (backend/frontend)-(functionality_name)
-  git checkout -b BRANCH_NAME 
+  git checkout -b BRANCH_NAME
   ```
 
 

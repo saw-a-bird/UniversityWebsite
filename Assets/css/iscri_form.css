@@ -1,10 +1,10 @@
 #container{
-    margin: 20px auto;
+    margin: 40px auto 30px;
     display: flex;
     /* margin-bottom: 20px; */
     /* margin-top: 10px; */
     /* position: absolute; */
-    width: 440px;
+    width: 450px;
     height: fit-content;
     /* left: 35%; */
     /* top: 1%; */
@@ -17,7 +17,8 @@
 #f{
     /* height: 1000px; */
     margin-left: 70px;
-    margin-top: 0px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 
@@ -39,7 +40,7 @@ margin-top: 20px;
 }
 
 .lab_in_txt{
-    width: 233px;
+    width: 290px;
     margin-top: 20px;
     border-top: 0px;
     border-left:0px ;
@@ -48,9 +49,9 @@ margin-top: 20px;
 
 .drop_form{
     width: 128px;
-height: 35px;
-margin-top: 20px;
-border: 3px solid #B1740F;
+    height: 35px;
+    margin-top: 20px;
+    border: 3px solid #B1740F;
 }
 
 #lab_in_date{
@@ -76,11 +77,9 @@ margin-top: 20px;
     border: 3px solid #101D42;
     border-radius: 45px;
     height: 45px;
-    width: 180px;
+    width: 190px;
     /* padding-left: 30px; */
-    margin-top: 5px;
-    margin-left: 60px;
-    margin-bottom: 20px;
+    margin: 15px 0 7px 60px;
     text-align: center;
     cursor: pointer;
 }
@@ -112,4 +111,15 @@ bottom: 0px;
     color: red;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.go_back_btn > p {
+    margin: 5px 60px;
+    text-align: center;
+    width: 190px;
+    color: #91917b;
+}
+
+.go_back_btn {
+    text-decoration: none;
 }

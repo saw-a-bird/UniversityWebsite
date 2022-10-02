@@ -28,6 +28,8 @@
             header("Location: closed.html");
         } elseif (!is_numeric($cin)) {
             $error = "Erreur! Entrer seulement des nombres!";
+        } elseif (strlen((string)$cin) != 8) {
+            $error = "Erreur! La longeur de CIN doit être 8 digits!";
         } elseif ($utilisateurDB->userExists($cin) == true) {
             $error = "Erreur! Cette CIN déja inscrit auparavant!";
         } else {
@@ -51,7 +53,7 @@
         <p id="bienvenue">BIENVENUE</p>
         <p id="title_2">Presenter votre CIN pour incrire </p>
         <form action="" method="post">
-            <input id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN" <?php if ($enabled_inscription == 0) echo "disabled";
+            <input maxlength="8" id="cin" type="text" name="INSCRIPTION_CIN" placeholder="CIN" <?php if ($enabled_inscription == 0) echo "disabled";
             ?>>
 
             <?php 
