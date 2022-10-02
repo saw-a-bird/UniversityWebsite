@@ -12,7 +12,7 @@
         }
 
          public function addToList($cin, $nomprenom, $role) {
-            $query = "INSERT INTO liste_inscription(cin, :nomprenom, role) VALUES (:cin, :nomprenom, :role)"; 
+            $query = "INSERT INTO liste_inscription(cin, nomprenom, role) VALUES (:cin, :nomprenom, :role)"; 
             $secureArray = array( 
                 ":cin" => $cin,
                 ":nomprenom" => $nomprenom,

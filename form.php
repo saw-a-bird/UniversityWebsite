@@ -202,7 +202,7 @@
             </label>
 
            <input type="submit" value="Confirmer" id="Confirmer" name = "confirmbtn" disabled>
-           <a class = "go_back_btn" href = "index.php"> <p >  Go back </p> </a>
+           <a class = "go_back_btn" href = "index.php"> <p > Retourner </p> </a>
 
            <script>
             var termsCheckbox = document.getElementById("terms");

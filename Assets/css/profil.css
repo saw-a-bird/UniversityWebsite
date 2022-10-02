@@ -1,14 +1,17 @@
 .verticalLine {
     border-left: 3px solid #925c16;
-    height: 350ox;
+    height: 350px;
 }
 
 .cd {
     padding-top: 30px;
     padding-left: 250px;
-    margin-bottom: 40px;
+    margin-bottom: 70px;
 }
-
+ 
+.table_name {
+    margin-top: 0;
+}
 .cadre {
     padding-top:50px;
     padding-left: 30px;
@@ -16,8 +19,9 @@
     box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
     border-radius: 15px;
     width: 1000px;
-    height: 600px;
     font-size: 20px;
+    min-height: 600px;
+    padding-bottom:50px
 }
 
 .pg {margin-left: 80px;}

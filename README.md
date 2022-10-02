@@ -2,23 +2,28 @@
 # TODO
 
 ### Frontend:
-- [ ] interface enseignant
-- [ ] interface parent
-- [ ] interface admin (table etudiant and table enseignant, add and remove buttons)
-- [ ] interface user
+- [X] interface enseignant
+- [X] interface parent
+- [ ] parent: table enfants >> details enfant
+- [X] interface admin
+- [X] admin: gestion users
+- [X] admin: inscription
+- [X] interface user
+- [ ] user: details
+- [ ] user: table parents
 - [X] register page (inscription page, also main page)
 - [X] register form page
 - [X] login page
 - [X] closed inscription page
-- [ ] forgot password page (email)
+- CANCELED: forgot password page by email
 
 ### Backend:
 
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
-- [ ] create all classes
-- [ ] set up Matricule SQL Sequence (matriculeSeq, instead of auto-generation)
-- [ ] create register function 
+- [X] create all classes
+
+- [X] create register function 
   ```
   - check CIN if in list
   - change form based on role from pre-made list (from admin)
@@ -28,21 +33,21 @@
   INFO: role is set in the constructor 
   ```
 
-- [ ] activation link
+- [X] activation link
   ```
   - generate token and send email
   - onValidation: set isActive true + message
   - activation link not accepted in 24hours
   ```
 
-- [ ]  create login function 
+- [X]  create login function 
   ```
   - use email + password
   - save login to SESSION
   - redirect to specific interface per role
   ```
 
-- [ ] forgot password button 
+- CANCELED: forgot password button 
   ```
   - email from form
   - send confirmation email
@@ -51,7 +56,7 @@
 
 - [ ] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
 
-- [ ] admin interface
+- [X] admin interface
   ```
   - get tables (etudiant, enseignant)
   - add/remove to table (CIN, role)
@@ -59,11 +64,13 @@
 
 - [ ] parent interface
   ```
-  - get table etudiants
-  - add/remove to table (CIN) >> student have to confirm before add.
+  - onRegister: immediately after confimation email, send email to enfant (by cin from Form) to verify identity.
+  - onVerified: activate user, add record to parent-enfant table
+  - onNotVerified: remove user.
+  - Ability: get table etudiants
   ```
 
-- [ ] logout 
+- [X] logout 
   ```
   - remove login from SESSION
   - redirect to main page (inscription page)

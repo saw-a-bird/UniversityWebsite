@@ -40,6 +40,7 @@
 </div>
     <div class="cd">
 <div class="cadre">
+<h1>Fiche d'utilisateur:</h1>
     <div class="pg">
         <div class="img_container">
             <?php

@@ -15,7 +15,7 @@
                 array(), 
                 1
             );
-            
+
             return $result["inscription"];
         }
 
@@ -98,6 +98,14 @@
         }
 
         /* QUERY METHODS */
+        public function getAll() {
+            return $this->request(
+                "SELECT * FROM utilisateur",
+                array(),
+                2
+            );
+        }
+
         public function getUserByMatricule($matricule) {
             return $this->request(
                 "SELECT * FROM utilisateur WHERE matricule = :matricule",

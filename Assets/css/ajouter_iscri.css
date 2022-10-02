@@ -1,0 +1,130 @@
+#container{
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 10%;
+    background: #FFFFFF;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 45px;
+}
+
+#f_first{
+    margin: 24px 20px 24px 85px;
+    width: 250px;
+}
+.lab_form{
+
+    font-family: 'Futura Hv BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 10px;
+    /* or 56% */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    color: #B1740F;
+    }
+    
+    .lab_in_txt{
+        width: 233px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-top: 0px;
+        border-left:0px ;
+        border-right:0px ;
+    }
+    input:hover {
+        opacity: 0.7;
+      }
+    .drop_form{
+        width: 128px;
+    height: 35px;
+    margin-top: 20px;
+    border: 3px solid #B1740F;
+    }    
+    #Confirmer{
+        font-family: 'Futura Hv BT';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 10px;
+    /* identical to box height, or 59% */
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        background: #f7aa18;
+        border: 1px solid #b4b4b4;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 45px;
+        height: 45px;
+        padding: 0 50px;
+        margin: 40px auto 20px;
+    }
+    #add{
+        font-family: 'Futura Hv BT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 10px;
+    /* identical to box height, or 59% */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #FFFFFF;
+    
+    background: #B1740F;
+    border: 3px solid #101D42;
+    border-radius: 10px;
+    height: 60px;
+    width: 200px;
+    padding-left: 30px;
+    margin-top: 40px;
+    margin-left: 5px;
+    }
+    
+    #form_img{
+        position: absolute;
+    width: 308px;
+    height: 537.19px;
+    left: 7%;
+    bottom: 0%;
+    }
+
+
+    .inscr_form_title {
+        margin-bottom: 40px;
+        margin-left: -30px;
+    }
+
+    .form_btns {
+        display:flex;
+        flex-direction:column;
+        text-align:center;
+    }
+
+    
+.green_alert {
+    font-weight: bold;
+    margin: 0 auto;
+    color:
+    green;
+  }
+  
+  .red_alert {
+    font-weight: bold;
+    margin: 10px auto;
+    color:red;
+  }
+
+  .form_btns a {
+    margin: 0 15px;
+    text-decoration: none;
+  }
+
+  .go_back {
+    color:grey
+  }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2022 at 08:28 PM
+-- Generation Time: Oct 02, 2022 at 06:37 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -78,6 +78,7 @@ INSERT INTO `etudiant` (`matricule`, `department`) VALUES
 
 CREATE TABLE `liste_inscription` (
   `cin` int(11) NOT NULL,
+  `nomprenom` varchar(40) NOT NULL,
   `role` int(10) NOT NULL,
   `isSubscribed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -86,8 +87,22 @@ CREATE TABLE `liste_inscription` (
 -- Dumping data for table `liste_inscription`
 --
 
-INSERT INTO `liste_inscription` (`cin`, `role`, `isSubscribed`) VALUES
-(111, 3, 1);
+INSERT INTO `liste_inscription` (`cin`, `nomprenom`, `role`, `isSubscribed`) VALUES
+(12312, 'SQDQSD', 3, 0),
+(11111111, 'Mahdi Abdelkebir', 3, 0),
+(12312312, 'Mahdi Abdelkebir', 3, 0),
+(13123123, 'SQDQSD', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent_enfants`
+--
+
+CREATE TABLE `parent_enfants` (
+  `matriculeParent` int(11) NOT NULL,
+  `matriculeEnfant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,8 +132,8 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`matricule`, `CIN`, `nom`, `prenom`, `sexe`, `email`, `adresse`, `password`, `dateNaissance`, `dateInscription`, `isActive`, `role`, `activationCode`, `activationExpiry`) VALUES
-(1, 1111, 'Website', 'Admin', 1, 'admin@gmail.com', 'adrrr', 'test', '2022-09-01', '2022-09-30 20:06:49', 1, 0, '', '2022-10-01 00:49:39'),
-(14, 111, 'S', 'S', 1, 'gamezrookie@gmail.com', 'S', 'U88G2L8R', '2022-10-06', '2022-10-01 19:24:29', 1, 3, '9f3c1b910bad125aa7d6348f772e07c8', '0000-00-00 00:00:00');
+(1, 1111, 'Website', 'Admin', 1, 'admin@gmail.com', 'adrrr', 'azeaze', '2022-09-01', '2022-09-30 20:06:49', 1, 0, '', '2022-10-01 00:49:39'),
+(14, 111, 'User', 'TEST', 1, 'mahdyabdelkbr@gmail.com', 'S', 'U88G2L8R', '2022-10-06', '2022-10-01 19:24:29', 1, 3, '9f3c1b910bad125aa7d6348f772e07c8', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -167,6 +182,12 @@ ALTER TABLE `liste_inscription`
   ADD PRIMARY KEY (`cin`);
 
 --
+-- Indexes for table `parent_enfants`
+--
+ALTER TABLE `parent_enfants`
+  ADD PRIMARY KEY (`matriculeParent`,`matriculeEnfant`);
+
+--
 -- Indexes for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
@@ -188,7 +209,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `liste_inscription`
 --
 ALTER TABLE `liste_inscription`
-  MODIFY `cin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `cin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13123124;
 
 --
 -- AUTO_INCREMENT for table `utilisateur`
@@ -212,6 +233,13 @@ ALTER TABLE `enseignant`
 ALTER TABLE `etudiant`
   ADD CONSTRAINT `departmentConstraint` FOREIGN KEY (`department`) REFERENCES `department` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `matriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`);
+
+--
+-- Constraints for table `parent_enfants`
+--
+ALTER TABLE `parent_enfants`
+  ADD CONSTRAINT `enfantConstraint` FOREIGN KEY (`matriculeEnfant`) REFERENCES `utilisateur` (`matricule`),
+  ADD CONSTRAINT `parentConstraint` FOREIGN KEY (`matriculeParent`) REFERENCES `utilisateur` (`matricule`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

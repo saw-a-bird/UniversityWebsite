@@ -29,6 +29,11 @@
                 <img src="Assets/imgs/adm_inscription.png" />
                 <a href = "adm_inscription.php"> <h4> Configurer l'inscription </h4> </a>
             </div>
+            
+            <div>
+                <img src="Assets/imgs/users_icon.png" />
+                <a href = "adm_users.php"> <h4> Gestion les utilisateurs </h4> </a>
+            </div>
         </div>
     </div>
 

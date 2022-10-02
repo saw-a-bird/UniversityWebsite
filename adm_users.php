@@ -10,14 +10,9 @@
     include("Pipes/get_login.php");
     include("config.php");
  
-    require_once("Classes/AdminDB.php");
-    $adminDB = new AdminDB();
-    $users = $adminDB->getIList();
-    $adminDB = null;
-
     require_once("Classes/UtilisateurDB.php");
     $utilisateurDB = new UtilisateurDB();
-    $state = $utilisateurDB->getIState();
+    $users = $utilisateurDB->getAll();
     $utilisateurDB = null;
 
     require_once("Classes/Roles.php");
@@ -34,41 +29,36 @@
             <h3 class = "deconnection"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>
+
 </div>
 
 <div class="cd">
 <div class="cadre" >
-<h1 class = "table_name"> Tableau d'inscription: </h1>
+<h1> Tableau d'utilisateurs: </h1>
     <div class = "cadre_header">
+        
         <div class = "forms">
-            <div>Inscription:   
-                <select id="inscription_select" class="drop_form" name="role" onchange="selectIState()">
-                    <option value="0">Fermé</option>
-                    <option value="1">Ouvert</option>
-                </select>
-                <button type = "button" id = "valider_btn" class = "_btn valider_btn" onclick="changeIState()" disabled> Changer </button>
-            </div> 
             <div>Search:   
                 <select id="search_filter_form" class="drop_form" name="role">
-                    <option value="1">CIN</option>
-                    <option value="2">Nom et prenom</option>
+                    <option value="1">Matricule</option>
+                    <option value="2">CIN</option>
+                    <option value="3">Nom et prenom</option>
+                    <option value="4">Role</option>
                 </select>
                 <input id= "search_input" type="text" class="lab_in_txt" name = "CIN" placeholder = "something..." required>
                 <button type = "button" class = "_btn search_btn" onclick="search()"> Search </button>
             </div> 
         </div>
-        <div class = "adm_btns">
-            <a href = "adm_ajouter_inscri.php"><button class = "_btn add_btn"> Ajouter </button></a>
-            <a href = "Pipes/inscr_reset.php" onclick="return confirm('DELETION: Are you sure you want to remove ALL items in the inscriptions table?');"><button class = "_btn reset_btn"> Réinitialiser </button> </a>
-        </div>
     </div>
     <table id ="table_adm" class="scrollable-table">
         <thead>
             <tr> 
-                <th style = "width:20%"><span class = "table_header">CIN</span></th>
-                <th style = "width:30%"><span class = "table_header">Nom et prenom</span></th>
+                <th style = "width:10%"><span class = "table_header">Matricule</span></th>
+                <th style = "width:10%"><span class = "table_header">CIN</span></th>
+                <th style = "width:20%"><span class = "table_header">Nom et prenom</span></th>
                 <th><span class = "table_header">Role</span></th>
-                <th><span class = "table_header">Inscrit?</span></th>
+                <th><span class = "table_header">Date d'inscription</span></th>
+                <th><span class = "table_header">Active?</span></th>
                 <th><span class = "table_header">Actions</span></th>
             </tr>
         </thead>
@@ -78,13 +68,15 @@
                     foreach ($users as $key => $user) {
                         echo "
                             <tr>
-                                <td>".$user["cin"]."</td>
-                                <td>".$user["nomprenom"]."</td>
+                                <td>".$user["matricule"]."</td>
+                                <td>".$user["CIN"]."</td>
+                                <td>".$user["nom"]." ".$user["prenom"]."</td>
                                 <td>".Roles::getName($user["role"])."</td>
-                                <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
+                                <td>".$user["dateInscription"]."</td>
+                                <td>". ($user["isActive"] == 1? "Oui": "Non")."</td>
                                 <td>
-                                <a class = 'link_ref' href = 'adm_modify_insr_form.php?cin=".$user["cin"]."'>Modifier</a>
-                                <a class = 'link_ref' href = 'Pipes/adm_supprimer_insr.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
+                                <a class = 'link_ref' href = 'user_see_details.php?cin=".$user["CIN"]."'>Details</a>
+                                <a class = 'link_ref' href = 'Pipes/adm_supprimer_user.php?cin=".$user["CIN"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove USER #\'".$user["matricule"]."\' from the database?');\">Supprimer</a> 
                                 </td>
                             </tr>
                         ";
@@ -96,22 +88,6 @@
 </div>
 </div>
 <script>
-    var website_link = "<?= HOST ?>";
-    var IState = <?= $state ?>;
-    var inscription_select = document.getElementById("inscription_select");
-    inscription_select.options[IState].selected = true;
-    
-    var valider_btn = document.getElementById("valider_btn");
-
-    function selectIState() {
-        valider_btn.disabled = (inscription_select.selectedIndex == IState);
-    }
-
-    function changeIState() {
-        if (confirm("WARNING!!!! Are you sure you want to "+(IState == 0? "OPEN": "CLOSE")+" inscription to this website?")) {
-            window.location.href = website_link+"Pipes/change_state.php?state="+(IState+1); // (0+1) % 2 = 1 // (1+1) % 2 = 0
-        }
-    }
 
     var table = document.getElementById("table_adm");
     var tr = table.getElementsByTagName("tr");
