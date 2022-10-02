@@ -55,7 +55,7 @@
             <button> Réinitialiser </button>
         </div>
     </div>
-    <table class="table_adm">
+    <table class="table_adm scrollable-table">
         <thead>
             <tr> 
                 <th style = "width:20%"><span class = "table_header">CIN</span></th>
