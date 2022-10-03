@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2022 at 06:37 PM
+-- Generation Time: Oct 03, 2022 at 09:51 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -63,13 +63,6 @@ CREATE TABLE `etudiant` (
   `department` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `etudiant`
---
-
-INSERT INTO `etudiant` (`matricule`, `department`) VALUES
-(14, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -88,10 +81,21 @@ CREATE TABLE `liste_inscription` (
 --
 
 INSERT INTO `liste_inscription` (`cin`, `nomprenom`, `role`, `isSubscribed`) VALUES
-(12312, 'SQDQSD', 3, 0),
+(12312, 'test', 3, 0),
 (11111111, 'Mahdi Abdelkebir', 3, 0),
-(12312312, 'Mahdi Abdelkebir', 3, 0),
-(13123123, 'SQDQSD', 3, 0);
+(12312312, 'Mahdi Abdelkebir', 1, 1),
+(13123123, 'SQDQSD', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parent`
+--
+
+CREATE TABLE `parent` (
+  `matricule` int(11) NOT NULL,
+  `verifyCIN` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -133,7 +137,7 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`matricule`, `CIN`, `nom`, `prenom`, `sexe`, `email`, `adresse`, `password`, `dateNaissance`, `dateInscription`, `isActive`, `role`, `activationCode`, `activationExpiry`) VALUES
 (1, 1111, 'Website', 'Admin', 1, 'admin@gmail.com', 'adrrr', 'azeaze', '2022-09-01', '2022-09-30 20:06:49', 1, 0, '', '2022-10-01 00:49:39'),
-(14, 111, 'User', 'TEST', 1, 'mahdyabdelkbr@gmail.com', 'S', 'U88G2L8R', '2022-10-06', '2022-10-01 19:24:29', 1, 3, '9f3c1b910bad125aa7d6348f772e07c8', '0000-00-00 00:00:00');
+(16, 12312312, 'qsdqs', 'qsdsqd', 1, 'gamezrookie@gmail.com', 'qsdsq', 'A3hzgL2t', '2022-10-06', '2022-10-03 08:37:04', 1, 1, '09fbc60aaf72eab377ad768ba644ecc2', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -182,10 +186,17 @@ ALTER TABLE `liste_inscription`
   ADD PRIMARY KEY (`cin`);
 
 --
+-- Indexes for table `parent`
+--
+ALTER TABLE `parent`
+  ADD PRIMARY KEY (`matricule`);
+
+--
 -- Indexes for table `parent_enfants`
 --
 ALTER TABLE `parent_enfants`
-  ADD PRIMARY KEY (`matriculeParent`,`matriculeEnfant`);
+  ADD PRIMARY KEY (`matriculeParent`,`matriculeEnfant`),
+  ADD KEY `enfantConstraint` (`matriculeEnfant`);
 
 --
 -- Indexes for table `utilisateur`
@@ -215,7 +226,7 @@ ALTER TABLE `liste_inscription`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
@@ -225,21 +236,27 @@ ALTER TABLE `utilisateur`
 -- Constraints for table `enseignant`
 --
 ALTER TABLE `enseignant`
-  ADD CONSTRAINT `martriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`);
+  ADD CONSTRAINT `cc` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `etudiant`
 --
 ALTER TABLE `etudiant`
-  ADD CONSTRAINT `departmentConstraint` FOREIGN KEY (`department`) REFERENCES `department` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `matriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`);
+  ADD CONSTRAINT `departmentConstraint` FOREIGN KEY (`department`) REFERENCES `department` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `matriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `parent`
+--
+ALTER TABLE `parent`
+  ADD CONSTRAINT `mConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `parent_enfants`
 --
 ALTER TABLE `parent_enfants`
-  ADD CONSTRAINT `enfantConstraint` FOREIGN KEY (`matriculeEnfant`) REFERENCES `utilisateur` (`matricule`),
-  ADD CONSTRAINT `parentConstraint` FOREIGN KEY (`matriculeParent`) REFERENCES `utilisateur` (`matricule`);
+  ADD CONSTRAINT `enfantConstraint` FOREIGN KEY (`matriculeEnfant`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `parentConstraint` FOREIGN KEY (`matriculeParent`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
