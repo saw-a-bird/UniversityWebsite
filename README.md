@@ -132,11 +132,22 @@ smtp_port=587
 smtp_ssl=tls
 error_logfile=error.log
 debug_logfile=debug.log
+ ```
+
+ During the repetitive testing, I discovered that GMAIL allows you to send only some few messages before banning you until the next day. Probably to prevent spamming. So I had to make multiple accounts, try them and check if they worked. All errors will be displayed in the  ``` error.log  ``` next to the ```sendemail.ini``` file.
+
+
+ ```
 auth_username=joe.localhost1@gmail.com
 auth_password=jwssmhaexympwgpl
+ ```
+  ```
+auth_username=joe.localhost2@gmail.com
+auth_password=yfebrxnecjwpppli
+
   ```
 
-I already taken care of the server-side code.
+I already taken care of the server-side code inside the Class ``` Emailer.php ```. Feel free to check it.
 
 If this didn't work, please immediately DM me.
 
