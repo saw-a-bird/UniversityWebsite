@@ -17,10 +17,11 @@ Proxima Nova -->
   <?php
 
     session_start();
-    include("config.php");
     if (isset($_SESSION["login"])) {
       header("location: Pipes/login_redirect.php");
     }
+    
+    include("config.php");
 
     if (isset($_GET["m"])) {
       switch ($_GET["m"]) {

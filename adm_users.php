@@ -7,6 +7,7 @@
 <body>
 <?php
     session_start();
+    $authRole = 0;
     include("Pipes/get_login.php");
     include("config.php");
  
@@ -29,12 +30,11 @@
             <h3 class = "deconnection"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>
-
 </div>
 
 <div class="cd">
-<div class="cadre" >
-<h1> Tableau d'utilisateurs: </h1>
+<div class="cadre">
+    <h1> Tableau d'utilisateurs: </h1>
     <div class = "cadre_header">
         
         <div class = "forms">
@@ -76,7 +76,7 @@
                                 <td>". ($user["isActive"] == 1? "Oui": "Non")."</td>
                                 <td>
                                 <a class = 'link_ref' href = 'user_see_details.php?cin=".$user["CIN"]."'>Details</a>
-                                <a class = 'link_ref' href = 'Pipes/adm_supprimer_user.php?cin=".$user["CIN"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove USER #\'".$user["matricule"]."\' from the database?');\">Supprimer</a> 
+                                <a class = 'link_ref' href = 'Pipes/adm_user_supprimer.php?cin=".$user["CIN"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove USER #\'".$user["matricule"]."\' from the database?');\">Supprimer</a> 
                                 </td>
                             </tr>
                         ";
@@ -87,6 +87,7 @@
     </table>
 </div>
 </div>
+
 <script>
 
     var table = document.getElementById("table_adm");

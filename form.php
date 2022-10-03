@@ -11,28 +11,37 @@
 <body>
     <?php
         session_start();
-        include("config.php");
-
         if (isset($_SESSION["login"])) {
             header("location: Pipes/login_redirect.php");
         }
 
+        include("config.php");
+
         // check if CIN exists (in LIST if role is not admin or parent)
         // remove CIN from SESSION after validation (security)
-        require_once("Classes/UtilisateurDB.php");
-        $utilisateurDB = new UtilisateurDB();
+
         // first of all, for security purposes and to get role.
 
-        if ($utilisateurDB->getIState() == 0) {
-            header("Location: closed.html");
+        require_once("Classes/InscriptionDB.php");
+        $inscriptionDB = new InscriptionDB();
+
+        if ($inscriptionDB->getIState() == 0) {
+            header("Location: closed.php");
         }
         
+
+        require_once("Classes/UtilisateurDB.php");
+        $utilisateurDB = new UtilisateurDB();
         $cin = $_SESSION["INSCRIPTION_CIN"];
+
         if ($utilisateurDB->userExists($cin) == true) {
             header("Location: index.php");
         }
 
-        $role = $utilisateurDB->listeExists($cin);
+        require_once("Classes/InscriptionDB.php");
+        $inscriptionDB = new InscriptionDB();
+        $role = $inscriptionDB->getRole($cin);
+
         if ($role == false) {
             $role = 2;
             $roleError = "Ton CIN n'existe pas dans la liste! Est-ce que vous un parent?";
@@ -149,9 +158,10 @@
             <label for="adresse" class="lab_form"> Adresse :</label>
             <input type="text" class="lab_in_txt"  name = "adresse" required>
 
-            <label for="email" class="lab_form"> Email :</label> <?php if (isset($emailError)) echo "<span class = '_error'> $emailError </span>"; ?>
-            <input type="email" class="lab_in_txt" name = "email" required>
-
+            <div>
+                <label for="email" class="lab_form"> Email :</label> <?php if (isset($emailError)) echo "<span class = '_error'> $emailError </span>"; ?>
+                <input type="email" class="lab_in_txt" name = "email" required>
+            </div>
             <div id = "dep_div"> <!-- LACKS SECURITY!!!! SAME AS SEXE  -->
                 <label for="department" class="lab_form"> Department :</label>
                 <select id="department" class="drop_form" name="department">

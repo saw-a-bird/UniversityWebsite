@@ -9,15 +9,25 @@
     <link rel="stylesheet" href="Assets/css/general.css">
 </head>
 <body>
+    <?php 
+      include("config.php");
+
+      require_once("Classes/InscriptionDB.php");
+      $inscriptionDB = new InscriptionDB();
+
+      if ($inscriptionDB->getIState() == 1) {
+          header("Location: index.php");
+      }
+    ?>
       <!--logo and name--> 
       <div>
         <img src="Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-    <h1 id="nom_uni">NOM DE L’INSTITUTE </h1>
+    <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
     </div>
     <!--Content-->
     <div>
-        <p id="titre_close">désolé, le site n'est pas encore disponible!</p>
-        <p id="s_titre_close">returner dans le 28 Aout.</p>
+        <p id="titre_close">Désolé, le site n'est pas encore disponible!</p>
+        <p id="s_titre_close">Returner dans le 28 aôut.</p>
     </div>
     <img src="Assets/imgs/woman_p_unavilable.png" alt="woman" id="img_close">
 </body>

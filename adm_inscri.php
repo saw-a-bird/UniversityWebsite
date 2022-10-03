@@ -7,18 +7,15 @@
 <body>
 <?php
     session_start();
+    $authRole = 0;
     include("Pipes/get_login.php");
     include("config.php");
  
-    require_once("Classes/AdminDB.php");
-    $adminDB = new AdminDB();
-    $users = $adminDB->getIList();
-    $adminDB = null;
-
-    require_once("Classes/UtilisateurDB.php");
-    $utilisateurDB = new UtilisateurDB();
-    $state = $utilisateurDB->getIState();
-    $utilisateurDB = null;
+    require_once("Classes/InscriptionDB.php");
+    $inscriptionDB = new InscriptionDB();
+    $state = $inscriptionDB->getIState();
+    $users = $inscriptionDB->getAll();
+    $inscriptionDB = null;
 
     require_once("Classes/Roles.php");
 ?>
@@ -58,7 +55,7 @@
             </div> 
         </div>
         <div class = "adm_btns">
-            <a href = "adm_ajouter_inscri.php"><button class = "_btn add_btn"> Ajouter </button></a>
+            <a href = "adm_inscri_ajouter.php"><button class = "_btn add_btn"> Ajouter </button></a>
             <a href = "Pipes/inscr_reset.php" onclick="return confirm('DELETION: Are you sure you want to remove ALL items in the inscriptions table?');"><button class = "_btn reset_btn"> Réinitialiser </button> </a>
         </div>
     </div>
@@ -83,8 +80,8 @@
                                 <td>".Roles::getName($user["role"])."</td>
                                 <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
                                 <td>
-                                <a class = 'link_ref' href = 'adm_modify_insr_form.php?cin=".$user["cin"]."'>Modifier</a>
-                                <a class = 'link_ref' href = 'Pipes/adm_supprimer_insr.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
+                                <a class = 'link_ref' href = 'adm_inscri_modifier.php?cin=".$user["cin"]."'>Modifier</a>
+                                <a class = 'link_ref' href = 'Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
                                 </td>
                             </tr>
                         ";

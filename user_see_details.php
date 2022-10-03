@@ -6,6 +6,7 @@
 <body>
 <?php
     session_start();
+    
     include("Pipes/get_login.php");
     include("config.php");
  
@@ -30,7 +31,7 @@
             <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <div class = "buttons_div">
-            <h3 class = "go_back"> <a href="Pipes/login_redirect.php">Retourner</a></h3>
+            <h3 class = "go_back"> <a href="adm_users.php">Retourner</a></h3>
             <h3 class = "deconnection"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>
@@ -40,8 +41,9 @@
 </div>
     <div class="cd">
 <div class="cadre">
-<h1>Fiche d'utilisateur:</h1>
+
     <div class="pg">
+    
         <div class="img_container">
             <?php
                 if ($user["sexe"] == 0) {
@@ -51,13 +53,13 @@
                 }
             ?>
             
-            <h2>Informations:</h2>
+            <h1>Fiche d'utilisateur #<?= $user["matricule"] ?></h1>
         </div>
         <div class = "flex-box">
             <div class="form_">
                 <ul>
-                    <li>
-                    <span>Nom:</span> <?= $user["nom"] ?> </li>
+
+                    <li><span>Nom:</span> <?= $user["nom"] ?> </li>
                 
                     <br>
                     <br>
@@ -79,15 +81,17 @@
                     </li> 
                     <br>
                     <br>
+
                     <li> <span>Date d'inscription:</span>  <?= $user["dateInscription"] ?> </li> 
                     <br>
                     <br>
-
                 </ul>
             </div>
             <div class="verticalLine"></div>
             <div class="form_">
                 <ul>
+
+
                     <li> <span>Adresse:</span>  <?= $user["adresse"] ?> </li>
                 
                     <br>

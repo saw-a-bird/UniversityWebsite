@@ -5,9 +5,11 @@
 <body>
     <?php
         session_start();
-        include("config.php");
+        $authRole = 2;
         include("Pipes/get_login.php");
+        include("config.php");
     ?>
+    
     <div class="logo">  
         <div class = "header_div">
             <img src="Assets/imgs/LOGO.png">

@@ -69,6 +69,6 @@ margin-top: -405px;
     margin-bottom: 40px;
 }
 
-.img_container h2 {
+.img_container h2, .img_container h1 {
     margin-left: 20px
 }

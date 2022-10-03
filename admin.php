@@ -6,9 +6,12 @@
 <body>
     <?php
         session_start();
+
+        $authRole = 0;
         include("Pipes/get_login.php");
         include("config.php");
     ?>
+
     <div class="logo">  
         <div class = "header_div">
             <img src="Assets/imgs/LOGO.png">
@@ -27,7 +30,7 @@
             </div>
             <div>
                 <img src="Assets/imgs/adm_inscription.png" />
-                <a href = "adm_inscription.php"> <h4> Configurer l'inscription </h4> </a>
+                <a href = "adm_inscri.php"> <h4> Configurer l'inscription </h4> </a>
             </div>
             
             <div>
@@ -38,7 +41,7 @@
     </div>
 
     <div class="image" style = "display:flex; align-items: flex-end;">
-        <img src="Assets/imgs/prof.png" alt="prof_pic" class="prof_pic" />
+        <img src="Assets/imgs/director.png" alt="prof_pic" class="prof_pic" />
         <img src="Assets/imgs/PC.png" style = "height: fit-content;margin-left: auto;"  alt="PC" class="PC"  />
     </div>
 

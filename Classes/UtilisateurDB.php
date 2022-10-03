@@ -7,18 +7,6 @@
             VERIFY AND QUERY METHODS
         */
 
-        public function getIState() { 
-            // checks if inscription is OPEN or CLOSED (boolean)
-            
-            $result = $this->request(
-                "SELECT inscription FROM website_config", 
-                array(), 
-                1
-            );
-
-            return $result["inscription"];
-        }
-
         public function userExists($CIN) {
             $resultUser = $this->request(
                 "SELECT CIN FROM utilisateur WHERE CIN = :CIN",
@@ -37,21 +25,6 @@
             );
             // "Erreur! Cette CIN déja inscrit auparavant!"
             return $resultUser;
-        }
-
-        public function listeExists($CIN) {
-            $resultList = $this->request(
-                "SELECT CIN, role FROM liste_inscription WHERE CIN = :CIN",
-                array(':CIN' => $CIN),
-                1
-            );
-            
-            // "Erreur! Cette CIN n'existe pas dans la liste!"
-            if ($resultList == -1) {
-                return false;
-            } else {
-                return $resultList["role"];
-            }
         }
 
         /*
@@ -87,20 +60,22 @@
 
             $this->request($query, $secureArray);
         }
+        
 
-        public function delete($matricule) {
-            $query = "DELETE FROM utilisateur WHERE matricule = :matricule"; 
+        public function delete($CIN) {
             $secureArray = array( 
-                ":matricule" => $matricule
+                ":CIN" => $CIN
             );
 
-            $this->request($query, $secureArray);
+            $this->request("DELETE FROM utilisateur WHERE CIN = :CIN", $secureArray);
+
+            $this->request("UPDATE liste_inscription SET isSubscribed = 0 WHERE cin = :CIN", $secureArray);
         }
 
         /* QUERY METHODS */
         public function getAll() {
             return $this->request(
-                "SELECT * FROM utilisateur",
+                "SELECT * FROM utilisateur WHERE role <> 0",
                 array(),
                 2
             );
@@ -132,7 +107,7 @@
             if ($responseUser != -1) {
                 // error: ALREADY EXPIRED
                 if ((int)$responseUser["isExpired"] === 1) {
-                    self::delete($responseUser['matricule']);
+                    $this->delete($responseUser['CIN']);
                     return 0;
                 }
                 

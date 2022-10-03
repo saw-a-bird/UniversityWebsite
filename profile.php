@@ -9,17 +9,17 @@
     include("Pipes/get_login.php");
     include("config.php");
  
-    include("Classes/Utilisateur.php");
+    include_once("Classes/Utilisateur.php");
     $sexe = Utilisateur::getSexeName($user["sexe"]);
 
     if (isset($user["department"])) {
-        include("Classes/DepartmentDB.php");
+        include_once("Classes/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
         $department = $departmentDB->getNom($user["department"]);
         $departmentDB = null;
     }
 
-    include("Classes/Roles.php");
+    include_once("Classes/Roles.php");
     $role = Roles::getName($user["role"]);
 ?>
 
@@ -56,6 +56,12 @@
             <div class="form_">
                 <ul>
                     <li>
+                    <span>Matricule:</span> <?= $user["matricule"] ?> </li>
+                
+                    <br>
+                    <br>
+
+                    <li>
                     <span>Nom:</span> <?= $user["nom"] ?> </li>
                 
                     <br>
@@ -78,15 +84,15 @@
                     </li> 
                     <br>
                     <br>
-                    <li> <span>Date d'inscription:</span>  <?= $user["dateInscription"] ?> </li> 
-                    <br>
-                    <br>
 
                 </ul>
             </div>
             <div class="verticalLine"></div>
             <div class="form_">
                 <ul>
+                    <li> <span>Date d'inscription:</span>  <?= $user["dateInscription"] ?> </li> 
+                    <br>
+                    <br>
                     <li> <span>Adresse:</span>  <?= $user["adresse"] ?> </li>
                 
                     <br>

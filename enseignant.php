@@ -5,7 +5,7 @@
 <body>
     <?php
         session_start();
-        $authRole = 3;
+        $authRole = 1;
         include("Pipes/get_login.php");
         include("config.php");
     ?>
@@ -18,7 +18,7 @@
     </div>
         
     <div class="content">
-        <h1>Salut Etudiant<br> <span><?= $user["nom"]." ".$user["prenom"] ?> </span>  </h1>
+        <h1>Salut Enseignant<br> <span><?= $user["nom"]." ".$user["prenom"] ?> </span>  </h1>
   
         <div>
             <img src="Assets/imgs/account_icon.png"> 
@@ -26,9 +26,9 @@
         </div>
     </div>
 
-    <div class="image" style = "display:flex;">
-        <img src="Assets/imgs/p_interfaceETD_left.png">
-        <img style = "margin-left: auto;" src="Assets/imgs/p_interfaceETD_right.png">
+    <div class="image" style = "display:flex; align-items: flex-end;">
+        <img src="Assets/imgs/prof_fm.png"  alt="PC" class="PC"  />
+        <img src="Assets/imgs/prof_m.png" alt="prof_pic" class="prof_pic" style = "height: fit-content;margin-left: auto;"/>
     </div>
 
 </body>

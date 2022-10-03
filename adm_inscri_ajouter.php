@@ -13,6 +13,7 @@
 <body>
     <?php
         session_start();
+        $authRole = 0;
         include("Pipes/get_login.php");
         include("config.php");
 
@@ -20,9 +21,9 @@
         if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] == 0) {
             if (isset($_POST["confirm_btn"])) {
                 if (isset($_POST["nomprenom"], $_POST["cin"], $_POST["role"]) && is_numeric($_POST["cin"])) {
-                    require_once("Classes/AdminDB.php");
-                    $adminDB = new AdminDB();
-                    $adminDB->addToList($_POST["cin"], $_POST["nomprenom"], $_POST["role"]);
+                    require_once("Classes/InscriptionDB.php");
+                    $inscriptionDB = new InscriptionDB();
+                    $inscriptionDB->insert($_POST["cin"], $_POST["nomprenom"], $_POST["role"]);
                     
                     $message = "<p class = 'green_alert'>La CIN est ajouté avec succes.</p>";
                 } else {
@@ -60,7 +61,7 @@
                 </select><br>
                 <div class = "form_btns">
                     <input type="submit" value="Ajouter" id="Confirmer" name="confirm_btn" onclick="return confirm('Confirmer?');">
-                    <span> <a href = "adm_inscription.php" class = "go_back"> Retourner </a> <a href = "#">Importer un Excel</a>
+                    <span> <a href = "adm_inscri.php" class = "go_back"> Retourner </a> <a href = "#">Importer un Excel</a>
 
 
                 </div>
