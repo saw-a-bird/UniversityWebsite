@@ -3,19 +3,19 @@
 
 ### Frontend:
 - [X] interface enseignant
-- [X] interface parent
-- [ ] parent: table enfants >> details enfant
+- CANCELED: interface parent
+- CANCELED: parent: table enfants >> details enfant
 - [X] interface admin
 - [X] admin: gestion users
 - [X] admin: inscription
 - [X] interface user
-- [ ] user: details
-- [ ] user: table parents
+- [X] user: public details
+- CANCELED: user: table parents
 - [X] register page (inscription page, also main page)
 - [X] register form page
 - [X] login page
 - [X] closed inscription page
-- CANCELED: forgot password page by email
+- [ ] forgot password page by email
 
 ### Backend:
 
@@ -47,14 +47,14 @@
   - redirect to specific interface per role
   ```
 
-- CANCELED: forgot password button 
+- [ ]: forgot password button 
   ```
   - email from form
   - send confirmation email
   - password edit
   ```
 
-- [ ] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
+- [X] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
 
 - [X] admin interface
   ```
@@ -62,7 +62,7 @@
   - add/remove to table (CIN, role)
   ```
 
-- [ ] parent interface
+- CANCELED: parent interface
   ```
   - onRegister: immediately after confimation email, send email to enfant (by cin from Form) to verify identity.
   - onVerified: activate user, add record to parent-enfant table
