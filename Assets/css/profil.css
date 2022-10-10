@@ -70,5 +70,14 @@ margin-top: -405px;
 }
 
 .img_container h2, .img_container h1 {
-    margin-left: 20px
+    margin-left: 20px;
+    margin-bottom: 5px
 }
+
+.success_alert {
+    display:block;
+    margin: 0 0 0 20px;
+    color:green;
+    font-size:15px
+}
+  

@@ -1,8 +1,11 @@
+body {
+    height: 105vh
+}
+
 #container{
     position: absolute;
     width: 400px;
     left: 50%;
-    top: 10%;
     background: #FFFFFF;
     box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
     border-radius: 45px;
@@ -39,12 +42,26 @@
     input:hover {
         opacity: 0.7;
       }
+
     .drop_form{
         width: 128px;
-    height: 35px;
-    margin-top: 20px;
-    border: 3px solid #B1740F;
+        height: 35px;
+        margin-top: 20px;
+        border: 3px solid #B1740F;
+        margin-bottom: 10px;
     }    
+
+    #lab_in_date{
+        background: #FFFFFF;
+        border: 3px solid #B1740F;
+        border-radius: 45px;
+        width: 191px;
+        height: 28.69px;
+        margin-top: 20px;
+        padding-left: 10px;
+        margin-bottom: 10px;
+    }
+
     #Confirmer{
         font-family: 'Futura Hv BT';
         font-style: normal;
@@ -96,8 +113,9 @@
 
 
     .inscr_form_title {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         margin-left: -30px;
+        margin-right: -15px;
     }
 
     .form_btns {
@@ -109,14 +127,13 @@
     
 .green_alert {
     font-weight: bold;
-    margin: 0 auto;
-    color:
-    green;
+    margin: 0 auto 20px;
+    color:green;
   }
   
   .red_alert {
     font-weight: bold;
-    margin: 10px auto;
+    margin: 0 auto 20px;
     color:red;
   }
 

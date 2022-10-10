@@ -14,15 +14,39 @@ background-image: linear-gradient(160deg, #0093E9 15%, #cce9e5 100%);
     
     
     .content h1{
-    font-family:
-    'Times New Roman', Times, serif;
-    font-size: 50px;
-    padding-left: 20px;
-    margin-top: 9%;
-    margin-left: 420px;
-    letter-spacing: 2px;
+      font-family:
+      'Times New Roman', Times, serif;
+      font-size: 50px;
+      padding-left: 20px;
+      margin-top: 8%;
+      margin-left: 400px;
+      letter-spacing: 2px;
         margin-bottom: 40px;
     }
+
+    .content ._block{
+      margin-bottom: 0;
+    }
+
+    .content h2 {
+      font-family:'Times New Roman', Times, serif;
+      font-size: 15px;
+      padding-left: 20px;
+      margin-left: 415px;
+      letter-spacing: 2px;
+        margin-bottom: 40px;
+    }
+
+
+    .content h3 {
+      font-size: 15px;
+      margin-top: 5px;
+        font-family:'Times New Roman', Times, serif;
+        padding-left: 20px;
+        margin-left: 415px;
+        letter-spacing: 2px;
+          margin-bottom: 40px;
+      }
     
     
     
@@ -47,6 +71,7 @@ background-image: linear-gradient(160deg, #0093E9 15%, #cce9e5 100%);
         display: flex;
         flex-direction: row;
         align-items: center;
+        height: 70px;
       }
 
       .seperated_div {
@@ -111,4 +136,11 @@ background-image: linear-gradient(160deg, #0093E9 15%, #cce9e5 100%);
     .user_ability_list > div > img{
         width:120px;
         height:120px;
+    }
+
+
+    ._green_text {
+      font-weight: bold;
+      margin: 0 auto 20px;
+      color:green;
     }

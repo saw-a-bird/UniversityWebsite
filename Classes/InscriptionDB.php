@@ -34,7 +34,13 @@
         }
 
         public function getAll() {
-            return $this->request("SELECT * from liste_inscription", array(), 2);
+            return $this->request("
+            SELECT l.cin as cin, nomprenom, role, case when u.CIN is NULL THEN 0 ELSE 1 END as isSubscribed
+            FROM liste_inscription as l
+            LEFT JOIN (
+                SELECT cin
+                FROM utilisateur
+            ) as u ON u.CIN = l.cin", array(), 2);
         }
 
          public function insert($cin, $nomprenom, $role) {
@@ -48,13 +54,14 @@
             $this->request($query, $secureArray);
         }
 
-        public function update($cin, $nomprenom, $role) {
-            $query = "UPDATE liste_inscription SET cin = :cin, nomprenom = :nomprenom, role = :role WHERE cin = :cin"; 
+        public function update($oldcin, $cin, $nomprenom, $role) {
+            $query = "UPDATE liste_inscription SET cin = :cin, nomprenom = :nomprenom, role = :role WHERE cin = :oldcin"; 
 
             $secureArray = array( 
                 ":cin" => $cin,
                 ":nomprenom" => $nomprenom,
-                ":role" => $role
+                ":role" => $role,
+                ":oldcin" => $oldcin
             );
 
             $this->request($query, $secureArray);
@@ -74,6 +81,14 @@
         }
 
         /* QUERY LIST */
+
+        public function exists($CIN) {
+            return $this->request(
+                "SELECT * FROM liste_inscription WHERE CIN = :CIN",
+                array(':CIN' => $CIN),
+                0
+            );
+        }
 
         public function getRole($CIN) {
             $resultList = $this->request(

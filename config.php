@@ -1,5 +1,6 @@
 <?php
-    define("HOST", "http://localhost/teamworkProj/");
+    // define("HOST", "http://iset.local/");
     define("NOM_SITE", "ISET SOUSSE");
+    define("ROOT", $_SERVER['DOCUMENT_ROOT']);
 
 ?>

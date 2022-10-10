@@ -1,0 +1,48 @@
+STATUS:
+
+added department to user
+removed department from etudiant
+added qualification to enseignant
+added role to enseignant
+added extends to enseiganant
+changed CRUD insert and update (enseignant)
+added required classes to DB classes (etudiant, enseigant)
+changed user CRUD
+added filiere to etudiant
+added director (inscription, gestion users)
+set up another system of routes
+removed parent totally
+changed database
+- consulter etudiants / enseignants ::DONE
+- consulter details user ::DONE
+- modifier compte information ::DONE
+
+tried to fix account deletion (changed cin -> matricule).
+added minimum authentification type (for public details) 
+
+TEST TEST TEST TEST (from admin creating list, to different types of user creation, information modification, see details of user...) #TEST #TEST #TEST
+
+
+TODO: 
+
+
+- modifier password  ::LATER
+- formulaire (filiere + annee, qualification) ::LATER
+
+
+
+LOGIN CASES:
+case 1: // confirmation link sent (form.php) done
+case 2: // password - sent (activate.php) done
+case -1: // compte not found (activate.php) done
+case -2: // password - service emailer error (activate.php) done
+case -3: // already expired (activate.php) done
+case -4: // already active (activate.php) done
+case -5: // weird activation link (activate.php) done
+case normal: // done
+
+INSCRIPTION CASES (modification):
+change cin, but cin exists already in inscription list. done
+change role, but user already made account. done
+
+its ok for admin to change inscription CIN when user already made account. maybe just error on his part, meh.

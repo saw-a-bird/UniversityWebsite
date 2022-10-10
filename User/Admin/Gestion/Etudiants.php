@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="Assets/css/user.css">
-<link rel="stylesheet" href="Assets/css/profil.css">
-<link rel="stylesheet" href="Assets/css/adm_liste_inscription.css">
+<link rel="stylesheet" href="/Assets/css/user.css">
+<link rel="stylesheet" href="/Assets/css/profil.css">
+<link rel="stylesheet" href="/Assets/css/tables.css">
 </head>
 <body>
 <?php
     session_start();
-    $authRole = 0;
-    include("Pipes/get_login.php");
-    include("config.php");
- 
-    require_once("Classes/UtilisateurDB.php");
-    $utilisateurDB = new UtilisateurDB();
-    $users = $utilisateurDB->getAll();
-    $utilisateurDB = null;
+    $authRole = 1;
+    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+    include(ROOT."/Pipes/get_login.php");
+    require_once(ROOT."/Classes/Roles.php");
 
-    require_once("Classes/Roles.php");
+    require_once(ROOT."/Classes/UtilisateurDB.php");
+    $utilisateurDB = new UtilisateurDB();
+
+    $users = $utilisateurDB->getList(Roles::ByName("Etudiant"), $user["departmentID"]);
+    $utilisateurDB = null;
 ?>
 
 <div class="logo">  
     <div class = "seperated_div">
         <div class = "header_div">
-            <img src="Assets/imgs/LOGO.png">
+            <img src="/Assets/imgs/LOGO.png">
             <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <div class = "buttons_div">
-            <h3 class = "go_back"> <a href="Pipes/login_redirect.php">Retourner</a></h3>
-            <h3 class = "deconnection"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
+            <h3 class = "go_back"> <a href="/User/redirect.php">Retourner</a></h3>
+            <h3 class = "deconnection"> <a href="/Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>
 </div>
 
 <div class="cd">
 <div class="cadre">
-    <h1> Tableau d'utilisateurs: </h1>
+    <h1> Tableau d'etudiants: </h1>
     <div class = "cadre_header">
         
         <div class = "forms">
@@ -43,20 +43,18 @@
                     <option value="1">Matricule</option>
                     <option value="2">CIN</option>
                     <option value="3">Nom et prenom</option>
-                    <option value="4">Role</option>
                 </select>
                 <input id= "search_input" type="text" class="lab_in_txt" name = "CIN" placeholder = "something..." required>
                 <button type = "button" class = "_btn search_btn" onclick="search()"> Search </button>
             </div> 
         </div>
     </div>
-    <table id ="table_adm" class="scrollable-table">
+    <table id ="table_" class="scrollable-table">
         <thead>
             <tr> 
                 <th style = "width:10%"><span class = "table_header">Matricule</span></th>
                 <th style = "width:10%"><span class = "table_header">CIN</span></th>
                 <th style = "width:20%"><span class = "table_header">Nom et prenom</span></th>
-                <th><span class = "table_header">Role</span></th>
                 <th><span class = "table_header">Date d'inscription</span></th>
                 <th><span class = "table_header">Active?</span></th>
                 <th><span class = "table_header">Actions</span></th>
@@ -71,12 +69,10 @@
                                 <td>".$user["matricule"]."</td>
                                 <td>".$user["CIN"]."</td>
                                 <td>".$user["nom"]." ".$user["prenom"]."</td>
-                                <td>".Roles::getName($user["role"])."</td>
                                 <td>".$user["dateInscription"]."</td>
                                 <td>". ($user["isActive"] == 1? "Oui": "Non")."</td>
                                 <td>
-                                <a class = 'link_ref' href = 'user_see_details.php?cin=".$user["CIN"]."'>Details</a>
-                                <a class = 'link_ref' href = 'Pipes/adm_user_supprimer.php?cin=".$user["CIN"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove USER #\'".$user["matricule"]."\' from the database?');\">Supprimer</a> 
+                                    <a class = 'link_ref' href = '/User/Account/public.php?matricule=".$user["matricule"]."'>Details</a>
                                 </td>
                             </tr>
                         ";
@@ -90,7 +86,7 @@
 
 <script>
 
-    var table = document.getElementById("table_adm");
+    var table = document.getElementById("table_");
     var tr = table.getElementsByTagName("tr");
     var input = document.getElementById("search_input");
     var filterSelect = document.getElementById("search_filter_form");

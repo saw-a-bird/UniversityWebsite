@@ -3,27 +3,28 @@
     require_once("Utilisateur.php");
 
     class Etudiant extends Utilisateur {
-        private $departmentID;
+        private $filiereID = null;
 
         public function __construct() {
             $this->role = 3;
         }
+
         /**
-         * Get the value of departmentID
+         * Get the value of filiereID
          */ 
-        public function getDepartmentID()
+        public function getFiliereID()
         {
-                return $this->departmentID;
+                return $this->filiereID;
         }
 
         /**
-         * Set the value of departmentID
+         * Set the value of filiereID
          *
          * @return  self
          */ 
-        public function setDepartmentID($departmentID)
+        public function setFiliereID($filiereID)
         {
-                $this->departmentID = $departmentID;
+                $this->filiereID = $filiereID;
 
                 return $this;
         }

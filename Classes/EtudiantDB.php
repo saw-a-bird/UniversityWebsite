@@ -1,23 +1,24 @@
 <?php
     require_once("MySql.php");
+    require_once("Etudiant.php");
 
     class EtudiantDB extends MySql {
 
         // METHODS
-        public function insert($etd) {
-            $query = "INSERT INTO etudiant(matricule, department) VALUES (:matricule, :department)"; 
+        public function insert(Etudiant $etd) {
+            $query = "INSERT INTO etudiant(matricule, filiereID) VALUES (:matricule, :filiereID)"; 
             $secureArray = array( 
                 ":matricule" => $etd->getMatricule(),
-                ":department" => $etd->getDepartmentID()
+                ":filiereID" => $etd->getFiliereID()
             );
 
             $this->request($query, $secureArray);
         }
 
-        public function update($etd) {
-            $query = "UPDATE etudiant SET department = :department WHERE marticule = :marticule"; 
+        public function update(Etudiant $etd) {
+            $query = "UPDATE etudiant SET filiereID = :filiereID WHERE marticule = :marticule"; 
             $secureArray = array( 
-                ":department" => $etd->getDepartmentID(),
+                ":filiereID" => $etd->getFiliereID(),
                 ":marticule" => $etd->getMatricule()
             );
 

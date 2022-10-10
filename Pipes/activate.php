@@ -7,24 +7,26 @@ if (isset($_GET["email"]) && isset($_GET["activation_code"])) {
     $utilisateurDB = new UtilisateurDB();
     $response = $utilisateurDB->verify_activation_code($_GET["activation_code"], $email);
 
-    if ($response == -1) {
-        // NOT FOUND
-        header("location: ../login.php?m=1");
-    } elseif ($response == 0) {
-        // ALREADY EXPIRED
-        header("location: ../login.php?m=2");
-    } else {
+    if (is_array($response)) {
         // SEND password to email
         require_once("../Classes/Emailer.php");
         $emailer = new Emailer($email);
-        $new_password = $emailer->send_new_password();
+        $new_password = $emailer->create_new_password();
 
-        // ACTIVATE
-        $utilisateurDB->activate_user($response["CIN"], $new_password);
+        if ($emailer->send()) {
+            $utilisateurDB->activate_user($response["matricule"], $new_password);
 
-        // REDIRECT to login 
-        header("location: ../login.php?m=3");
+            // success: password sent
+            header("location: /login.php?m=2");
+        } else {
+            // error: email service offline
+            header("location: /login.php?m=-2");
+        }
+    } else {
+        // errors: already expired, already active, not found
+        header("location: /login.php?m=".$response);
     }
-
-    $utilisateurDB = null;
+} else {
+    // error: WEIRD LINK
+    header("location: /login.php?m=-5");
 }

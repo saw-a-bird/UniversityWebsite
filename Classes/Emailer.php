@@ -1,17 +1,30 @@
 <?php
 
+    error_reporting(-1); 
+    ini_set('display_errors', 'On');
+    set_error_handler("var_dump");
+
     class Emailer {
         const SENDER_EMAIL_ADDRESS = "joe.localhost1@gmail.com";
-        const EMAIL_HEADERS = "From: ". self::SENDER_EMAIL_ADDRESS;
+        private $headers;
         private $recipient;
+        private $subject, $message;
 
         public function __construct($recipient) {
             $this->recipient = $recipient;
+            $this->headers  = [
+                'MIME-Version' => 'MIME-Version: 1.0',
+                'Content-type' => 'text/html; charset=iso-8859-1',
+                "From" => self::SENDER_EMAIL_ADDRESS,
+                "Reply-To" => $recipient,
+                'X-Mailer' => 'PHP/' . phpversion(),
+            ];
         }
         
-        private $debug = true;
-        function send($subject, $message) {
-            $return = mail($this->recipient, $subject, nl2br($message), self::EMAIL_HEADERS);
+        // private $debug = true;
+        function send() {
+            
+            return mail($this->recipient, $this->subject, nl2br($this->message), $this->headers);
             // if ($this->debug) {
             //     if($return == true) {
             //         print_r('Message was sent SUCCESSFULLY.');
@@ -19,33 +32,31 @@
             //         print_r('MAIL ERROR: '.error_get_last()['message']);
             //     }
             // }
-
         }
 
-        function send_activation_email() {
+        function create_activation_email() {
             function generate_activation_code(): string {
                 return bin2hex(random_bytes(16));
             }
 
             $activation_code = generate_activation_code();
             // create the activation link
-            $activation_link = "http://localhost/teamworkProj/Pipes/activate.php?email=".$this->recipient."&activation_code=$activation_code";
+            $activation_link = "http://isetso.local/Pipes/activate.php?email=".$this->recipient."&activation_code=$activation_code";
 
             // set email subject & body
-            $subject = 'Please activate your account';
-            $message = <<<MESSAGE
+            $this->subject = 'Please activate your account';
+            $this->message = <<<MESSAGE
                     Hi,
                     Please click the following link to activate your account:
                     $activation_link
                     MESSAGE;
 
             // send the email
-            $this->send($subject, $message);
             return $activation_code;
         }
         
 
-        function send_new_password() {
+        function create_new_password() {
             function create_random_password() {
                 $password = ""; //remember to declare $pass as an array
                 $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -61,14 +72,13 @@
             $new_password = create_random_password();
 
             // set email subject & body
-            $subject = 'Your new password.';
-            $message = <<<MESSAGE
+            $this->subject = 'Your new password.';
+            $this->message = <<<MESSAGE
                     Hi,
                     Your password is: $new_password
                     MESSAGE;
 
             // send the email
-            $this->send($subject, $message);
             return $new_password;
         }
     }

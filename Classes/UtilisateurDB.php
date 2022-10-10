@@ -7,31 +7,29 @@
             VERIFY AND QUERY METHODS
         */
 
-        public function userExists($CIN) {
-            $resultUser = $this->request(
+
+        public function exists($CIN) {
+            return $this->request(
                 "SELECT CIN FROM utilisateur WHERE CIN = :CIN",
                 array(':CIN' => $CIN),
                 0
-            );
-            // "Erreur! Cette CIN déja inscrit auparavant!"
-            return $resultUser;
+            );;
         }
 
         public function emailExists($email, $return = 0) {
-            $resultUser = $this->request(
+            // "Erreur! Cette CIN déja inscrit auparavant!"
+            return $this->request(
                 "SELECT * FROM utilisateur WHERE email = :email",
                 array(':email' => $email),
                 $return
             );
-            // "Erreur! Cette CIN déja inscrit auparavant!"
-            return $resultUser;
         }
 
         /*
             MAIN CRUD METHODS
         */
         public function insert(Utilisateur $user) {
-            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, role, activationCode) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :role, :activationCode)"; 
+            $query = "INSERT INTO utilisateur(CIN, nom, prenom, sexe, adresse, dateNaissance, email, departmentID, role, activationCode) VALUES (:CIN, :nom, :prenom, :sexe, :adresse, :dateNaissance, :email, :departmentID, :role, :activationCode)"; 
             $secureArray = array( 
                 ":CIN" => $user->getCIN(),
                 ":nom" => $user->getNom(),
@@ -39,37 +37,37 @@
                 ":sexe" => $user->getSexe(),
                 ":adresse" => $user->getAdresse(),
                 ":dateNaissance" => $user->getDateNaissance(),
-                ":email" => $user->getEmail(),  
+                ":email" => $user->getEmail(),
+                ":departmentID" => $user->getDepartmentID(),
                 ":role" => $user->getRole(),
-                ":activationCode" => $user->getActivationCode()
+                ":activationCode" => $user->getActivationCode(),
             );
 
             $user->setMatricule($this->request($query, $secureArray, 3));
         }
 
-        public function update($user) {
-            $query = "UPDATE utilisateur SET nom = ?, prenom = ?, sexe = ?, adresse = ?, dateNaissance = ? WHERE CIN = ?"; 
+        public function update(Utilisateur $user) {
+            $query = "UPDATE utilisateur SET nom = ?, prenom = ?, sexe = ?, adresse = ?, dateNaissance = ?  WHERE CIN = ?"; 
             $secureArray = array( 
-                $user->nom,
-                $user->prenom,
-                $user->sexe,
-                $user->adresse,
-                $user->dateNaissance,
-                $user->CIN
+                $user->getNom(),
+                $user->getPrenom(),
+                $user->getSexe(),
+                $user->getAdresse(),
+                $user->getDateNaissance(),
+                $user->getCIN()
             );
 
             $this->request($query, $secureArray);
         }
         
 
-        public function delete($CIN) {
+        public function delete($matricule) {
             $secureArray = array( 
-                ":CIN" => $CIN
+                ":matricule" => $matricule
             );
 
-            $this->request("DELETE FROM utilisateur WHERE CIN = :CIN", $secureArray);
-
-            $this->request("UPDATE liste_inscription SET isSubscribed = 0 WHERE cin = :CIN", $secureArray);
+            $this->request("DELETE FROM utilisateur WHERE matricule = :matricule", $secureArray);
+            
         }
 
         /* QUERY METHODS */
@@ -78,6 +76,22 @@
                 "SELECT * FROM utilisateur WHERE role <> 0",
                 array(),
                 2
+            );
+        }
+
+        public function getList($role, $depId) {
+            return $this->request(
+                "SELECT * FROM utilisateur WHERE role = :role and departmentID = :depId",
+                array(":role" => $role, ":depId" => $depId),
+                2
+            );
+        }
+
+        public function getUserByCIN($cin) {
+            return $this->request(
+                "SELECT * FROM utilisateur WHERE CIN = :cin",
+                array(':cin' => $cin),
+                1
             );
         }
 
@@ -95,20 +109,26 @@
 
         public function verify_activation_code(string $activationCode, string $email) {
             $responseUser = $this->request(
-                'SELECT CIN, activationCode, DATEDIFF(activationExpiry, now()) as isExpired
+                'SELECT isActive, matricule, activationCode, DATEDIFF(activationExpiry, now()) as isExpired
                  FROM utilisateur
-                 WHERE isActive = 0 AND email = :email',
+                 WHERE email = :email',
                 array( 
                     ":email" => $email
                 ),
                 1
             );
 
-            if ($responseUser != -1) {
+            if (is_array($responseUser)) {
+                
+                // error: ALREADY ACTIVE
+                if ((int)$responseUser["isActive"] === 1) {
+                    return -4;
+                }
+
                 // error: ALREADY EXPIRED
                 if ((int)$responseUser["isExpired"] === 1) {
-                    $this->delete($responseUser['CIN']);
-                    return 0;
+                    $this->delete($responseUser['matricule']);
+                    return -3;
                 }
                 
                 // verify the password
@@ -121,19 +141,12 @@
         }
         
 
-        public function activate_user($CIN, $password) {
+        public function activate_user($matricule, $password) {
             $this->request(
-                "UPDATE utilisateur SET isActive = 1, password = :PASS, activationExpiry = NULL WHERE CIN = :CIN",
+                "UPDATE utilisateur SET isActive = 1, password = :PASS, activationExpiry = NULL WHERE matricule = :matricule",
                 array( 
-                    ":CIN" => $CIN,
+                    ":matricule" => $matricule,
                     ":PASS" => $password
-                )
-            );
-
-            $this->request(
-                "UPDATE liste_inscription SET isSubscribed = 1 WHERE CIN = :CIN",
-                array( 
-                    ":CIN" => $CIN
                 )
             );
         }

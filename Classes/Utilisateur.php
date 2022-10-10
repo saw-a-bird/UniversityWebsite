@@ -1,6 +1,7 @@
 <?php
 
     class Utilisateur {
+        private $role = 0;
         private $matricule;
         private $CIN;
         private $email;
@@ -12,9 +13,9 @@
         private $dateInscription;
         private $password;
         private $isActive;
-        private $role = 0;
         private $activationCode;
         private $activationExpiry;
+        private $departmentID;
 
         public function getCIN(){
             return $this->CIN;
@@ -185,6 +186,26 @@
         public function setActivationExpiry($activationExpiry)
         {
                 $this->activationExpiry = $activationExpiry;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of departmentID
+         */ 
+        public function getDepartmentID()
+        {
+                return $this->departmentID;
+        }
+
+        /**
+         * Set the value of departmentID
+         *
+         * @return  self
+         */ 
+        public function setDepartmentID($departmentID)
+        {
+                $this->departmentID = $departmentID;
 
                 return $this;
         }

@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="Assets/css/user.css">
-<link rel="stylesheet" href="Assets/css/profil.css">
-<link rel="stylesheet" href="Assets/css/adm_liste_inscription.css">
+<link rel="stylesheet" href="/Assets/css/user.css">
+<link rel="stylesheet" href="/Assets/css/profil.css">
+<link rel="stylesheet" href="/Assets/css/tables.css">
+<link rel="stylesheet" href="/Assets/css/buttons.css">
+<title> Directeur - Gestion d'inscriptions </title>
 </head>
 <body>
 <?php
     session_start();
     $authRole = 0;
-    include("Pipes/get_login.php");
-    include("config.php");
- 
-    require_once("Classes/InscriptionDB.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+    include(ROOT."/Pipes/get_login.php");
+
+    require_once(ROOT."/Classes/InscriptionDB.php");
     $inscriptionDB = new InscriptionDB();
     $state = $inscriptionDB->getIState();
     $users = $inscriptionDB->getAll();
     $inscriptionDB = null;
 
-    require_once("Classes/Roles.php");
+    require_once(ROOT."/Classes/Roles.php");
 ?>
 
 <div class="logo">  
     <div class = "seperated_div">
         <div class = "header_div">
-            <img src="Assets/imgs/LOGO.png">
+            <img src="/Assets/imgs/LOGO.png">
             <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <div class = "buttons_div">
-            <h3 class = "go_back"> <a href="Pipes/login_redirect.php">Retourner</a></h3>
-            <h3 class = "deconnection"> <a href="Pipes/deconnexion.php">Se deconnecter</a></h3>
+            <h3 class = "go_back"> <a href="/User/redirect.php">Retourner</a></h3>
+            <h3 class = "deconnection"> <a href="/Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>
 </div>
@@ -54,12 +56,12 @@
                 <button type = "button" class = "_btn search_btn" onclick="search()"> Search </button>
             </div> 
         </div>
-        <div class = "adm_btns">
-            <a href = "adm_inscri_ajouter.php"><button class = "_btn add_btn"> Ajouter </button></a>
-            <a href = "Pipes/inscr_reset.php" onclick="return confirm('DELETION: Are you sure you want to remove ALL items in the inscriptions table?');"><button class = "_btn reset_btn"> Réinitialiser </button> </a>
+        <div class = "_tool_buttons">
+            <a href = "ajouter.php"><button class = "_btn _green_btn"> Ajouter </button></a>
+            <a href = "/Pipes/adm_insr_reset.php" onclick="return confirm('DELETION: Are you sure you want to remove ALL items in the inscriptions table?');"><button class = "_btn _red_btn"> Réinitialiser </button> </a>
         </div>
     </div>
-    <table id ="table_adm" class="scrollable-table">
+    <table id ="table_" class="scrollable-table">
         <thead>
             <tr> 
                 <th style = "width:20%"><span class = "table_header">CIN</span></th>
@@ -80,10 +82,10 @@
                                 <td>".Roles::getName($user["role"])."</td>
                                 <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
                                 <td>
-                                <a class = 'link_ref' href = 'adm_inscri_modifier.php?cin=".$user["cin"]."'>Modifier</a>
-                                <a class = 'link_ref' href = 'Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
-                                </td>
-                            </tr>
+                                    <a class = 'link_ref' href = 'modifier.php?cin=".$user["cin"]."'>Modifier</a>
+                                    <a class = 'link_ref' href = '/Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
+                            </td>
+                        </tr>
                         ";
                     }
                 }
@@ -93,7 +95,6 @@
 </div>
 </div>
 <script>
-    var website_link = "<?= HOST ?>";
     var IState = <?= $state ?>;
     var inscription_select = document.getElementById("inscription_select");
     inscription_select.options[IState].selected = true;
@@ -106,11 +107,11 @@
 
     function changeIState() {
         if (confirm("WARNING!!!! Are you sure you want to "+(IState == 0? "OPEN": "CLOSE")+" inscription to this website?")) {
-            window.location.href = website_link+"Pipes/change_state.php?state="+(IState+1); // (0+1) % 2 = 1 // (1+1) % 2 = 0
+            window.location.href = "/Pipes/change_state.php?state="+(IState+1); // (0+1) % 2 = 1 // (1+1) % 2 = 0
         }
     }
 
-    var table = document.getElementById("table_adm");
+    var table = document.getElementById("table_");
     var tr = table.getElementsByTagName("tr");
     var input = document.getElementById("search_input");
     var filterSelect = document.getElementById("search_filter_form");

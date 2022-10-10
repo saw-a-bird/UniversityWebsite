@@ -1,24 +1,30 @@
 <?php
 
-    class Enseignant {
-        private $matiere;
+        require_once("Utilisateur.php");
 
-        /**
-         * Get the value of matiere
-         */ 
-        public function getMatiere()
-        {
-                return $this->matiere;
+    class Enseignant extends Utilisateur {
+        private $qualifications;
+
+        public function __construct() {
+                $this->role = 2;
         }
 
         /**
-         * Set the value of matiere
+         * Get the value of qualifications
+         */ 
+        public function getQualifications()
+        {
+                return $this->qualifications;
+        }
+
+        /**
+         * Set the value of qualifications
          *
          * @return  self
          */ 
-        public function setMatiere($matiere)
+        public function setQualifications($qualifications)
         {
-                $this->matiere = $matiere;
+                $this->qualifications = $qualifications;
 
                 return $this;
         }
