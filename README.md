@@ -2,9 +2,9 @@
 # TODO
 
 ### Frontend:
-- [X] interface enseignant
-- CANCELED: interface parent
-- CANCELED: parent: table enfants >> details enfant
+- [X] interface enseignant.
+CANCELED -  interface parent
+CANCELED - parent: table enfants >> details enfant
 - [X] interface admin
 - [X] admin: gestion users
 - [X] admin: inscription
