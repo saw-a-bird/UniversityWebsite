@@ -2,24 +2,40 @@
 # TODO
 
 ### Frontend:
-- [X] interface enseignant.
-- CANCELED: interface parent
-- CANCELED: parent: table enfants >> details enfant
-- [X] interface admin
-- [X] admin: gestion users
-- [X] admin: inscription
-- [X] interface user
-- [X] user: public details
-- CANCELED: user: table parents
 - [X] register page (inscription page, also main page)
-- [X] register form page
 - [X] login page
 - [X] closed inscription page
 - [X] forgot password page by email
-- [ ] reconfirmation email
+- [X] reconfirmation email
+- [ ] users: add pagnation menu in main interface
+- [X] users: public details
 
-### Backend:
+- [X] interface enseignant.
+- [ ] enseignant: afficher emploi
+- [ ] enseignant: ... ???
 
+- [X] interface etudiant
+- CANCELED: etudiant: table parents
+- [ ] etudiant: afficher emploi
+- [ ] etudiant: ... ???
+
+- [X] interface super-admin
+- [X] super-admin: gestion users
+- [X] super-admin: inscription
+- [ ] super-admin: anne > session (+CRUD, new session if last year) > classes > groups > emploi??
+- [ ] super-admin: afficher salles + form salle (nom)
+
+- [X] interface admin
+- [ ] admin: plan etudes (by parcours in their department) > semestres > unites > matieres > enseignants.
+- [ ] admin: classes > groups > etudiants
+- [ ] admin: afficher emplois (etudiant only, enseignant automatic) + form emploi (salle, sceance, emploi, class, group, matiere, enseignant)
+
+
+- CANCELED: interface parent
+- CANCELED: parent: table enfants >> details enfant
+
+
+### Backend (NOT UPDATED YET):
 - [X] set up diagramme de clases
 - [X] set up connection Class (MySQL)
 - [X] create all classes
@@ -140,7 +156,22 @@ error_logfile=error.log
 debug_logfile=debug.log
  ```
 
- During the repetitive testing, I discovered that GMAIL allows you to send only some few messages before banning you until the next day. Probably to prevent spamming. So I had to make multiple accounts, try them and check if they worked. All errors will be displayed in the  ``` error.log  ``` next to the ```sendemail.ini``` file.
+Then go to ```C:\xampp\php``` and open ```php.ini  ```
+
+Modify these
+  ```
+[mail function]
+; For Win32 only.
+SMTP=smtp.gmail.com
+smtp_port=587
+sendmail_from =sender@gmail.com
+sendmail_path = "C:\xampp\sendmail\sendmail.exe -t"
+mail.add_x_header=On
+  ```
+
+During the repetitive testing, I discovered that GMAIL allows you to send only some few messages before banning you until the next day. Most likely to prevent spamming. 
+ 
+Because of this, I had to make multiple accounts, try them and check if they worked. All email-related errors will be displayed in the  ``` error.log  ``` next to the ```sendemail.ini``` file.
 
 
  ```

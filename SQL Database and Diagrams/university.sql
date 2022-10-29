@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 07:28 PM
+-- Generation Time: Oct 29, 2022 at 08:25 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -108,7 +108,7 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`matricule`, `groupId`) VALUES
-(7, NULL);
+(8, NULL);
 
 -- --------------------------------------------------------
 
@@ -280,7 +280,7 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`matricule`, `cin`, `nom`, `prenom`, `sexe`, `dateNaissance`, `adresse`, `email`, `password`, `departmentID`, `dateInscription`, `isConfirmed`, `isActive`, `activationCode`, `activationExpiry`, `role`) VALUES
 (1, 0, 'Mahdi', 'Abdelkebir', 1, '2022-10-12', '', 'admin@gmail.com', 'azeaze', 1, '2022-10-16 19:28:46', 1, 1, '', '2022-10-16 19:28:46', 0),
-(7, 12222222, 'AAA', 'AAA', 1, '2022-09-30', 'AAA', 'gamezrookie@gmail.com', '1rXgwdiN', 1, '2022-10-17 10:37:00', 0, 0, '26d3f589a5cbc81e6b038d1d465a9377', '0000-00-00 00:00:00', 4);
+(8, 12222222, 'aa', 'aa', 1, '2022-10-20', 'aa', 'gamezrookie@gmail.com', '', 1, '2022-10-29 18:40:01', 0, 0, 'acbde2a0780dbeb748c9ff915fa9a0af', '2022-10-29 18:40:01', 4);
 
 -- --------------------------------------------------------
 
@@ -447,7 +447,7 @@ ALTER TABLE `classe`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
