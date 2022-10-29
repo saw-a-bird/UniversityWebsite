@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2022 at 01:21 AM
+-- Generation Time: Oct 30, 2022 at 01:42 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -56,7 +56,7 @@ CREATE TABLE `anne` (
 CREATE TABLE `classe` (
   `id` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
-  `parcoursNom` varchar(20) NOT NULL,
+  `parcoursID` int(11) NOT NULL,
   `sessionN1` int(11) NOT NULL,
   `sessionN2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -170,7 +170,8 @@ CREATE TABLE `matiere` (
 --
 
 CREATE TABLE `parcours` (
-  `nom` varchar(20) NOT NULL,
+  `id` int(11) NOT NULL,
+  `parcoursNom` varchar(20) NOT NULL,
   `departmentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -182,7 +183,7 @@ CREATE TABLE `parcours` (
 
 CREATE TABLE `planetude` (
   `id` int(11) NOT NULL,
-  `parcoursNom` varchar(20) NOT NULL,
+  `parcoursID` int(11) NOT NULL,
   `dateDebut` datetime NOT NULL DEFAULT current_timestamp(),
   `dateFin` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -320,9 +321,9 @@ ALTER TABLE `anne`
 --
 ALTER TABLE `classe`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `parcoursConstraint` (`parcoursNom`),
   ADD KEY `session1Constraint_classe` (`sessionN1`),
-  ADD KEY `session2Constraint_classe` (`sessionN2`);
+  ADD KEY `session2Constraint_classe` (`sessionN2`),
+  ADD KEY `parcoursConstraint_classe` (`parcoursID`);
 
 --
 -- Indexes for table `department`
@@ -376,7 +377,7 @@ ALTER TABLE `matiere`
 -- Indexes for table `parcours`
 --
 ALTER TABLE `parcours`
-  ADD PRIMARY KEY (`nom`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `departmentConstraint_parcours` (`departmentID`);
 
 --
@@ -384,7 +385,7 @@ ALTER TABLE `parcours`
 --
 ALTER TABLE `planetude`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `parcoursConstraint_planEtude` (`parcoursNom`);
+  ADD KEY `parcoursConstraint_planEtude` (`parcoursID`);
 
 --
 -- Indexes for table `salle`
@@ -440,6 +441,12 @@ ALTER TABLE `classe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `parcours`
+--
+ALTER TABLE `parcours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
@@ -464,7 +471,7 @@ ALTER TABLE `affecter`
 -- Constraints for table `classe`
 --
 ALTER TABLE `classe`
-  ADD CONSTRAINT `parcoursConstraint` FOREIGN KEY (`parcoursNom`) REFERENCES `parcours` (`nom`),
+  ADD CONSTRAINT `parcoursConstraint_classe` FOREIGN KEY (`parcoursID`) REFERENCES `parcours` (`id`),
   ADD CONSTRAINT `session1Constraint_classe` FOREIGN KEY (`sessionN1`) REFERENCES `session` (`numero`),
   ADD CONSTRAINT `session2Constraint_classe` FOREIGN KEY (`sessionN2`) REFERENCES `session` (`numero`);
 
@@ -510,7 +517,7 @@ ALTER TABLE `parcours`
 -- Constraints for table `planetude`
 --
 ALTER TABLE `planetude`
-  ADD CONSTRAINT `parcoursConstraint_planEtude` FOREIGN KEY (`parcoursNom`) REFERENCES `parcours` (`nom`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `parcoursConstraint_planEtude` FOREIGN KEY (`parcoursID`) REFERENCES `parcours` (`id`);
 
 --
 -- Constraints for table `session`
