@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 08:25 PM
+-- Generation Time: Oct 30, 2022 at 01:21 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -33,7 +33,8 @@ CREATE TABLE `affecter` (
   `salleNom` varchar(20) NOT NULL,
   `sceanceNum` int(11) NOT NULL,
   `jourNum` int(11) NOT NULL,
-  `groupId` int(11) NOT NULL
+  `groupId` int(11) NOT NULL,
+  `matriculeEnseignant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,9 +56,9 @@ CREATE TABLE `anne` (
 CREATE TABLE `classe` (
   `id` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
-  `departmentID` int(11) NOT NULL,
   `parcoursNom` varchar(20) NOT NULL,
-  `sessionNum` int(11) NOT NULL
+  `sessionN1` int(11) NOT NULL,
+  `sessionN2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -95,20 +96,13 @@ CREATE TABLE `enseignant_matiere` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiant`
+-- Table structure for table `etudiant_group`
 --
 
-CREATE TABLE `etudiant` (
+CREATE TABLE `etudiant_group` (
   `matricule` int(11) NOT NULL,
-  `groupId` int(11) DEFAULT NULL
+  `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `etudiant`
---
-
-INSERT INTO `etudiant` (`matricule`, `groupId`) VALUES
-(8, NULL);
 
 -- --------------------------------------------------------
 
@@ -151,7 +145,7 @@ CREATE TABLE `liste_inscription` (
 --
 
 INSERT INTO `liste_inscription` (`cin`, `nomprenom`, `role`, `departmentID`) VALUES
-(12222222, 'AAA AA', 4, 1);
+(12222222, 'AAA AA', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +171,7 @@ CREATE TABLE `matiere` (
 
 CREATE TABLE `parcours` (
   `nom` varchar(20) NOT NULL,
-  `sessionNumero` int(11) NOT NULL
+  `departmentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -188,7 +182,7 @@ CREATE TABLE `parcours` (
 
 CREATE TABLE `planetude` (
   `id` int(11) NOT NULL,
-  `parcoursID` int(11) NOT NULL,
+  `parcoursNom` varchar(20) NOT NULL,
   `dateDebut` datetime NOT NULL DEFAULT current_timestamp(),
   `dateFin` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -280,7 +274,7 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`matricule`, `cin`, `nom`, `prenom`, `sexe`, `dateNaissance`, `adresse`, `email`, `password`, `departmentID`, `dateInscription`, `isConfirmed`, `isActive`, `activationCode`, `activationExpiry`, `role`) VALUES
 (1, 0, 'Mahdi', 'Abdelkebir', 1, '2022-10-12', '', 'admin@gmail.com', 'azeaze', 1, '2022-10-16 19:28:46', 1, 1, '', '2022-10-16 19:28:46', 0),
-(8, 12222222, 'aa', 'aa', 1, '2022-10-20', 'aa', 'gamezrookie@gmail.com', '', 1, '2022-10-29 18:40:01', 0, 0, 'acbde2a0780dbeb748c9ff915fa9a0af', '2022-10-29 18:40:01', 4);
+(9, 12222222, 'aa', 'aaa', 1, '2022-10-05', 'aaa', 'gamezrookie@gmail.com', '9eZw5FdN', 1, '2022-10-29 22:03:08', 0, 1, '84ccf5c425e95dc213df94cb91ea02b8', '0000-00-00 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -312,7 +306,8 @@ ALTER TABLE `affecter`
   ADD KEY `salleConstraint` (`salleNom`),
   ADD KEY `sceanceConstraint` (`sceanceNum`),
   ADD KEY `jourConstraint` (`jourNum`),
-  ADD KEY `affecter_groupConstraint` (`groupId`);
+  ADD KEY `affecter_groupConstraint` (`groupId`),
+  ADD KEY `matriculeEnsConstraint_affecter` (`matriculeEnseignant`);
 
 --
 -- Indexes for table `anne`
@@ -325,9 +320,9 @@ ALTER TABLE `anne`
 --
 ALTER TABLE `classe`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `departmentConstraint` (`departmentID`),
   ADD KEY `parcoursConstraint` (`parcoursNom`),
-  ADD KEY `sessionConstrain` (`sessionNum`);
+  ADD KEY `session1Constraint_classe` (`sessionN1`),
+  ADD KEY `session2Constraint_classe` (`sessionN2`);
 
 --
 -- Indexes for table `department`
@@ -343,11 +338,11 @@ ALTER TABLE `enseignant_matiere`
   ADD KEY `em_matriculeConstraint` (`matricule`);
 
 --
--- Indexes for table `etudiant`
+-- Indexes for table `etudiant_group`
 --
-ALTER TABLE `etudiant`
-  ADD PRIMARY KEY (`matricule`),
-  ADD KEY `groupeConstraint` (`groupId`);
+ALTER TABLE `etudiant_group`
+  ADD KEY `matriculeConstraint_eg` (`matricule`),
+  ADD KEY `groupConstraint_eg` (`groupID`);
 
 --
 -- Indexes for table `groupe`
@@ -382,13 +377,14 @@ ALTER TABLE `matiere`
 --
 ALTER TABLE `parcours`
   ADD PRIMARY KEY (`nom`),
-  ADD KEY `sessionConstraint` (`sessionNumero`);
+  ADD KEY `departmentConstraint_parcours` (`departmentID`);
 
 --
 -- Indexes for table `planetude`
 --
 ALTER TABLE `planetude`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parcoursConstraint_planEtude` (`parcoursNom`);
 
 --
 -- Indexes for table `salle`
@@ -447,7 +443,7 @@ ALTER TABLE `classe`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `matricule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -460,6 +456,7 @@ ALTER TABLE `affecter`
   ADD CONSTRAINT `affecter_groupConstraint` FOREIGN KEY (`groupId`) REFERENCES `groupe` (`id`),
   ADD CONSTRAINT `jourConstraint` FOREIGN KEY (`jourNum`) REFERENCES `jour` (`numero`),
   ADD CONSTRAINT `matiereConstrain` FOREIGN KEY (`matiereId`) REFERENCES `matiere` (`id`),
+  ADD CONSTRAINT `matriculeEnsConstraint_affecter` FOREIGN KEY (`matriculeEnseignant`) REFERENCES `utilisateur` (`matricule`),
   ADD CONSTRAINT `salleConstraint` FOREIGN KEY (`salleNom`) REFERENCES `salle` (`nom`),
   ADD CONSTRAINT `sceanceConstraint` FOREIGN KEY (`sceanceNum`) REFERENCES `sceance` (`numero`);
 
@@ -467,9 +464,9 @@ ALTER TABLE `affecter`
 -- Constraints for table `classe`
 --
 ALTER TABLE `classe`
-  ADD CONSTRAINT `departmentConstraint` FOREIGN KEY (`departmentID`) REFERENCES `department` (`id`),
   ADD CONSTRAINT `parcoursConstraint` FOREIGN KEY (`parcoursNom`) REFERENCES `parcours` (`nom`),
-  ADD CONSTRAINT `sessionConstrain` FOREIGN KEY (`sessionNum`) REFERENCES `session` (`numero`);
+  ADD CONSTRAINT `session1Constraint_classe` FOREIGN KEY (`sessionN1`) REFERENCES `session` (`numero`),
+  ADD CONSTRAINT `session2Constraint_classe` FOREIGN KEY (`sessionN2`) REFERENCES `session` (`numero`);
 
 --
 -- Constraints for table `enseignant_matiere`
@@ -479,11 +476,11 @@ ALTER TABLE `enseignant_matiere`
   ADD CONSTRAINT `em_matriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`);
 
 --
--- Constraints for table `etudiant`
+-- Constraints for table `etudiant_group`
 --
-ALTER TABLE `etudiant`
-  ADD CONSTRAINT `groupeConstraint` FOREIGN KEY (`groupId`) REFERENCES `groupe` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `matriculeConstraint` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`) ON DELETE CASCADE;
+ALTER TABLE `etudiant_group`
+  ADD CONSTRAINT `groupConstraint_eg` FOREIGN KEY (`groupID`) REFERENCES `groupe` (`id`),
+  ADD CONSTRAINT `matriculeConstraint_eg` FOREIGN KEY (`matricule`) REFERENCES `utilisateur` (`matricule`);
 
 --
 -- Constraints for table `groupe`
@@ -507,7 +504,13 @@ ALTER TABLE `matiere`
 -- Constraints for table `parcours`
 --
 ALTER TABLE `parcours`
-  ADD CONSTRAINT `sessionConstraint` FOREIGN KEY (`sessionNumero`) REFERENCES `session` (`numero`);
+  ADD CONSTRAINT `departmentConstraint_parcours` FOREIGN KEY (`departmentID`) REFERENCES `department` (`id`);
+
+--
+-- Constraints for table `planetude`
+--
+ALTER TABLE `planetude`
+  ADD CONSTRAINT `parcoursConstraint_planEtude` FOREIGN KEY (`parcoursNom`) REFERENCES `parcours` (`nom`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `session`

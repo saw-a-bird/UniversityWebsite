@@ -28,9 +28,22 @@
         <h2 class = "_block" style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
         <h3>Department: <?= $departmentDB->getNom($user["departmentID"]) ?><br>  </h3>
             
-        <div>
-            <img src="/Assets/imgs/account_icon.png"> 
-            <a href = "/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
+        <div class="carousel-slider" id="responsive">
+            <div class="carousel-content" data-pagination="true">
+                <aside class="slide-item">
+                    <div>
+                        <img src="/Assets/imgs/account_icon.png"> 
+                        <a href = "/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
+                    </div>
+                    <div>
+                        <img src="/Assets/imgs/adm_inscription.png" />
+                        <a href = "Gestion/PlanEtude/index.php"> <h4> Gestion de plans d'etude </h4> </a>
+                    </div>
+                </aside>
+            </div>
+            <button class="carousel-prev-btn">&larr;</button>
+            <button class="carousel-next-btn">&rarr;</button>
+            <div class="carousel-pagination"></div>
         </div>
     </div>
 
@@ -39,4 +52,6 @@
         <img style = "margin-left: auto;" src="/Assets/imgs/p_interfaceETD_right.png">
     </div>
 
+    <script src="/Assets/js/pagination.js"></script>
+    <link rel="stylesheet" href="/Assets/css/pagination.css">
 </body>

@@ -52,9 +52,9 @@
             }
     
             if (isset($_POST["confirmbtn"])) {
-                if ($role != $_POST["role"]) {
-                    $roleError = "La rôle n'est pas le même que celui dans la base de donnée!";
-                }
+                // if ($role != $_POST["role"]) {
+                //     $roleError = "La rôle n'est pas le même que celui dans la base de donnée!";
+                // }
 
                 $post_nom = $_POST["nom"];
                 $post_prenom = $_POST["prenom"];
@@ -147,7 +147,7 @@
             <?php if (isset($generalErrors)) echo "<span class = '_error'> $generalErrors </span>"; ?>
             <label for="role" class="_form"> Role :</label>
             <?php if (isset($roleInfo)) echo "<span class = '_error' style = 'color: #ac5151;'> $roleInfo </span>"; ?>
-            <?php if (isset($roleError)) echo "<span class = '_error' style = 'display:block'> $roleInfo </span>"; ?>
+            <?php if (isset($roleError)) echo "<span class = '_error' style = 'display:block'> $roleError </span>"; ?>
 
             <select id="role_form" class="drop_form" name="roleC" disabled>
                 <?php

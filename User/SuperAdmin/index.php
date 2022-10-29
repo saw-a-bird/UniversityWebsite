@@ -9,6 +9,7 @@
 
     <title> Bonsoir - <?= $authName ?> </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
+    <link rel="stylesheet" href="/Assets/css/pagination.css">
 </head>
 <body>
     <div class="logo">  
@@ -24,19 +25,29 @@
         <h2 style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
 
         <div class = "user_ability_list">
-            <div>
-                <img src="/Assets/imgs/account_icon.png"> 
-                <a href = "/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
-            </div>
-            <div>
-                <img src="/Assets/imgs/adm_inscription.png" />
-                <a href = "Gestion/Inscriptions/index.php"> <h4> Configurer l'inscription </h4> </a>
+            <div class="carousel-slider" id="responsive">
+                <div class="carousel-content" data-pagination="true">
+                    <aside class="slide-item">
+                        <div>
+                            <img src="/Assets/imgs/account_icon.png"> 
+                            <a href = "/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
+                        </div>
+                        <div>
+                            <img src="/Assets/imgs/adm_inscription.png" />
+                            <a href = "Gestion/Inscriptions/index.php"> <h4> Configurer l'inscription </h4> </a>
+                        </div>
+                        
+                        <div>
+                            <img src="/Assets/imgs/users_icon.png" />
+                            <a href = "Gestion/Users.php"> <h4> Gestion les utilisateurs </h4> </a>
+                        </div>
+                    </aside>
+                </div>
+                <button class="carousel-prev-btn">&larr;</button>
+                <button class="carousel-next-btn">&rarr;</button>
+                <div class="carousel-pagination"></div>
             </div>
             
-            <div>
-                <img src="/Assets/imgs/users_icon.png" />
-                <a href = "Gestion/Users.php"> <h4> Gestion les utilisateurs </h4> </a>
-            </div>
         </div>
     </div>
 
@@ -45,6 +56,8 @@
         <img src="/Assets/imgs/PC.png" style = "height: fit-content;margin-left: auto;"  alt="PC" class="PC"  />
     </div>
 
+    <script src="/Assets/js/pagination.js"></script>
+    <link rel="stylesheet" href="/Assets/css/pagination.css">
     </body>
-    </html>
+</html>
     

@@ -123,17 +123,17 @@ background-image: linear-gradient(160deg, #0093E9 15%, #cce9e5 100%);
     }
     
 
-    .user_ability_list {
+    .slide-item {
         display:flex;
         flex-direction: column;
     }
 
-    .user_ability_list > div{
+    .slide-item > div{
         height:120px;
         margin-bottom:20px
     }
 
-    .user_ability_list > div > img{
+    .slide-item > div > img{
         width:120px;
         height:120px;
     }
