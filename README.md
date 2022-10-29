@@ -142,7 +142,7 @@ I'll check it out, verify it and confirm it.
 After the branch is merged, it'll be deleted from github.
 
 
-# HOW TO ADD EMAIL:
+# HOW TO ADD EMAIL (NECESSARY):
 
 Go to ```C:\xampp\sendmail``` and open ```sendmail.ini  ```
 
@@ -184,9 +184,13 @@ auth_password=yfebrxnecjwpppli
 
   ```
 
+Please try not to spam emails, it'll block all email-related functionality for a day, which will be really inconvenient for all of us.
+
 I already taken care of the server-side code inside the Class ``` Emailer.php ```. Feel free to check it.
 
-# HOW TO SET UP WEBSITE:
+# HOW TO SET UP WEBSITE (NECESSARY):
+
+This was actually done, not because it looks pretty cool, it helps with routing especially for images.
 
 Go to ```C:\xampp\apache\conf\extra```, and open ```httpd-vhosts.conf```. Add this:
 
@@ -206,7 +210,7 @@ Then go to ```c:\Windows\System32\Drivers\etc\hosts``` and open ```hosts``` file
 
 Restart XAMPP Apache and MySQL.
 
-You'll have to enter the website from here:
+From now on, use this link to enter the website:
 
 ```
 http://isetso.local/
