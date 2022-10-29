@@ -15,7 +15,8 @@
 - [X] register form page
 - [X] login page
 - [X] closed inscription page
-- [ ] forgot password page by email
+- [X] forgot password page by email
+- [ ] reconfirmation email
 
 ### Backend:
 
@@ -47,13 +48,18 @@
   - redirect to specific interface per role
   ```
 
-- [ ]: forgot password button 
+- [X]: forgot password button 
+  ```
+  - email from form
+  - send password
+  ```
+
+- [X]: reconfirmation send button 
   ```
   - email from form
   - send confirmation email
-  - password edit
   ```
-
+  
 - [X] modify account (nom, prenom, sexe, adresse, dateNaissance, CIN) 
 
 - [X] admin interface
