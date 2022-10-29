@@ -3,28 +3,24 @@
     require_once("Utilisateur.php");
 
     class Etudiant extends Utilisateur {
-        private $filiereID = null;
-
-        public function __construct() {
-            $this->role = 3;
-        }
+        private $groupID = null;
 
         /**
-         * Get the value of filiereID
+         * Get the value of groupID
          */ 
-        public function getFiliereID()
+        public function getGroupID()
         {
-                return $this->filiereID;
+                return $this->groupID;
         }
 
         /**
-         * Set the value of filiereID
+         * Set the value of groupID
          *
          * @return  self
          */ 
-        public function setFiliereID($filiereID)
+        public function setGroupID($groupID)
         {
-                $this->filiereID = $filiereID;
+                $this->groupID = $groupID;
 
                 return $this;
         }

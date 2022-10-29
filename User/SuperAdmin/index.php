@@ -2,20 +2,15 @@
 <head>
     <?php
         session_start();
-        $securityRole = 1;
+        $securityRole = 0;
         require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
         include(ROOT."/Pipes/get_login.php");
     ?>
 
-    <title> Page Principale - <?= $authName ?> </title>
+    <title> Bonsoir - <?= $authName ?> </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
 </head>
 <body>
-    <?php
-        include(ROOT."/Classes/DepartmentDB.php");
-        $departmentDB = new DepartmentDB();
-    ?>
-
     <div class="logo">  
         <div class = "header_div">
             <img src="/Assets/imgs/LOGO.png">
@@ -25,41 +20,23 @@
     </div>
 
     <div class="content">
-        <h1 class = "_block">Salut <?= $authName ?> </h1>
-        <h2 class = "_block" style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
-        <h3>Department: <?= $departmentDB->getNom($user["departmentID"]) ?><br>  </h3>
-            
-  
+        <h1 class = "_block">Bonsoir <?= $authName ?> </h1>
+        <h2 style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
+
         <div class = "user_ability_list">
             <div>
                 <img src="/Assets/imgs/account_icon.png"> 
                 <a href = "/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
             </div>
-
             <div>
-                <img src="/Assets/imgs/etds_crowd.png" />
-                <a href = "Gestion/Etudiants.php"> <h4> Gestion etudiants </h4> </a>
+                <img src="/Assets/imgs/adm_inscription.png" />
+                <a href = "Gestion/Inscriptions/index.php"> <h4> Configurer l'inscription </h4> </a>
             </div>
-
-            <div>
-                <img src="/Assets/imgs/ens_crowd.png" />
-                <a href = "Gestion/Enseignants.php"> <h4> Gestion enseignants </h4> </a>
-            </div>
-
-            <!-- <div>
-                <img src="/Assets/imgs/users_icon.png" />
-                <a href = "Gestion/Emplois.php"> <h4> Gestion emplois </h4> </a>
-            </div>
-
+            
             <div>
                 <img src="/Assets/imgs/users_icon.png" />
-                <a href = "Gestion/Classes.php"> <h4> Gestion classes </h4> </a>
+                <a href = "Gestion/Users.php"> <h4> Gestion les utilisateurs </h4> </a>
             </div>
-
-            <div>
-                <img src="/Assets/imgs/users_icon.png" />
-                <a href = "Gestion/Demandes.php"> <h4> Gestion demandes </h4> </a>
-            </div> -->
         </div>
     </div>
 

@@ -2,20 +2,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <?php
+          session_start();
+          if (isset($_SESSION["login"])) {
+              header("location: /User/index.php");
+          }
+          require_once("config.php");
+      ?>
       <link rel="stylesheet" href="/Assets/css/login.css">
       <title>Login</title>
     </head>
 <body>
-    
   <?php
-
-    session_start();
-    if (isset($_SESSION["login"])) {
-      header("location: /User/redirect.php");
-    }
-    
-    include("config.php");
-
     if (isset($_GET["m"])) {
       switch ($_GET["m"]) {
         case 1:
@@ -56,7 +54,7 @@
             if ($user["isActive"] == 1) {
 
               $_SESSION["login"] = array("matricule" => $user["matricule"], "role" => $user["role"]);
-              header("location: /User/redirect.php");
+              header("location: /User/index.php");
 
             } else {
               $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
@@ -97,7 +95,7 @@
         <div style = "margin-bottom:auto;">
           <p class="psw">
               Vous n'avez pas un compte? appuier ici pour <a href="/index.php">s'inscrire.</a>
-              <!-- <br>vous avez oublié votre password? appuier <a href="/forgot_password.php">ICI </a> -->
+              <br>vous avez oublié votre password? appuier <a href="/forgot_password.php">ICI </a>
           </p>
       </div>
 

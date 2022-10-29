@@ -35,7 +35,7 @@
 
         public function getAll() {
             return $this->request("
-            SELECT l.cin as cin, nomprenom, role, case when u.CIN is NULL THEN 0 ELSE 1 END as isSubscribed
+            SELECT l.cin as cin, nomprenom, role, departmentID, case when u.CIN is NULL THEN 0 ELSE 1 END as isSubscribed
             FROM liste_inscription as l
             LEFT JOIN (
                 SELECT cin
@@ -43,24 +43,26 @@
             ) as u ON u.CIN = l.cin", array(), 2);
         }
 
-         public function insert($cin, $nomprenom, $role) {
-            $query = "INSERT INTO liste_inscription(cin, nomprenom, role) VALUES (:cin, :nomprenom, :role)"; 
+         public function insert($cin, $nomprenom, $departmentID, $role) {
+            $query = "INSERT INTO liste_inscription(cin, nomprenom, departmentID, role) VALUES (:cin, :nomprenom, :departmentID, :role)"; 
             $secureArray = array( 
                 ":cin" => $cin,
                 ":nomprenom" => $nomprenom,
+                ":departmentID" => $departmentID,
                 ":role" => $role
             );
 
             $this->request($query, $secureArray);
         }
 
-        public function update($oldcin, $cin, $nomprenom, $role) {
-            $query = "UPDATE liste_inscription SET cin = :cin, nomprenom = :nomprenom, role = :role WHERE cin = :oldcin"; 
+        public function update($oldcin, $newcin, $nomprenom, $departmentID, $role) {
+            $query = "UPDATE liste_inscription SET cin = :newcin, nomprenom = :nomprenom, departmentID = :departmentID, role = :role WHERE cin = :oldcin"; 
 
             $secureArray = array( 
-                ":cin" => $cin,
+                ":newcin" => $newcin,
                 ":nomprenom" => $nomprenom,
                 ":role" => $role,
+                ":departmentID" => $departmentID,
                 ":oldcin" => $oldcin
             );
 
@@ -90,19 +92,12 @@
             );
         }
 
-        public function getRole($CIN) {
-            $resultList = $this->request(
-                "SELECT role FROM liste_inscription WHERE CIN = :CIN",
-                array(':CIN' => $CIN),
+        public function getInfo($cin) {
+            return $this->request(
+                "SELECT departmentID, role FROM liste_inscription WHERE cin = :cin",
+                array(':cin' => $cin),
                 1
             );
-            
-            // "Erreur! Cette CIN n'existe pas dans la liste!"
-            if ($resultList == -1) {
-                return false;
-            } else {
-                return $resultList["role"];
-            }
         }
     }
     

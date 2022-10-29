@@ -24,11 +24,19 @@
 
         /* QUERY METHODS */
         public function getNom($id) {
-            $query = "SELECT nom from department"; 
+            $query = "SELECT nom from department WHERE id = :id"; 
             $secureArray = array( 
                 ":id" => $id,
             );
 
             return $this->request($query, $secureArray, 1)["nom"];
+        }
+
+        public function getAll() {
+            return $this->request(
+                "SELECT * FROM department",
+                array(),
+                2
+            );
         }
     }

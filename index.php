@@ -13,7 +13,7 @@
    <?php 
         session_start();
         if (isset($_SESSION["login"])) {
-        header("location: /User/redirect.php");
+            header("location: /User/index.php");
         }
         
         include("config.php");
@@ -79,7 +79,14 @@
             ?>
             
         </form>
-        <p id="alt_connect"><span id="part1_conn">Déja inscrit? Appuier ici pour </span><a href="/login.php" id="part2_conn"> se connecter.</a></p>
+        <div class = "alt_connect">
+            <p>
+                <span id="question_conn">Déja inscrit? Appuier ici pour </span><a href="/login.php" id="link_conn"> se connecter.</a>
+            </p>
+            <p>
+                <span id="question_conn">Le lien de confirmation ne vous est pas parvenu? Appuier ici pour <a href="/comfirmation_again.php" id="link_conn"> pour la reenvoyer.</a></span>
+            </p>
+        </div>
     </div>
 
     <!--background img--> 

@@ -85,3 +85,13 @@ input[type=text], input[type=password] {
 .login_btn:hover {
   opacity: 0.9;
 }
+
+span.forgot_header {
+  color: white;
+  font: 35pt Proxima Nova;
+}
+
+p.forgot_info {
+  font-size: 17px; 
+  margin-top: 0
+}

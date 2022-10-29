@@ -6,19 +6,19 @@
 
         // METHODS
         public function insert(Etudiant $etd) {
-            $query = "INSERT INTO etudiant(matricule, filiereID) VALUES (:matricule, :filiereID)"; 
+            $query = "INSERT INTO etudiant(matricule, groupID) VALUES (:matricule, :groupID)"; 
             $secureArray = array( 
                 ":matricule" => $etd->getMatricule(),
-                ":filiereID" => $etd->getFiliereID()
+                ":groupID" => $etd->getGroupID()
             );
 
             $this->request($query, $secureArray);
         }
 
         public function update(Etudiant $etd) {
-            $query = "UPDATE etudiant SET filiereID = :filiereID WHERE marticule = :marticule"; 
+            $query = "UPDATE etudiant SET groupID = :groupID WHERE marticule = :marticule"; 
             $secureArray = array( 
-                ":filiereID" => $etd->getFiliereID(),
+                ":groupID" => $etd->getGroupID(),
                 ":marticule" => $etd->getMatricule()
             );
 

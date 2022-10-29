@@ -1,14 +1,19 @@
 <html>
 <head>
+    <?php
+        session_start();
+        $securityRole = 3;
+        require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+        include(ROOT."/Pipes/get_login.php");
+    ?>
+
+    <title> Page Principale - <?= $authName ?> </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
-    <title> Page Principale - Enseignant </title>
 </head>
 <body>
     <?php
-        session_start();
-        $authRole = 2;
-        require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-        include(ROOT."/Pipes/get_login.php");
+        include(ROOT."/Classes/DepartmentDB.php");
+        $departmentDB = new DepartmentDB();
     ?>
     <div class="logo">  
         <div class = "header_div">
@@ -19,7 +24,9 @@
     </div>
         
     <div class="content">
-        <h1>Salut Enseignant<br> <span><?= $user["nom"]." ".$user["prenom"] ?> </span>  </h1>
+        <h1 class = "_block">Bonjour <?= $authName ?> </h1>
+        <h2 class = "_block" style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
+        <h3>Department: <?= $departmentDB->getNom($user["departmentID"]) ?><br>  </h3>
   
         <div>
             <img src="/Assets/imgs/account_icon.png"> 
@@ -28,7 +35,7 @@
     </div>
 
     <div class="image" style = "display:flex; align-items: flex-end;">
-        <img src="/Assets/imgs/prof_fm.png"  alt="PC" class="PC"  />
+        <img src="/Assets/imgs/prof_fm.png"  alt="PC" class="PC"/>
         <img src="/Assets/imgs/prof_m.png" alt="prof_pic" class="prof_pic" style = "height: fit-content;margin-left: auto;"/>
     </div>
 

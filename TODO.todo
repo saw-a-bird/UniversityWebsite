@@ -33,7 +33,7 @@ TODO:
 
 LOGIN CASES:
 case 1: // confirmation link sent (form.php) done
-case 2: // password - sent (activate.php) done
+case 2: // password sent (activate.php) done
 case -1: // compte not found (activate.php) done
 case -2: // password - service emailer error (activate.php) done
 case -3: // already expired (activate.php) done

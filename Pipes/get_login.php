@@ -1,19 +1,19 @@
 <?php
     // MAIN OBJECTIVE: check authentification, get user object OTHERWISE log-out.
 
-    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-
     // Check logged-in
     if (isset($_SESSION["login"])) {
         function deconnexion() {
             header("location: /Pipes/deconnexion.php");
         }
 
+        $sessionRole = $_SESSION["login"]["role"];
+
         // Check authentification
-        if (isset($authRole) && $_SESSION["login"]["role"] != $authRole) {
-            header("location: /User/redirect.php");
-        } elseif (isset($leastRole) && $_SESSION["login"]["role"] > $leastRole) {
-            header("location: /User/redirect.php");
+        if (isset($securityRole) && $sessionRole != $securityRole) {
+            header("location: /User/index.php");
+        } elseif (isset($leastRole) && $sessionRole > $leastRole) {
+            header("location: /User/index.php");
         }
 
         // Get user object
@@ -25,8 +25,10 @@
         if ($user == -1) { // if user doesn't exist anymore
             deconnexion();
         } else {
+            require(ROOT."/Classes/Roles.php");
+            $authName = Roles::getName($user["role"]);
             // if role user, get department and merge.
-            if ($_SESSION["login"]["role"] == 3) {
+            if ($sessionRole == 3) {
                 require_once(ROOT."/Classes/EtudiantDB.php");
                 $etudiantDB = new EtudiantDB();
                 $etd = $etudiantDB->get($matricule);
@@ -35,13 +37,11 @@
                     $user = array_merge($user, $etd);
                 } else {
                     deconnexion();
+                    exit();
                 }
-            } else {
-                // other roles
             }
         }
     } else {
         header("location: /index.php");
     }
-
 ?>

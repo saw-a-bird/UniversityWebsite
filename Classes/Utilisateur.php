@@ -1,21 +1,28 @@
 <?php
 
     class Utilisateur {
-        private $role = 0;
+        
+        // regular info
         private $matricule;
         private $CIN;
-        private $email;
         private $nom;
         private $prenom;
         private $sexe;
-        private $adresse;
         private $dateNaissance;
-        private $dateInscription;
+        private $adresse;
+        private $email;
         private $password;
+        private $departmentID;
+
+        // inscription phase
+        private $dateInscription;
+        private $isConfirmed;
         private $isActive;
         private $activationCode;
         private $activationExpiry;
-        private $departmentID;
+
+        // user role
+        private $role = 0;
 
         public function getCIN(){
             return $this->CIN;
@@ -206,6 +213,26 @@
         public function setDepartmentID($departmentID)
         {
                 $this->departmentID = $departmentID;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of isConfirmed
+         */ 
+        public function getIsConfirmed()
+        {
+                return $this->isConfirmed;
+        }
+
+        /**
+         * Set the value of isConfirmed
+         *
+         * @return  self
+         */ 
+        public function setIsConfirmed($isConfirmed)
+        {
+                $this->isConfirmed = $isConfirmed;
 
                 return $this;
         }

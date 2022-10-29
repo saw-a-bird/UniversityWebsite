@@ -44,12 +44,12 @@
             $activation_link = "http://isetso.local/Pipes/activate.php?email=".$this->recipient."&activation_code=$activation_code";
 
             // set email subject & body
-            $this->subject = 'Please activate your account';
+            $this->subject = 'Veuiller à activer votre compte!';
             $this->message = <<<MESSAGE
-                    Hi,
-                    Please click the following link to activate your account:
-                    $activation_link
-                    MESSAGE;
+                Bonjour!
+                Veuillez cliquer sur le lien suivant pour activer votre compte:
+                $activation_link
+                MESSAGE;
 
             // send the email
             return $activation_code;
@@ -72,13 +72,37 @@
             $new_password = create_random_password();
 
             // set email subject & body
-            $this->subject = 'Your new password.';
+            $this->subject = 'Votre mot de passe.';
             $this->message = <<<MESSAGE
-                    Hi,
-                    Your password is: $new_password
+                    Bonjour!
+                    Votre mot de passe est: $new_password
                     MESSAGE;
 
             // send the email
             return $new_password;
+        }
+
+        
+        function email_activation_again($activation_code) {
+            $activation_link = "http://isetso.local/Pipes/activate.php?email=".$this->recipient."&activation_code=$activation_code";
+            
+            // set email subject & body
+            $this->subject = 'Veuiller à activer votre compte!';
+            $this->message = <<<MESSAGE
+                    Rebonjour,
+                    Veuillez cliquer sur le lien suivant pour activer votre compte:
+                    $activation_link
+                    MESSAGE;
+
+        }
+
+        function email_password_again($password) {
+    
+            // set email subject & body
+            $this->subject = 'Votre mot de passe.';
+            $this->message = <<<MESSAGE
+                    Bonjour,
+                    Votre mot de passe: $password
+                    MESSAGE;
         }
     }

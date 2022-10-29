@@ -1,20 +1,23 @@
 <!--maaneha fyha (CIN, nomprenom less9yn, Role)
      button tee l'addition excel Import Excel table Ajouter Inscription-->
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+        session_start();
+        require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+        include(ROOT."/Pipes/get_login.php");
+    ?>
+
+    <title>Formulaire - Modifier notre informations </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire - Modifier informations </title>
     <link rel="stylesheet" href="/Assets/css/secondary_form.css">
     <link rel="stylesheet" href="/Assets/css/general.css">
 </head>
 <body>
     <?php
-        session_start();
-        require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-        include(ROOT."/Pipes/get_login.php");
 
         $message = "";
         if (isset($_POST["confirm_btn"])) {
@@ -30,7 +33,7 @@
                 $utilisateurDB = new UtilisateurDB();
                 
                 $utilisateur = new Utilisateur();
-                $utilisateur->setCIN($user["CIN"])
+                $utilisateur->setCIN($user["cin"])
                     ->setNom($post_nom)
                     ->setPrenom($post_prenom)
                     ->setAdresse($post_adresse)

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <head>
+    <?php
+        session_start();
+        require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
+        include(ROOT."/Pipes/get_login.php");
+    ?>
+
+    <title> Profile </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
     <link rel="stylesheet" href="/Assets/css/profil.css">
     <link rel="stylesheet" href="/Assets/css/buttons.css">
-    <title>Profil </title>
 </head>
 <body>
 <?php
-    session_start();
-    require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
-    include(ROOT."/Pipes/get_login.php");
  
     include_once(ROOT."/Classes/Utilisateur.php");
     $sexe = Utilisateur::getSexeName($user["sexe"]);
@@ -21,7 +24,7 @@
         $departmentDB = null;
     }
 
-    include_once(ROOT."/Classes/Roles.php");
+    //include_once(ROOT."/Classes/Roles.php");
     $role = Roles::getName($user["role"]);
 
     if (isset($_GET["m"])) {
@@ -41,7 +44,7 @@
             <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
         </div>
         <div class = "buttons_div">
-            <h3 class = "go_back"> <a href="/User/redirect.php">Retourner</a></h3>
+            <h3 class = "go_back"> <a href="/User/index.php">Retourner</a></h3>
             <h3 class = "deconnection"> <a href="/Pipes/deconnexion.php">Se deconnecter</a></h3>
         </div>
     </div>

@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+if (isset($_SESSION["login"])) {
+    $_SESSION["login"] = null;
+}
+
 if (isset($_GET["email"]) && isset($_GET["activation_code"])) {
     $email = $_GET["email"];
 

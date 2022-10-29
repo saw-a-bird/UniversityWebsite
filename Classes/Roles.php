@@ -3,16 +3,20 @@
 class Roles
 {
     private const roleArray = array(
-        0 => 'Directeur',
-        1 => 'Administrateur',
-        2 => 'Enseignant',
-        3 => 'Etudiant'
+        0 => 'SuperAdmin',
+        1 => 'Directeur',
+        2 => 'Admin',
+        3 => 'Enseignant',
+        4 => 'Etudiant'
     );
 
     private static $nameArray;
 
     static public function getAll() {
-        return self::roleArray;
+        $roleArray = self::roleArray;
+        unset($roleArray[0]);
+        
+        return $roleArray;
     }
 
     static public function getName($id) {
