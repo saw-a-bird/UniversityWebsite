@@ -148,7 +148,7 @@
             <label for="role" class="_form"> Role :</label>
             <?php if (isset($roleInfo)) echo "<span class = '_error' style = 'color: #ac5151;'> $roleInfo </span>"; ?>
             <?php if (isset($roleError)) echo "<span class = '_error' style = 'display:block'> $roleInfo </span>"; ?>
-            <input type="hidden" class="lab_in_txt" name = "role" value = "<?= $role ?>">
+
             <select id="role_form" class="drop_form" name="roleC" disabled>
                 <?php
                     foreach (Roles::getAll() as $id => $name) {
@@ -198,12 +198,12 @@
             </div> -->
             <script>
                 var role = <?= $role ?>;
-                const selectBox = document.getElementById('role_form');
-                selectBox.options[role-1].selected = true;
+                const selectBoxRole = document.getElementById('role_form');
+                selectBoxRole.options[role-1].selected = true;
 
                 var dep = <?= $department ?>;
-                const selectBox = document.getElementById('dep_form');
-                selectBox.options[dep-1].selected = true;
+                const selectBoxDep = document.getElementById('dep_form');
+                selectBoxDep.options[dep-1].selected = true;
 
                 <?php 
                     if (isset($post_sexe)) {
