@@ -206,6 +206,11 @@ Then go to ```c:\Windows\System32\Drivers\etc\hosts``` and open ```hosts``` file
 
 Restart XAMPP Apache and MySQL.
 
+You'll have to enter the website from here:
+
+```
+http://isetso.local/
+```
 
 # FOOTER:
 
