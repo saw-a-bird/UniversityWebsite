@@ -186,5 +186,28 @@ auth_password=yfebrxnecjwpppli
 
 I already taken care of the server-side code inside the Class ``` Emailer.php ```. Feel free to check it.
 
-If this didn't work, please immediately DM me.
+# HOW TO SET UP WEBSITE:
+
+Go to ```C:\xampp\apache\conf\extra```, and open ```httpd-vhosts.conf```. Add this:
+
+```
+ <VirtualHost *:80>
+    DocumentRoot    "C:/XAMPP/htdocs/teamWorkProj"
+    ServerName      isetso.local
+    ServerAlias www.isetso.local
+ </VirtualHost>
+```
+
+Then go to ```c:\Windows\System32\Drivers\etc\hosts``` and open ```hosts``` file. Add this:
+
+```
+127.0.0.1       isetso.local
+```
+
+Restart XAMPP Apache and MySQL.
+
+
+# FOOTER:
+
+If you followed the steps listed above but it didn't work, please immediately DM me.
 
