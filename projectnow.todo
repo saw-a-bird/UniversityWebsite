@@ -1,0 +1,35 @@
+1)
+plan etude (create + table) 
+create PLAN ETUDE form (date debut, date fin, parcours)
+
+2)
+afficher plan etude (add unite + add matiere)
+create UNITE form (nom, type, semestre, planEtude (default))
+create MATIERE form (nom, coefficient, credit, heursCours, heursTP, uniteID) put independant or relative???
+
+3)
+emplois
+create emploi (matiere from plan etude, enseignant???)
+
+4)
+salles
+check if empty.
+
+
+# other:
+salles (CRUD)
+sceances (STATIC, 6times, 1.5per)
+jour (STATIC, 7days)
+anne (TEXT INPUT)
+semestre (STATIC, 2)
+
+
+#todo
+plan etude list
+plan etude DB class
+contenu plan etude list
+unite DB class
+
+
+
+
