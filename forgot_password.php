@@ -27,10 +27,7 @@
             $utilisateurDB = new UtilisateurDB();
             $user = $utilisateurDB->emailExists($email, 1);
 
-            if ($user == -1) {
-              $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
-
-            } else {
+            if (!empty($user)) {
                 if ($user["isActive"] == true) {
       
                   require_once("Classes/Emailer.php");
@@ -42,6 +39,8 @@
                 } else {
                   $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";
                 }
+            } else {
+              $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
             }
           }
         } else {

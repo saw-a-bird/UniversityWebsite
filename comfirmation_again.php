@@ -20,17 +20,12 @@
         $email = $_POST["email"];
 
           // check if email exists.
-          if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $message = "<p class = 'red_alert'>Cette format d'email n'est pas valide.</p>";
-          } else {
+          if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
             require_once("Classes/UtilisateurDB.php");
             $utilisateurDB = new UtilisateurDB();
             $user = $utilisateurDB->emailExists($email, 1);
             
-            if ($user == -1) {
-              $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
-
-            } else {
+            if (!empty($user)) {
                 if ($user["isActive"] == false) {
                   require_once("Classes/Emailer.php");
                   $emailer = new Emailer($email);
@@ -41,7 +36,11 @@
                 } else {
                   $message = "<p class = 'red_alert'>Cette compte est déja activé.</p>";
                 }
+            } else {
+              $message = "<p class = 'red_alert'>Error. Cette e-mail n'existe pas dans la base de données.</p>";
             }
+          } else {
+            $message = "<p class = 'red_alert'>Cette format d'email n'est pas valide.</p>";
           }
         } else {
           $message = "<p class = 'red_alert'>Error. La formulaire est erroné.</p>";

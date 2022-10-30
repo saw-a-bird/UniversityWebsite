@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2022 at 01:42 AM
+-- Generation Time: Oct 30, 2022 at 12:03 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -35,16 +35,6 @@ CREATE TABLE `affecter` (
   `jourNum` int(11) NOT NULL,
   `groupId` int(11) NOT NULL,
   `matriculeEnseignant` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `anne`
---
-
-CREATE TABLE `anne` (
-  `anne` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -119,17 +109,6 @@ CREATE TABLE `groupe` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jour`
---
-
-CREATE TABLE `jour` (
-  `numero` int(11) NOT NULL,
-  `nom` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `liste_inscription`
 --
 
@@ -172,8 +151,20 @@ CREATE TABLE `matiere` (
 CREATE TABLE `parcours` (
   `id` int(11) NOT NULL,
   `parcoursNom` varchar(20) NOT NULL,
-  `departmentID` int(11) NOT NULL
+  `departmentID` int(11) NOT NULL,
+  `planSelectionné` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parcours`
+--
+
+INSERT INTO `parcours` (`id`, `parcoursNom`, `departmentID`, `planSelectionné`) VALUES
+(6, 'TI', 1, NULL),
+(7, 'DSI2', 1, NULL),
+(8, 'RSI2', 1, NULL),
+(9, 'MDW2', 1, NULL),
+(10, 'DSI3', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -188,6 +179,13 @@ CREATE TABLE `planetude` (
   `dateFin` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `planetude`
+--
+
+INSERT INTO `planetude` (`id`, `parcoursID`, `dateDebut`, `dateFin`) VALUES
+(1, 7, '2022-09-28 00:00:00', '2022-10-29 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -196,26 +194,6 @@ CREATE TABLE `planetude` (
 
 CREATE TABLE `salle` (
   `nom` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sceance`
---
-
-CREATE TABLE `sceance` (
-  `numero` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `semestre`
---
-
-CREATE TABLE `semestre` (
-  `numero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -303,18 +281,11 @@ INSERT INTO `website_config` (`inscription`) VALUES
 -- Indexes for table `affecter`
 --
 ALTER TABLE `affecter`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `matiereConstrain` (`matiereId`),
   ADD KEY `salleConstraint` (`salleNom`),
-  ADD KEY `sceanceConstraint` (`sceanceNum`),
-  ADD KEY `jourConstraint` (`jourNum`),
   ADD KEY `affecter_groupConstraint` (`groupId`),
   ADD KEY `matriculeEnsConstraint_affecter` (`matriculeEnseignant`);
-
---
--- Indexes for table `anne`
---
-ALTER TABLE `anne`
-  ADD PRIMARY KEY (`anne`);
 
 --
 -- Indexes for table `classe`
@@ -353,12 +324,6 @@ ALTER TABLE `groupe`
   ADD KEY `classeConstraint` (`classeId`);
 
 --
--- Indexes for table `jour`
---
-ALTER TABLE `jour`
-  ADD PRIMARY KEY (`numero`);
-
---
 -- Indexes for table `liste_inscription`
 --
 ALTER TABLE `liste_inscription`
@@ -378,7 +343,8 @@ ALTER TABLE `matiere`
 --
 ALTER TABLE `parcours`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `departmentConstraint_parcours` (`departmentID`);
+  ADD KEY `departmentConstraint_parcours` (`departmentID`),
+  ADD KEY `planEtdConstraint_parcours` (`planSelectionné`);
 
 --
 -- Indexes for table `planetude`
@@ -392,18 +358,6 @@ ALTER TABLE `planetude`
 --
 ALTER TABLE `salle`
   ADD PRIMARY KEY (`nom`);
-
---
--- Indexes for table `sceance`
---
-ALTER TABLE `sceance`
-  ADD PRIMARY KEY (`numero`);
-
---
--- Indexes for table `semestre`
---
-ALTER TABLE `semestre`
-  ADD PRIMARY KEY (`numero`);
 
 --
 -- Indexes for table `session`
@@ -435,15 +389,57 @@ ALTER TABLE `utilisateur`
 --
 
 --
+-- AUTO_INCREMENT for table `affecter`
+--
+ALTER TABLE `affecter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `classe`
 --
 ALTER TABLE `classe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `groupe`
+--
+ALTER TABLE `groupe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `matiere`
+--
+ALTER TABLE `matiere`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `parcours`
 --
 ALTER TABLE `parcours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `planetude`
+--
+ALTER TABLE `planetude`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `session`
+--
+ALTER TABLE `session`
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `unites`
+--
+ALTER TABLE `unites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -461,11 +457,9 @@ ALTER TABLE `utilisateur`
 --
 ALTER TABLE `affecter`
   ADD CONSTRAINT `affecter_groupConstraint` FOREIGN KEY (`groupId`) REFERENCES `groupe` (`id`),
-  ADD CONSTRAINT `jourConstraint` FOREIGN KEY (`jourNum`) REFERENCES `jour` (`numero`),
   ADD CONSTRAINT `matiereConstrain` FOREIGN KEY (`matiereId`) REFERENCES `matiere` (`id`),
   ADD CONSTRAINT `matriculeEnsConstraint_affecter` FOREIGN KEY (`matriculeEnseignant`) REFERENCES `utilisateur` (`matricule`),
-  ADD CONSTRAINT `salleConstraint` FOREIGN KEY (`salleNom`) REFERENCES `salle` (`nom`),
-  ADD CONSTRAINT `sceanceConstraint` FOREIGN KEY (`sceanceNum`) REFERENCES `sceance` (`numero`);
+  ADD CONSTRAINT `salleConstraint` FOREIGN KEY (`salleNom`) REFERENCES `salle` (`nom`);
 
 --
 -- Constraints for table `classe`
@@ -511,7 +505,8 @@ ALTER TABLE `matiere`
 -- Constraints for table `parcours`
 --
 ALTER TABLE `parcours`
-  ADD CONSTRAINT `departmentConstraint_parcours` FOREIGN KEY (`departmentID`) REFERENCES `department` (`id`);
+  ADD CONSTRAINT `departmentConstraint_parcours` FOREIGN KEY (`departmentID`) REFERENCES `department` (`id`),
+  ADD CONSTRAINT `planEtdConstraint_parcours` FOREIGN KEY (`planSelectionné`) REFERENCES `planetude` (`id`);
 
 --
 -- Constraints for table `planetude`
@@ -520,18 +515,10 @@ ALTER TABLE `planetude`
   ADD CONSTRAINT `parcoursConstraint_planEtude` FOREIGN KEY (`parcoursID`) REFERENCES `parcours` (`id`);
 
 --
--- Constraints for table `session`
---
-ALTER TABLE `session`
-  ADD CONSTRAINT `anneConstraint` FOREIGN KEY (`anne`) REFERENCES `anne` (`anne`),
-  ADD CONSTRAINT `semestreConstraint` FOREIGN KEY (`semestre`) REFERENCES `semestre` (`numero`);
-
---
 -- Constraints for table `unites`
 --
 ALTER TABLE `unites`
-  ADD CONSTRAINT `planEtudeConstraint` FOREIGN KEY (`planEtudeId`) REFERENCES `planetude` (`id`),
-  ADD CONSTRAINT `semestreConstraint2` FOREIGN KEY (`semestreNum`) REFERENCES `semestre` (`numero`);
+  ADD CONSTRAINT `planEtudeConstraint` FOREIGN KEY (`planEtudeId`) REFERENCES `planetude` (`id`);
 
 --
 -- Constraints for table `utilisateur`

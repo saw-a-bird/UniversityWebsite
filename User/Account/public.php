@@ -18,7 +18,7 @@
 
         if (isset($_GET["matricule"]) && is_numeric($_GET["matricule"])) {
             $person = $utilisateurDB->getUserByMatricule($_GET["matricule"]);
-            if ($person === -1) {
+            if (empty($person)) {
                 header("location: /User/Account/not_found.php");
             } else {
                 include(ROOT."/Classes/Utilisateur.php");

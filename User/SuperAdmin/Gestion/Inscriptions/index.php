@@ -77,21 +77,19 @@
                 </thead>
                 <tbody>
                     <?php
-                        if (is_array($users)) {
-                            foreach ($users as $key => $user) {
-                                echo "
-                                    <tr>
-                                        <td>".$user["cin"]."</td>
-                                        <td>".$user["nomprenom"]."</td>
-                                        <td>".Roles::getName($user["role"])."</td>
-                                        <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
-                                        <td>
-                                            <a class = 'link_ref' href = 'modifier.php?cin=".$user["cin"]."'>Modifier</a>
-                                            <a class = 'link_ref' href = '/Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
-                                    </td>
-                                </tr>
-                                ";
-                            }
+                        foreach ($users as $key => $user) {
+                            echo "
+                                <tr>
+                                    <td>".$user["cin"]."</td>
+                                    <td>".$user["nomprenom"]."</td>
+                                    <td>".Roles::getName($user["role"])."</td>
+                                    <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
+                                    <td>
+                                        <a class = 'link_ref' href = 'modifier.php?cin=".$user["cin"]."'>Modifier</a>
+                                        <a class = 'link_ref' href = '/Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
+                                </td>
+                            </tr>
+                            ";
                         }
                     ?>
                 </tbody>

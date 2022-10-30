@@ -118,7 +118,7 @@
                 1
             );
 
-            if (is_array($responseUser)) {
+            if (!empty($responseUser)) {
                 
                 // error: ALREADY ACTIVE
                 if ((int)$responseUser["isActive"] === 1) {

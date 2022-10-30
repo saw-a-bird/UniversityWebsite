@@ -49,7 +49,7 @@
         require_once("Classes/UtilisateurDB.php");
         $utilisateurDB = new UtilisateurDB();
         $user = $utilisateurDB->emailExists($email, 1);
-        if ($user != -1) {
+        if (!empty($user)) {
           if ($_POST["password"] === $user["password"]) {
             if ($user["isActive"] == 1) {
 

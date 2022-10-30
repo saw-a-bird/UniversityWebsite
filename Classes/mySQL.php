@@ -41,9 +41,9 @@
             } else if ($return == 0) { // checks if there are any elements
                 return $prep->rowCount() > 0;
             } else if ($return == 1) { // fetch first element (for SELECT)
-                return $prep->rowCount() > 0? $prep->fetch() : -1;
+                return $prep->rowCount() > 0? $prep->fetch() : array();
             } else if ($return == 2) { // fetch all elements (for SELECT)
-                return $prep->rowCount() > 0? $prep->fetchAll() : -1;
+                return $prep->rowCount() > 0? $prep->fetchAll() : array();
             } else if ($return == 3) { // get last inserted ID (FOR INSERT)
                 return $this->_cnx->lastInsertId();
             }

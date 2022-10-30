@@ -2,11 +2,11 @@
     require_once("MySql.php");
     require_once("Etudiant.php");
 
-    class EtudiantDB extends MySql {
+    class EtudiantGroupDB extends MySql {
 
         // METHODS
         public function insert(Etudiant $etd) {
-            $query = "INSERT INTO etudiant(matricule, groupID) VALUES (:matricule, :groupID)"; 
+            $query = "INSERT INTO etudiant_group(matricule, groupID) VALUES (:matricule, :groupID)"; 
             $secureArray = array( 
                 ":matricule" => $etd->getMatricule(),
                 ":groupID" => $etd->getGroupID()
@@ -16,7 +16,7 @@
         }
 
         public function update(Etudiant $etd) {
-            $query = "UPDATE etudiant SET groupID = :groupID WHERE marticule = :marticule"; 
+            $query = "UPDATE etudiant_group SET groupID = :groupID WHERE marticule = :marticule"; 
             $secureArray = array( 
                 ":groupID" => $etd->getGroupID(),
                 ":marticule" => $etd->getMatricule()
@@ -28,7 +28,7 @@
         /* QUERY METHODS */
         public function get($matricule) {
             return $this->request(
-                "SELECT * FROM etudiant WHERE matricule = :matricule",
+                "SELECT * FROM etudiant_group WHERE matricule = :matricule",
                 array(':matricule' => $matricule),
                 1
             );

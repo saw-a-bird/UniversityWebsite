@@ -66,21 +66,19 @@
         </thead>
         <tbody>
             <?php
-                if (is_array($users)) {
-                    foreach ($users as $key => $user) {
-                        echo "
-                            <tr>
-                                <td>".$user["matricule"]."</td>
-                                <td>".$user["cin"]."</td>
-                                <td>".$user["nom"]." ".$user["prenom"]."</td>
-                                <td>".$user["dateInscription"]."</td>
-                                <td>". ($user["isActive"] == 1? "Oui": "Non")."</td>
-                                <td>
-                                    <a class = 'link_ref' href = '/User/Account/public.php?matricule=".$user["matricule"]."'>Details</a>
-                                </td>
-                            </tr>
-                        ";
-                    }
+                foreach ($users as $key => $user) {
+                    echo "
+                        <tr>
+                            <td>".$user["matricule"]."</td>
+                            <td>".$user["cin"]."</td>
+                            <td>".$user["nom"]." ".$user["prenom"]."</td>
+                            <td>".$user["dateInscription"]."</td>
+                            <td>". ($user["isActive"] == 1? "Oui": "Non")."</td>
+                            <td>
+                                <a class = 'link_ref' href = '/User/Account/public.php?matricule=".$user["matricule"]."'>Details</a>
+                            </td>
+                        </tr>
+                    ";
                 }
             ?>
         </tbody>

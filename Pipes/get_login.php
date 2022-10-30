@@ -22,24 +22,24 @@
         $utilisateurDB = new UtilisateurDB();
         $user = $utilisateurDB->getUserByMatricule($matricule);
 
-        if ($user == -1) { // if user doesn't exist anymore
-            deconnexion();
-        } else {
+        if (!empty($user)) {
             require(ROOT."/Classes/Roles.php");
             $authName = Roles::getName($user["role"]);
             // if role user, get department and merge.
             if ($sessionRole == 3) {
-                require_once(ROOT."/Classes/EtudiantDB.php");
-                $etudiantDB = new EtudiantDB();
-                $etd = $etudiantDB->get($matricule);
+                require_once(ROOT."/Classes/EtudiantGroupDB.php");
+                $etudiantGrpDB = new EtudiantGroupDB();
+                $etdGrp = $etudiantGrpDB->get($matricule);
 
-                if ($etd != 1) {
-                    $user = array_merge($user, $etd);
+                if ($etdGrp != 1) {
+                    $user = array_merge($user, $etdGrp);
                 } else {
                     deconnexion();
                     exit();
                 }
             }
+        } else {
+            deconnexion();
         }
     } else {
         header("location: /index.php");

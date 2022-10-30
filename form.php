@@ -86,14 +86,8 @@
                         }
 
                         if ($result == true) {
-                            if ($role == Roles::ByName("Etudiant")) {
-                                require_once("Classes/Etudiant.php");
-                                $user = new Etudiant();
-                            } else {
-                                require_once("Classes/Utilisateur.php");
-                                $user = new Utilisateur();
-                            }
-                            
+                            require_once("Classes/Utilisateur.php");
+                            $user = new Utilisateur();
         
                             // info
                             $user->setCIN($cin)
@@ -110,12 +104,6 @@
 
                             // insert objects
                             $utilisateurDB->insert($user);
-        
-                            if (is_a($user, "Etudiant")) {
-                                require_once("Classes/EtudiantDB.php");
-                                $etdDB = new EtudiantDB();
-                                $etdDB->insert($user);
-                            }
 
                             // SUCCESS CREATION
                             $_SESSION["INSCRIPTION_CIN"] = null; // remove
