@@ -79,6 +79,14 @@
             );
         }
 
+        public function getListDirecteurs($role) {
+            return $this->request(
+                "SELECT * FROM utilisateur u JOIN department d ON (d.id = u.departmentID) WHERE role = :role",
+                array(":role" => $role),
+                2
+            );
+        }
+
         public function getList($role, $depId) {
             return $this->request(
                 "SELECT * FROM utilisateur WHERE role = :role and departmentID = :depId",

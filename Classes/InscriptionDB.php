@@ -25,17 +25,17 @@
 
         // CRUD METHODS
 
-        public function get($CIN) {
+        public function get($id) {
             return $this->request(
-                "SELECT * FROM liste_inscription WHERE CIN = :CIN",
-                array(':CIN' => $CIN),
+                "SELECT * FROM liste_inscription WHERE id = :id",
+                array(':id' => $id),
                 1
             );
         }
 
         public function getAll() {
             return $this->request("
-            SELECT l.cin as cin, nomprenom, role, departmentID, case when u.CIN is NULL THEN 0 ELSE 1 END as isSubscribed
+            SELECT l.id, l.cin as cin, nomprenom, role, departmentID, case when u.CIN is NULL THEN 0 ELSE 1 END as isSubscribed
             FROM liste_inscription as l
             LEFT JOIN (
                 SELECT cin
@@ -69,10 +69,10 @@
             $this->request($query, $secureArray);
         }
 
-        public function delete($cin) {
-            $query = "DELETE FROM liste_inscription WHERE cin = :cin"; 
+        public function delete($id) {
+            $query = "DELETE FROM liste_inscription WHERE id = :id"; 
             $secureArray = array( 
-                ":cin" => $cin
+                ":id" => $id
             );
 
             $this->request($query, $secureArray);

@@ -148,7 +148,7 @@
                                 <td rowspan='1' class = 'table_normal'>".$matiere["nom"]."</td>
                                 <td rowspan='1'><span>".(($matiere["heursCours"] + ($matiere["heursCours"]/2) + $matiere["heursTP"])*14)."</span></td>
                                 
-                                <td rowspan='1'>$index</td>
+                                <td rowspan='1'>".((float) $matiere["heursCours"])."</td>
                                 <td rowspan='1'>".($matiere["heursCours"]/2)."</td>
                                 <td rowspan='1'>".((float) $matiere["heursTP"])."</td>
                                 <td rowspan='1'>".((float) $matiere["credit_mat"])."</td>";

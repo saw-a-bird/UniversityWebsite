@@ -3,10 +3,10 @@
     $securityRole = 0;
 
     if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] == $securityRole) {
-        if (isset($_GET["cin"])) {
+        if (isset($_GET["id"])) {
             require_once("../Classes/InscriptionDB.php");
             $inscriptionDB = new InscriptionDB();
-            $inscriptionDB->delete($_GET["cin"]);
+            $inscriptionDB->delete($_GET["id"]);
             $utilisateurDB = null;
         }
 

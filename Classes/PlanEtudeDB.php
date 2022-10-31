@@ -15,6 +15,16 @@
             $this->request($query, $secureArray);
         }
 
+        public function update($id, $dateDebut, $dateFin) {
+            return $this->request(
+                "UPDATE planetude SET dateDebut = :dateDebut, dateFin = :dateFin WHERE id = :id",
+                array(
+                    ":id" => $id,
+                    ":dateDebut" => $dateDebut,
+                    ":dateFin" => $dateFin
+                )
+            );
+        }
         public function delete($id) {
             $query = "DELETE FROM planEtude WHERE id = :id"; 
             $secureArray = array( 
@@ -49,6 +59,16 @@
             );
         }
 
+        public function get($id) {
+            return $this->request(
+                "SELECT pl.id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin, pr.planSelectionné FROM planetude pl JOIN parcours pr ON (pr.id = pl.parcoursID) WHERE pl.id = :id",
+                array(
+                    ":id" => $id
+                ),
+                1
+            );
+        }
+
         public function getAll() {
             return $this->request(
                 "SELECT * FROM planetude",
@@ -59,7 +79,7 @@
 
         public function getAllByDepartmentID($depID) {
             return $this->request(
-                "SELECT pl.id, parcoursID, parcoursNom, dateDebut, dateFin, pr.planSelectionné FROM planetude pl JOIN parcours pr ON (pr.id = pl.parcoursID) WHERE pr.departmentID = :depID",
+                "SELECT pl.id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin, pr.planSelectionné FROM planetude pl JOIN parcours pr ON (pr.id = pl.parcoursID) WHERE pr.departmentID = :depID",
                 array(
                     ":depID" => $depID
                 ),

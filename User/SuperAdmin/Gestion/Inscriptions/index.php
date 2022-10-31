@@ -18,7 +18,7 @@
         require_once(ROOT."/Classes/InscriptionDB.php");
         $inscriptionDB = new InscriptionDB();
         $state = $inscriptionDB->getIState();
-        $users = $inscriptionDB->getAll();
+        $inscriptions = $inscriptionDB->getAll();
         $inscriptionDB = null;
 
         //require_once(ROOT."/Classes/Roles.php");
@@ -77,16 +77,16 @@
                 </thead>
                 <tbody>
                     <?php
-                        foreach ($users as $key => $user) {
+                        foreach ($inscriptions as $key => $inscrit) {
                             echo "
                                 <tr>
-                                    <td>".$user["cin"]."</td>
-                                    <td>".$user["nomprenom"]."</td>
-                                    <td>".Roles::getName($user["role"])."</td>
-                                    <td>". ($user["isSubscribed"] == 1? "Oui": "Non")."</td>
+                                    <td>".$inscrit["cin"]."</td>
+                                    <td>".$inscrit["nomprenom"]."</td>
+                                    <td>".Roles::getName($inscrit["role"])."</td>
+                                    <td>". ($inscrit["isSubscribed"] == 1? "Oui": "Non")."</td>
                                     <td>
-                                        <a class = 'link_ref' href = 'modifier.php?cin=".$user["cin"]."'>Modifier</a>
-                                        <a class = 'link_ref' href = '/Pipes/adm_insr_supprimer.php?cin=".$user["cin"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$user["nomprenom"]."\' from the table?');\">Supprimer</a> 
+                                        <a class = 'link_ref' href = 'modifier.php?id=".$inscrit["id"]."'>Modifier</a>
+                                        <a class = 'link_ref' href = '/Pipes/adm_insr_supprimer.php?id=".$inscrit["id"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove \'".$inscrit["nomprenom"]."\' from the table?');\">Supprimer</a> 
                                 </td>
                             </tr>
                             ";

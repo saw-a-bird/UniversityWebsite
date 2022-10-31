@@ -2,7 +2,7 @@
 <head>
     <?php
         session_start();
-        $leastRole = 3;
+        $securityRole = 3;
         require_once($_SERVER['DOCUMENT_ROOT']."/config.php");
         include(ROOT."/Pipes/get_login.php");
     ?>

@@ -21,9 +21,10 @@
     <?php
         require_once(ROOT."/Classes/InscriptionDB.php");
         $inscriptionDB = new InscriptionDB();
-        $inscription = $inscriptionDB->get($_GET["cin"]);
+        $inscription = $inscriptionDB->get($_GET["id"]);
 
         $message = "";
+        
         if (isset($_POST["confirm_btn"])) {
             if (isset($_POST["nomprenom"]) && (isset($_POST["cin"]) && is_numeric($_POST["cin"])) && isset($_POST["role"]) && isset($_POST["department"])) {
 
@@ -48,7 +49,7 @@
                             $message = "<p class = 'green_alert'>Le record est modifié avec succes.</p>";
                             $inscription["cin"] = $new_cin;
                             $inscription["role"] = $new_role;
-                            header("location: modifier.php?cin=".$new_cin);
+                            // header("location: modifier.php?id=".$new_cin."&m=1");
                         }
                     }
                 }

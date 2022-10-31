@@ -42,6 +42,12 @@
                             <a href = "Gestion/Users.php"> <h4> Gestion les utilisateurs </h4> </a>
                         </div>
                     </aside>
+                    <!-- <aside class="slide-item">
+                        <div>
+                            <img src="/Assets/imgs/ens_crowd.png" />
+                            <a href = "Gestion/Directeurs.php"> <h4> Gestion les directeurs </h4> </a>
+                        </div>
+                    </aside> -->
                 </div>
                 <button class="carousel-prev-btn">&larr;</button>
                 <button class="carousel-next-btn">&rarr;</button>

@@ -4,11 +4,21 @@
     class ParcoursDB extends MySql {
 
         // METHODS
-         public function new($department_id, $nom) {
-            $query = "INSERT INTO parcours(department_id, nom) VALUES (:department_id, :nom)"; 
+        public function insert($nom, $departmentID) {
+            $query = "INSERT INTO parcours(departmentID, nom) VALUES (:departmentID, :nom)"; 
             $secureArray = array( 
-                ":department_id" => $department_id,
+                ":departmentID" => $departmentID,
                 ":nom" => $nom,
+            );
+
+            $this->request($query, $secureArray);
+        }
+
+        public function update($id, $nom) {
+            $query = "UPDATE parcours SET nom = :nom WHERE id = :id"; 
+            $secureArray = array( 
+                ":nom" => $nom,
+                ":id" => $id
             );
 
             $this->request($query, $secureArray);
@@ -20,11 +30,31 @@
                 ":id" => $id,
             );
 
-            $this->request($query, $secureArray);
+            return $this->request($query, $secureArray);
         }
 
+
         /* QUERY METHODS */
-    
+
+        public function nomExists($nom) {
+            return $this->request(
+                "SELECT * FROM parcours WHERE nom = :nom",
+                array(
+                    ":nom" => $nom
+                ),
+                0
+            );
+        }
+
+        public function get($id) {
+            return $this->request(
+                "SELECT * FROM parcours WHERE id = :id",
+                array(
+                    ":id" => $id
+                ),
+                1
+            );
+        }
         public function getAll() {
             return $this->request(
                 "SELECT * FROM parcours",
