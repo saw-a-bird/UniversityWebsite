@@ -61,7 +61,7 @@
                         require_once(ROOT."/Classes/ParcoursDB.php");
                         $parcoursDB = new ParcoursDB();
                         foreach ($parcoursDB->getAll($user["departmentID"]) as $row) {
-                            echo "<option value='".$row["id"]."'>".$row["parcoursNom"]."</option>";
+                            echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";
                         }
                     ?>
                 </select>

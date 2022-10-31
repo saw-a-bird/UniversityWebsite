@@ -8,7 +8,7 @@
     
     ?>
 
-    <title><?= $authName ?> - Plan Etude #</title>
+    <title><?= $authName ?> - Plan Etude</title>
     <link rel="stylesheet" href="/Assets/css/user.css">
     <link rel="stylesheet" href="/Assets/css/profil.css">
     <link rel="stylesheet" href="/Assets/css/tables.css">

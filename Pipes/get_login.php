@@ -24,7 +24,7 @@
             require(ROOT."/Classes/Roles.php");
             $authName = Roles::getName($user["role"]);
             // if role user, get department and merge.
-            if ($sessionRole == 3) {
+            if ($sessionRole == Roles::ByName("Etudiant")) {
                 require_once(ROOT."/Classes/EtudiantGroupDB.php");
                 $etudiantGrpDB = new EtudiantGroupDB();
                 $etdGrp = $etudiantGrpDB->get($matricule);
