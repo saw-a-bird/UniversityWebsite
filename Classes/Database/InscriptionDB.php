@@ -3,26 +3,6 @@
 
     class InscriptionDB extends MySql {
 
-        // CONFIG METHODS
-        public function changeIState($state) {
-            $this->request(
-                "UPDATE website_config SET inscription = :state", 
-                array(":state" => $state)
-            );
-        }
-
-        public function getIState() { 
-            // checks if inscription is OPEN or CLOSED (boolean)
-            
-            $result = $this->request(
-                "SELECT inscription FROM website_config", 
-                array(), 
-                1
-            );
-
-            return $result["inscription"];
-        }
-
         // CRUD METHODS
 
         public function get($id) {

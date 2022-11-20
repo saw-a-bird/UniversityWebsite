@@ -16,7 +16,7 @@
 <?php
 
     //require_once(ROOT."/Classes/Roles.php");
-    require_once(ROOT."/Classes/UtilisateurDB.php");
+    require_once(ROOT."/Classes/Database/UtilisateurDB.php");
 
     $utilisateurDB = new UtilisateurDB();
     $users = $utilisateurDB->getAll();

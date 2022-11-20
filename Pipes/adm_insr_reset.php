@@ -3,7 +3,7 @@
     $securityRole = 0;
 
     if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] == $securityRole) {
-        require_once("../Classes/InscriptionDB.php");
+        require_once("../Classes/Database/InscriptionDB.php");
         $inscriptionDB = new InscriptionDB();
         $inscriptionDB->clear();
 

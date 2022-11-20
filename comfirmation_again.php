@@ -21,7 +21,7 @@
 
           // check if email exists.
           if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            require_once("Classes/UtilisateurDB.php");
+            require_once("Classes/Database/UtilisateurDB.php");
             $utilisateurDB = new UtilisateurDB();
             $user = $utilisateurDB->emailExists($email, 1);
             

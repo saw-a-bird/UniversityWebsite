@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php
-        require_once(ROOT."/Classes/UtilisateurDB.php");
+        require_once(ROOT."/Classes/Database/UtilisateurDB.php");
         $utilisateurDB = new UtilisateurDB();
 
         if (isset($_GET["matricule"]) && is_numeric($_GET["matricule"])) {
@@ -25,7 +25,7 @@
                 $sexe = Utilisateur::getSexeName($person["sexe"]);
             
                 if (isset($person["departmentID"])) {
-                    include(ROOT."/Classes/DepartmentDB.php");
+                    include(ROOT."/Classes/Database/DepartmentDB.php");
                     $departmentDB = new DepartmentDB();
                     $department = $departmentDB->getNom($person["departmentID"]);
                     $departmentDB = null;
@@ -115,6 +115,10 @@
                                     <br>";
                                 }
                             ?>
+
+                            <li> <span>Email:</span>  <?= $person["email"] ?> </li> 
+                            <br>
+                            <br>
 
                         </ul>
 

@@ -15,12 +15,12 @@
 </head>
 <body>
     <?php
-        require_once(ROOT."/Classes/PlanEtudeDB.php");
+        require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
         $planEtudeDB = new PlanEtudeDB();
         $planEtudes = $planEtudeDB->getAllByDepartmentID($user["departmentID"]);
         $planEtudeDB = null;
 
-        require_once(ROOT."/Classes/DepartmentDB.php");
+        require_once(ROOT."/Classes/Database/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
         $depNom = $departmentDB->getNom($user["departmentID"]);
         $departmentDB = null;
@@ -40,7 +40,7 @@
     </div>
 
     <div class="cd">
-        <div class="cadre" >
+        <div class="cadre" id = "cadre">
         <h1 class = "table_name"> Plan etudes de department <?= $depNom ?>: </h1>
             <div class = "cadre_header">
                 <div class = "forms">
@@ -65,27 +65,22 @@
                         <th style = "width:30%"><span class = "table_header">Parcours</span></th>
                         <th><span class = "table_header">Date Debut</span></th>
                         <th><span class = "table_header">Date Fin</span></th>
-                        <th><span class = "table_header">Selectionné?</span></th>
                         <th><span class = "table_header">Actions</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         foreach ($planEtudes as $key => $plan) {
-                            $selected = $plan["planSelectionné"] == $plan["id"];
                             echo "
                                 <tr>
                                     <td>".$plan["id"]."</td>
                                     <td>".$plan["parcoursNom"]."</td>
                                     <td>".$plan["dateDebut"]."</td>
                                     <td>".$plan["dateFin"]."</td>
-                                    <td>".($selected? "Oui": "Non")."</td>
                                     <td>
                                         <a class = 'link_ref' href = 'afficher.php?id=".$plan["id"]."'>Afficher</a>
-                                        ". ($selected == false?
-                                        "<a class = 'link_ref' href = '/Pipes/PlanEtude/selectionner_plan.php?plan_id=".$plan["id"]."&parcours_id=".$plan["parcoursID"]."'>Selectionner</a>" : "<a class = 'link_ref' href = '/Pipes/PlanEtude/selectionner_plan.php?plan_id=-1&parcours_id=".$plan["parcoursID"]."'>Déselectionner</a>") ."
                                         <a class = 'link_ref' href = 'modifier.php?id=".$plan["id"]."'>Modifier</a>
-                                        <a class = 'link_ref' href = '/Pipes/PlanEtude/supprimer_planEtude.php?id=".$plan["id"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove PlanEtude #".$plan["id"]." from the table?');\">Supprimer</a> 
+                                        <a class = 'link_ref' href = '/Pipes/PlanEtudes/supprimer.php?id=".$plan["id"]."' onclick=\"return confirm('DELETION: Are you sure you want to remove PlanEtude #".$plan["id"]." from the table?');\">Supprimer</a> 
                                 </td>
                             </tr>
                             ";
@@ -96,6 +91,6 @@
         </div>
     </div>
 
-    <script src="/Assets/js/search.js"></script>
+    <script src="/Assets/js/specific_search.js" tables ="cadre"></script>
 </body>
 </html>

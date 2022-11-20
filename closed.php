@@ -12,10 +12,10 @@
     <?php 
       include("config.php");
 
-      require_once("Classes/InscriptionDB.php");
-      $inscriptionDB = new InscriptionDB();
+      require_once("Classes/Database/GlobalDB.php");
+      $globalDB = new GlobalDB();
 
-      if ($inscriptionDB->getIState() == 1) {
+      if ($globalDB->getInscription() == 1) {
           header("Location: /index.php");
       }
     ?>

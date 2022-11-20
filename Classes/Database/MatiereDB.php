@@ -18,14 +18,14 @@
             $this->request($query, $secureArray);
         }
 
-        // public function delete($id) {
-        //     $query = "DELETE FROM planEtude WHERE id = :id"; 
-        //     $secureArray = array( 
-        //         ":id" => $id,
-        //     );
+        public function delete($id) {
+            $query = "DELETE FROM matiere WHERE id = :id"; 
+            $secureArray = array( 
+                ":id" => $id,
+            );
 
-        //     $this->request($query, $secureArray);
-        // }
+            $this->request($query, $secureArray);
+        }
 
         /* QUERY METHODS */
 

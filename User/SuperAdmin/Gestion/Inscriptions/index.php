@@ -15,13 +15,15 @@
 </head>
 <body>
     <?php
-        require_once(ROOT."/Classes/InscriptionDB.php");
-        $inscriptionDB = new InscriptionDB();
-        $state = $inscriptionDB->getIState();
-        $inscriptions = $inscriptionDB->getAll();
-        $inscriptionDB = null;
+        require_once(ROOT."/Classes/Database/GlobalDB.php");
+        $globalDB = new GlobalDB();
+        $state = $globalDB->getInscription();
+        $globalDB = null;
 
-        //require_once(ROOT."/Classes/Roles.php");
+        require_once(ROOT."/Classes/Database/InscriptionDB.php");
+        $inscriptionDB = new InscriptionDB();
+        $inscriptions = $inscriptionDB->getAll();
+
     ?>
 
     <div class="logo">  
@@ -38,7 +40,7 @@
     </div>
 
     <div class="cd">
-        <div class="cadre" >
+        <div class="cadre" id = "cadre">
         <h1 class = "table_name"> Tableau d'inscription: </h1>
             <div class = "cadre_header">
                 <div class = "forms">
@@ -115,6 +117,6 @@
 
     </script>
 
-    <script src="/Assets/js/search.js"></script>
+    <script src="/Assets/js/specific_search.js" tables ="cadre"></script>
 </body>
 </html>

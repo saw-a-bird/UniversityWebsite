@@ -42,21 +42,29 @@
         td {
             font-size: 16px !important;
         }
+
+        .delete_x {
+            color:red
+        }
+
+        .delete_x:hover {
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
     <?php
         if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
             $planEtudeID = $_GET["id"];
-            require_once(ROOT."/Classes/PlanEtudeDB.php");
+            require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
             $planEtudeDB = new PlanEtudeDB();
 
             if ($planEtudeDB->exists($planEtudeID)) {
                 $planEtudeDB = null;
-                require_once(ROOT."/Classes/UniteDB.php");
+                require_once(ROOT."/Classes/Database/UniteDB.php");
                 $uniteDB = new UniteDB();
 
-                require_once(ROOT."/Classes/MatiereDB.php");
+                require_once(ROOT."/Classes/Database/MatiereDB.php");
                 $matiereDB = new MatiereDB();
             
             } else {
@@ -118,7 +126,7 @@
                     <th class="table_inner"><span>UE</span></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class = "unpadded">
             <?php
                     for ($sem = 1; $sem <= 2; $sem++) { 
                         echo"<tr>
@@ -134,7 +142,7 @@
                             echo "
                             <tr>
                                 <td rowspan='$matieresCount' class = 'table_type'> ".$unite["type"]." </td>
-                                <td rowspan='$matieresCount' class = 'table_normal'> ".$unite["nom"]." </td>
+                                <td rowspan='$matieresCount' class = 'table_normal'> ".$unite["nom"]." <a class = 'delete_x' href = '/Pipes/PlanEtudes/delete_unite.php?plan=$planEtudeID&id=". $unite["id"] . "' onclick=\"return confirm('Voulez-vous vraiment supprimer cette UNITE???? ".count($matieres)." matieres seront supprimé!')\"> (Supprimer)</a>  </td>
                             </tr>";
                             
                             $creditMatiere = 0;
@@ -145,7 +153,7 @@
                             $coeffMatiere += (float) $matiere["coefficient_mat"];
                             echo
                             "<tr>
-                                <td rowspan='1' class = 'table_normal'>".$matiere["nom"]."</td>
+                                <td rowspan='1' class = 'table_normal'>".$matiere["nom"]." <a class = 'delete_x' href = '/Pipes/PlanEtudes/delete_matiere.php?plan=$planEtudeID&id=". $matiere["id"] . "' onclick=\"return confirm('Voulez-vous vraiment supprimer cette MATIERE????')\"> (Supprimer)</a> </td>
                                 <td rowspan='1'><span>".(($matiere["heursCours"] + ($matiere["heursCours"]/2) + $matiere["heursTP"])*14)."</span></td>
                                 
                                 <td rowspan='1'>".((float) $matiere["heursCours"])."</td>

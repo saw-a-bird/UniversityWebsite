@@ -12,7 +12,7 @@
 </head>
 <body>
     <?php
-        include(ROOT."/Classes/DepartmentDB.php");
+        include(ROOT."/Classes/Database/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
     ?>
     <div class="logo">  

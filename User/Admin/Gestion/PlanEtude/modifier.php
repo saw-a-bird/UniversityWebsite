@@ -21,7 +21,7 @@
     <?php
         $message = "";
         if (isset($_GET["id"])) {
-            require_once(ROOT."/Classes/PlanEtudeDB.php");
+            require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
             $planEtudeDB = new PlanEtudeDB();
             $old_plan_id = $_GET["id"];
             $old_plan =  $planEtudeDB->get($old_plan_id);

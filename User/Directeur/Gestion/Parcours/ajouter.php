@@ -20,22 +20,22 @@
 <body>
     <?php
         $message = "";
-        // require_once(ROOT."/Classes/ParcoursDB.php");
+        // require_once(ROOT."/Classes/Database/ParcoursDB.php");
         // $parcoursDB = new ParcoursDB();
         // $parcoursAll = $parcoursDB->getAllByDepID($user["departmentID"]);
         // $parcoursDB = null;
         
         if (isset($_POST["confirm_btn"])) {
             if (isset($_POST["nom"])) {
-                $parcoursNom = $_POST["nom"];
-                require_once(ROOT."/Classes/ParcoursDB.php");
+                $parcoursNom = $_POST["nom"]; $parcoursFiliere = $_POST["filiere"];
+                require_once(ROOT."/Classes/Database/ParcoursDB.php");
                 $parcoursDB = new ParcoursDB();
                 $parcoursExist = $parcoursDB->nomExists($parcoursNom);
 
                 if ($parcoursExist == true) {
                     $message = "<p class = 'red_alert'>Erreur! Cette nom de parcours existe déja dans la base de données.</p>";
                 } else {
-                    $parcoursDB->insert($parcoursNom, $user["departmentID"]);
+                    $parcoursDB->insert($parcoursNom, $parcoursFiliere, $user["departmentID"]);
                     $message = "<p class = 'green_alert'>La parcours est ajouté avec succes.</p>";
                 }
             } else {
@@ -59,10 +59,13 @@
                 <label for="nom" class="lab_form"> Nom :</label>
                 <input type="text" class="lab_in_txt"  name = "nom" required>
 
+                <label for="filiere" class="lab_form"> Filiere :</label>
+                <input type="text" class="lab_in_txt" name = "filiere"  required>
+
                 <label for="department" class="lab_form"> Department :</label>
                 <select class="drop_form" name="department" id = "dep_form" disabled>
                     <?php
-                         require_once(ROOT."/Classes/DepartmentDB.php");
+                         require_once(ROOT."/Classes/Database/DepartmentDB.php");
                         $departmentDB = new DepartmentDB();
                         foreach ($departmentDB->getAll() as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

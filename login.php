@@ -46,7 +46,7 @@
 
       if (isset($email) && isset($password)) {
         // check if email exists.
-        require_once("Classes/UtilisateurDB.php");
+        require_once("Classes/Database/UtilisateurDB.php");
         $utilisateurDB = new UtilisateurDB();
         $user = $utilisateurDB->emailExists($email, 1);
         if (!empty($user)) {

@@ -8,7 +8,7 @@ if (isset($_SESSION["login"])) {
 if (isset($_GET["email"]) && isset($_GET["activation_code"])) {
     $email = $_GET["email"];
 
-    require_once("../Classes/UtilisateurDB.php");
+    require_once("../Classes/Database/UtilisateurDB.php");
     $utilisateurDB = new UtilisateurDB();
     $response = $utilisateurDB->verify_activation_code($_GET["activation_code"], $email);
 

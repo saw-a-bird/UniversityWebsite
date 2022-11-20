@@ -18,26 +18,29 @@
         
         include("config.php");
 
-        require_once("Classes/InscriptionDB.php");
-        $inscriptionDB = new InscriptionDB();
-        $enabled_inscription = $inscriptionDB->getIState();
-
         if (isset($_POST["INSCRIPTION_CIN"])){
             $cin = $_POST["INSCRIPTION_CIN"];
 
-            if ($enabled_inscription == 0) {
+            require_once("Classes/Database/GlobalDB.php");
+            $globalDB = new GlobalDB();
+
+            if ($globalDB->getInscription() == 0) {
                 header("Location: closed.php");
             } elseif (!is_numeric($cin)) {
                 $error = "Erreur! Entrer seulement des nombres!";
             } elseif (strlen((string)$cin) != 8) {
                 $error = "Erreur! La longeur de CIN doit être 8 digits!";
             } else {
-                require_once("Classes/UtilisateurDB.php");
+                require_once("Classes/Database/UtilisateurDB.php");
                 $utilisateurDB = new UtilisateurDB();
             
                 if ($utilisateurDB->exists($cin) == true) {
                     $error = "Erreur! Cette CIN déja inscrit auparavant!";
                 } else {
+
+                    require_once("Classes/Database/InscriptionDB.php");
+                    $inscriptionDB = new InscriptionDB();
+
                     if ($inscriptionDB->exists($cin)) {
                         $_SESSION["INSCRIPTION_CIN"] = $cin;
                         header("Location: form.php");

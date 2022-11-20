@@ -20,9 +20,9 @@
 <body>
     <?php
         $message = "";
-        require_once(ROOT."/Classes/ParcoursDB.php");
+        require_once(ROOT."/Classes/Database/ParcoursDB.php");
         $parcoursDB = new ParcoursDB();
-        $parcoursAll = $parcoursDB->getAllByDepID($user["departmentID"]);
+        $parcoursAll = $parcoursDB->getAllByDepartment($user["departmentID"]);
         $parcoursDB = null;
         
         if (isset($_POST["confirm_btn"])) {
@@ -32,7 +32,7 @@
                 if ($parcoursID >= 0 && $parcoursID < count($parcoursAll)) {
                     $message = "<p class = 'red_alert'>Erreur! Cette parcours n'existe pas.</p>";
                 } else {
-                    require_once(ROOT."/Classes/PlanEtudeDB.php");
+                    require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
                     $planEtudeDB = new PlanEtudeDB();
                     $planEtudeDB->insert($parcoursID, $_POST["date_deb"], $_POST["date_fin"]);
                     $message = "<p class = 'green_alert'>La plan d'etude est ajouté avec succes.</p>";
@@ -58,7 +58,7 @@
                 <label for="parcours" class="lab_form"> Parcours :</label>
                 <select id="parcours" class="drop_form" name="parcours">
                     <?php
-                        require_once(ROOT."/Classes/ParcoursDB.php");
+                        require_once(ROOT."/Classes/Database/ParcoursDB.php");
                         $parcoursDB = new ParcoursDB();
                         foreach ($parcoursDB->getAll($user["departmentID"]) as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

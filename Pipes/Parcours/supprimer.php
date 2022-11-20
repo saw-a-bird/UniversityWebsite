@@ -4,7 +4,7 @@
 
     if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] <= $securityRole) {
         if (isset($_GET["id"])) {
-            require_once("../../Classes/ParcoursDB.php");
+            require_once("../../Classes/Database/ParcoursDB.php");
             $parcoursDB = new ParcoursDB();
             $success = $parcoursDB->delete($_GET["id"]);
             $parcoursDB = null;

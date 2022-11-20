@@ -4,7 +4,7 @@
 
     if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] == $securityRole) {
         if (isset($_GET["matricule"])) {
-            require_once("../Classes/UtilisateurDB.php");
+            require_once("../Classes/Database/UtilisateurDB.php");
             $utilisateurDB = new UtilisateurDB();
             $utilisateurDB->delete($_GET["matricule"]);
             $utilisateurDB = null;

@@ -29,7 +29,7 @@
             // check general errors
             if (!empty($post_nom) && !empty($post_prenom) && !empty($post_adresse) && ($post_sexe >= 1 && $post_sexe <= 2)) {
                 require_once(ROOT."/Classes/Utilisateur.php");
-                require_once(ROOT."/Classes/UtilisateurDB.php");
+                require_once(ROOT."/Classes/Database/UtilisateurDB.php");
                 $utilisateurDB = new UtilisateurDB();
                 
                 $utilisateur = new Utilisateur();

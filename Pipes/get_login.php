@@ -16,7 +16,7 @@
 
         // Get user object
         $matricule = $_SESSION["login"]["matricule"];
-        require_once(ROOT."/Classes/UtilisateurDB.php");
+        require_once(ROOT."/Classes/Database/UtilisateurDB.php");
         $utilisateurDB = new UtilisateurDB();
         $user = $utilisateurDB->getUserByMatricule($matricule);
 
@@ -24,18 +24,18 @@
             require(ROOT."/Classes/Roles.php");
             $authName = Roles::getName($user["role"]);
             // if role user, get department and merge.
-            if ($sessionRole == Roles::ByName("Etudiant")) {
-                require_once(ROOT."/Classes/EtudiantGroupDB.php");
-                $etudiantGrpDB = new EtudiantGroupDB();
-                $etdGrp = $etudiantGrpDB->get($matricule);
+            // if ($sessionRole == Roles::ByName("Etudiant")) {
+            //     require_once(ROOT."/Classes/Database/EtudiantGroupDB.php");
+            //     $etudiantGrpDB = new EtudiantGroupDB();
+            //     $etdGrp = $etudiantGrpDB->get($matricule);
 
-                if ($etdGrp != 1) {
-                    $user = array_merge($user, $etdGrp);
-                } else {
-                    deconnexion();
-                    exit();
-                }
-            }
+            //     if ($etdGrp != 1) {
+            //         $user = array_merge($user, $etdGrp);
+            //     } else {
+            //         deconnexion();
+            //         exit();
+            //     }
+            // }
         } else {
             deconnexion();
         }

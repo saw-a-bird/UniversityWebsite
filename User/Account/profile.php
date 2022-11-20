@@ -18,7 +18,7 @@
     $sexe = Utilisateur::getSexeName($user["sexe"]);
 
     if (isset($user["departmentID"])) {
-        include_once(ROOT."/Classes/DepartmentDB.php");
+        include_once(ROOT."/Classes/Database/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
         $department = $departmentDB->getNom($user["departmentID"]);
         $departmentDB = null;

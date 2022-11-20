@@ -4,7 +4,7 @@
 
     if (isset($_SESSION["login"]) && $_SESSION["login"]["role"] == $securityRole) {
         if (isset($_GET["id"])) {
-            require_once("../Classes/InscriptionDB.php");
+            require_once("../Classes/Database/InscriptionDB.php");
             $inscriptionDB = new InscriptionDB();
             $inscriptionDB->delete($_GET["id"]);
             $utilisateurDB = null;

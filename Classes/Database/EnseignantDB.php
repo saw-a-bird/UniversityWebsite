@@ -1,6 +1,6 @@
 <?php
     require_once("MySql.php");
-    require_once("Enseignant.php");
+    require_once("../Enseignant.php");
 
     class EnseignantDB extends MySql {
 

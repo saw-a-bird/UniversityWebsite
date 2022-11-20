@@ -6,6 +6,7 @@
 }
 
 .cadre {
+    position: relative;
     background-color: white;
     margin: auto;
     padding:20px 30px 50px;
@@ -47,9 +48,10 @@
     height:30px;
 }
 
-#table_ > tbody tr:first-child td {
-    padding-top: 7px;
-  }
+#table_ > tbody:not(.unpadded):before {
+    /* margin-top: 5px; */
+    line-height:0.1em; content:"\200C"; display:block;
+}
 
 .table_header {
     font-weight: bold;
@@ -97,3 +99,38 @@ td {
 .link_ref:hover {
     background-color: #c4c3ff;
 }
+
+.cadre .navigation_btns {
+    position: absolute;
+    bottom: 20px;
+    width: 94%;
+}
+.navigation_btns {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 10px
+}
+.navigation_btns button {
+    font-size: 17px;
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    color: black;
+}
+  
+.navigation_btns button:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navigation_btns > button:disabled {
+    background-color: #dadada;
+    /* color: black; */
+}
+  
+.navigation_btns .round {
+    border-radius: 50%;
+}
+
+

@@ -20,7 +20,7 @@
 <body>
     <?php
         $message = "";
-        // require_once(ROOT."/Classes/ParcoursDB.php");
+        // require_once(ROOT."/Classes/Database/ParcoursDB.php");
         // $parcoursDB = new ParcoursDB();
         // $parcoursAll = $parcoursDB->getAllByDepID($user["departmentID"]);
         // $parcoursDB = null;
@@ -28,7 +28,7 @@
             $plan_id = $_POST["plan_id"];
             if (isset($_POST["type"]) && isset($_POST["nom"]) && isset($_POST["semestre"])) {
                 
-                require_once(ROOT."/Classes/UniteDB.php");
+                require_once(ROOT."/Classes/Database/UniteDB.php");
                 $uniteDB = new UniteDB();
                 $uniteDB->insert($_POST["type"], $_POST["nom"], $_POST["semestre"], $plan_id);
                 $message = "<p class = 'green_alert'>La unité est ajouté avec succes.</p>";

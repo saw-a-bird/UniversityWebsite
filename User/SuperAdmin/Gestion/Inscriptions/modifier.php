@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php
-        require_once(ROOT."/Classes/InscriptionDB.php");
+        require_once(ROOT."/Classes/Database/InscriptionDB.php");
         $inscriptionDB = new InscriptionDB();
         $inscription = $inscriptionDB->get($_GET["id"]);
 
@@ -38,7 +38,7 @@
                     if ($new_cin != $inscription["cin"] && $inscriptionDB->exists($new_cin)) {
                         $message = "<p class = 'red_alert'>Cette CIN déja existe dans la liste d'inscriptions</p>";
                     } else {
-                        require_once(ROOT."/Classes/UtilisateurDB.php");
+                        require_once(ROOT."/Classes/Database/UtilisateurDB.php");
                         $utilisateurDB = new UtilisateurDB();
 
                         $new_role = $_POST["role"];
@@ -80,7 +80,7 @@
                 <label for="department" class="lab_form"> Department :</label>
                 <select id="department" class="drop_form" name="department">
                     <?php
-                        require_once(ROOT."/Classes/DepartmentDB.php");
+                        require_once(ROOT."/Classes/Database/DepartmentDB.php");
                         $departmentDB = new DepartmentDB();
                         foreach ($departmentDB->getAll() as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

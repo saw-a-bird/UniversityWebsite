@@ -20,7 +20,7 @@
 <body>
     <?php
         $message = "";
-        // require_once(ROOT."/Classes/ParcoursDB.php");
+        // require_once(ROOT."/Classes/Database/ParcoursDB.php");
         // $parcoursDB = new ParcoursDB();
         // $parcoursAll = $parcoursDB->getAllByDepID($user["departmentID"]);
         // $parcoursDB = null;
@@ -28,7 +28,7 @@
             $plan_id = $_POST["plan_id"];
             if (isset($_POST["unite"]) && isset($_POST["nom"]) && isset($_POST["coeff"]) && isset($_POST["credit"]) && isset($_POST["heursCours"]) && isset($_POST["heursTP"])) {
                 
-                require_once(ROOT."/Classes/MatiereDB.php");
+                require_once(ROOT."/Classes/Database/MatiereDB.php");
                 $matiereDB = new MatiereDB();
                 $matiereDB->insert(
                     $_POST["nom"],
@@ -66,7 +66,7 @@
                 <label for="unite" class="lab_form"> Unite :</label>
                 <select id="unite" class="drop_form" name="unite">
                 <?php
-                        require_once(ROOT."/Classes/UniteDB.php");
+                        require_once(ROOT."/Classes/Database/UniteDB.php");
                         $uniteDB = new UniteDB();
                         foreach ($uniteDB->getAll($plan_id) as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

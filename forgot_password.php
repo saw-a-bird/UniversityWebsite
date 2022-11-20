@@ -23,7 +23,7 @@
           if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $message = "<p class = 'red_alert'>Cette format d'email n'est pas valide.</p>";
           } else {
-            require_once("Classes/UtilisateurDB.php");
+            require_once("Classes/Database/UtilisateurDB.php");
             $utilisateurDB = new UtilisateurDB();
             $user = $utilisateurDB->emailExists($email, 1);
 

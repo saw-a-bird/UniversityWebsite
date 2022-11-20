@@ -6,9 +6,9 @@
         if (isset($_GET["state"]) && is_numeric($_GET["state"])) {
             $state = $_GET["state"]%2;
             if ($state >= 0 && $state <= 1) {
-                require_once("../Classes/InscriptionDB.php");
-                $inscriptionDB = new InscriptionDB();
-                $inscriptionDB->changeIState($state);
+                require_once("../Classes/Database/GlobalDB.php");
+                $globalDB = new GlobalDB();
+                $globalDB->setInscription($state);
             }
         }
 

@@ -17,9 +17,9 @@
 
 <?php
     //require_once(ROOT."/Classes/Roles.php");
-    require_once(ROOT."/Classes/ParcoursDB.php");
+    require_once(ROOT."/Classes/Database/ParcoursDB.php");
     $parcoursDB = new ParcoursDB();
-    $parcoursAll = $parcoursDB->getAllByDepID($user["departmentID"]);
+    $parcoursAll = $parcoursDB->getAllByDepartment($user["departmentID"]);
     $parcoursDB = null;
 ?>
 
@@ -52,21 +52,18 @@
     <table id ="table_" class="scrollable-table">
         <thead>
             <tr> 
-                <th style = "width:10%"><span class = "table_header">ID#</span></th>
-                <th style = "width:30%"><span class = "table_header">Nom</span></th>
-                <th style = "width:60%"><span class = "table_header">Plan d'etude selectionné#</span></th>
+                <th style = "width:20%"><span class = "table_header">Nom</span></th>
+                <th style = "width:70%"><span class = "table_header">Filiere</span></th>
                 <th><span class = "table_header">Actions</span></th>
             </tr>
         </thead>
         <tbody>
             <?php
                 foreach ($parcoursAll as $parcours) {
-                    $plan = $parcours["planSelectionné"];
                     echo "
                         <tr>
-                            <td>".$parcours["id"]."</td>
                             <td>".$parcours["nom"]."</td>
-                            <td>".($plan != null? "<a class = 'link_ref' href = '/User/Admin/Gestion/PlanEtude/afficher.php?id=".$plan."'>Plan #". $plan."</a>.": "Aucune")."</td>
+                            <td>".$parcours["filiere"]."</td>
                             <td>
                                 <a class = 'link_ref' href = 'modifier.php?id=".$parcours["id"]."'>Modifier</a>
                                 <a class = 'link_ref' href = '/Pipes/Parcours/supprimer.php?id=".$parcours["id"]."'>Supprimer</a>

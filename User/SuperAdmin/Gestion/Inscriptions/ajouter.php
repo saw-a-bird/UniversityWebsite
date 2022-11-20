@@ -31,13 +31,13 @@
                 } elseif ($post_dep < 1 && $post_dep > 4) {
                     $message = "<p class = 'red_alert'>Erreur! Cette department n'existe pas.</p>";
                 } else {
-                    require_once(ROOT."/Classes/InscriptionDB.php");
+                    require_once(ROOT."/Classes/Database/InscriptionDB.php");
                     $inscriptionDB = new InscriptionDB();
 
                     if ($inscriptionDB->exists($cin)) {
                         $message = "<p class = 'red_alert'>Cette CIN déja existe dans la liste d'inscriptions</p>";
                     } else {
-                        require_once(ROOT."/Classes/UtilisateurDB.php");
+                        require_once(ROOT."/Classes/Database/UtilisateurDB.php");
                         $inscriptionDB->insert($_POST["cin"], $_POST["nomprenom"], $post_dep, $_POST["role"]);
                         $message = "<p class = 'green_alert'>La CIN est ajouté avec succes.</p>";
                     }
@@ -69,7 +69,7 @@
                 <label for="department" class="lab_form"> Department :</label>
                 <select id="department" class="drop_form" name="department">
                     <?php
-                        require_once(ROOT."/Classes/DepartmentDB.php");
+                        require_once(ROOT."/Classes/Database/DepartmentDB.php");
                         $departmentDB = new DepartmentDB();
                         foreach ($departmentDB->getAll() as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

@@ -24,10 +24,10 @@
 
         // first of all, for security purposes and to get role.
 
-        require_once("Classes/InscriptionDB.php");
-        $inscriptionDB = new InscriptionDB();
-
-        if ($inscriptionDB->getIState() == 0) {
+        require_once("Classes/Database/GlobalDB.php");
+        $globalDB = new GlobalDB();
+  
+        if ($globalDB->getInscription() == 0) {
             header("Location: closed.php");
         } elseif (!isset($_SESSION["INSCRIPTION_CIN"])) {
             header("Location: index.php");
@@ -36,11 +36,14 @@
             require_once("Classes/Roles.php");
             $cin = $_SESSION["INSCRIPTION_CIN"];
             
-            require_once("Classes/UtilisateurDB.php");
+            require_once("Classes/Database/UtilisateurDB.php");
             $utilisateurDB = new UtilisateurDB();
             if ($utilisateurDB->exists($cin) == true) {
                 $generalErrors = "Cette CIN est déja utilisé auparavant!";
             }
+
+            require_once("Classes/Database/InscriptionDB.php");
+            $inscriptionDB = new InscriptionDB();
 
             $inscription = $inscriptionDB->getInfo($cin);
             $role = $inscription["role"];
@@ -171,7 +174,7 @@
                 <label for="department" class="_form"> Department :</label>
                 <select class="drop_form" name="department" id = "dep_form" disabled>
                     <?php
-                        require_once("Classes/DepartmentDB.php");
+                        require_once("Classes/Database/DepartmentDB.php");
                         $departmentDB = new DepartmentDB();
                         foreach ($departmentDB->getAll() as $row) {
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";

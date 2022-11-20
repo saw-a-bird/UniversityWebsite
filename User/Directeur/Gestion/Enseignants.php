@@ -16,7 +16,7 @@
 
 <?php
     //require_once(ROOT."/Classes/Roles.php");
-    require_once(ROOT."/Classes/UtilisateurDB.php");
+    require_once(ROOT."/Classes/Database/UtilisateurDB.php");
     $utilisateurDB = new UtilisateurDB();
 
     $users = $utilisateurDB->getList(Roles::ByName("Enseignant"), $user["departmentID"]);
@@ -37,7 +37,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau d'enseignants: </h1>
     <div class = "cadre_header">
         
@@ -86,6 +86,6 @@
 </div>
 </div>
 
-<script src="/Assets/js/search.js"></script>
+<script src="/Assets/js/specific_search.js" tables ="cadre"></script>
 </body>
 </html>

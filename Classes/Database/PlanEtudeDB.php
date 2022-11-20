@@ -34,19 +34,6 @@
             $this->request($query, $secureArray);
         }
 
-        /* SPECIAL METHODS */
-
-        public function select($parcours_id, $plan_id) {
-            return $this->request(
-                "UPDATE parcours SET planSelectionné = :plan_id WHERE id = :parcours_id",
-                array(
-                    ":plan_id" => ($plan_id == -1)? null: $plan_id,
-                    ":parcours_id" => $parcours_id
-                ),
-                2
-            );
-        }
-
         /* QUERY METHODS */
     
         public function exists($id) {
@@ -61,7 +48,9 @@
 
         public function get($id) {
             return $this->request(
-                "SELECT pl.id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin, pr.planSelectionné FROM planetude pl JOIN parcours pr ON (pr.id = pl.parcoursID) WHERE pl.id = :id",
+                "SELECT pl.id as id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin FROM planetude pl 
+                JOIN parcours pr ON (pr.id = pl.parcoursID)
+                WHERE pl.id = :id",
                 array(
                     ":id" => $id
                 ),
@@ -77,11 +66,15 @@
             );
         }
 
-        public function getAllByDepartmentID($depID) {
+        /* ADVANCED QUERY METHODS */
+
+        public function getAllByDepartmentID($departmentId) {
             return $this->request(
-                "SELECT pl.id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin, pr.planSelectionné FROM planetude pl JOIN parcours pr ON (pr.id = pl.parcoursID) WHERE pr.departmentID = :depID",
+                "SELECT pl.id as id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin FROM planetude pl
+                JOIN parcours pr ON (pr.id = pl.parcoursID)
+                 WHERE pr.departmentID = :departmentId",
                 array(
-                    ":depID" => $depID
+                    ":departmentId" => $departmentId
                 ),
                 2
             );
