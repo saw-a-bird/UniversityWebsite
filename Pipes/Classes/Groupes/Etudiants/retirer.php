@@ -11,7 +11,7 @@
             $etdGroupDB->retirer($_GET["matricule"], $_GET["groupeId"]);
             $etdGroupDB = null;
 
-            header("location: /User/Directeur/Gestion/Classes/Groupes/Etudiants/index.php?groupeId=".$_GET["groupeId"]);
+            header("location: /Pages/Gestion/Classes/Groupes/Etudiants/index.php?groupeId=".$_GET["groupeId"]);
         }
 
         

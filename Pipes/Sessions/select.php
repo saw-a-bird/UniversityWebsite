@@ -6,7 +6,7 @@
         require_once("../../Classes/Database/GlobalDB.php");
         $globalDB = new GlobalDB();
         $globalDB->setSession($_GET["numero"]);
-        header("location: /User/SuperAdmin/Gestion/Sessions/index.php");
+        header("location: /Pages/Gestion/Sessions/index.php");
         exit();
     }
 

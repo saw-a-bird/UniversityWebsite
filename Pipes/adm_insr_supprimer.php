@@ -10,7 +10,7 @@
             $utilisateurDB = null;
         }
 
-        header("location: /User/SuperAdmin/Gestion/Inscriptions/index.php");
+        header("location: /Pages/Gestion/Inscriptions/index.php");
         exit();
     }
     

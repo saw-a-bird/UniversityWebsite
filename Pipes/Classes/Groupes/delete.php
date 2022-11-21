@@ -10,7 +10,7 @@
             $success = $groupDB->delete($_GET["groupeId"]);
             $groupDB = null;
 
-            header("location: /User/Directeur/Gestion/Classes/Groupes/index.php?classeId=".$_GET["classeId"] . "&m=". ($success == true? 1 : 0));
+            header("location: /Pages/Gestion/Classes/Groupes/index.php?classeId=".$_GET["classeId"] . "&m=". ($success == true? 1 : 0));
         }
 
         

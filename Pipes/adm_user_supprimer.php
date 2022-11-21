@@ -10,7 +10,7 @@
             $utilisateurDB = null;
         }
 
-        header("location: /User/SuperAdmin/Gestion/Users.php?m=1");
+        header("location: /Pages/Gestion/Users.php?m=1");
         exit();
     }
 

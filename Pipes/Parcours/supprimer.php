@@ -9,7 +9,7 @@
             $success = $parcoursDB->delete($_GET["id"]);
             $parcoursDB = null;
 
-            header("location: /User/Directeur/Gestion/Parcours/index.php?m=". ($success == true? 1 : 0));
+            header("location: /Pages/Gestion/Parcours/index.php?m=". ($success == true? 1 : 0));
         }
 
         

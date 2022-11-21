@@ -46,3 +46,49 @@ change cin, but cin exists already in inscription list. done
 change role, but user already made account. done
 
 its ok for admin to change inscription CIN when user already made account. maybe just error on his part, meh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIRECTEUR: 
+    PLAN ETUDE
+    PARCOURS
+
+ADMIN: 
+    CLASSES
+    
+
+
+
+
+
+
+
+DONE:
+GESTION UTILISATEURS
+GESTION PARCOURS
+GESTION PLAN ETUDES (UNITES, MATIERES)
+GESTION CLASSES (GROUPS, ETUDIANTS)
+
+
+
+MISSING:
+GESTION ENSEIGNANT - MATIERES
+GESTION EMPLOI (SPECIFIC)
+
+
+
+
+GESTION NOTIFICATIONS (SPECIFIC)
+GESTION ABSCENSES
+GESTION NOTE

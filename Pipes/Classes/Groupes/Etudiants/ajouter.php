@@ -17,7 +17,7 @@
 
             $etdGroupDB = null;
             echo "Done.";
-            header("location: /User/Directeur/Gestion/Classes/Groupes/Etudiants/index.php?groupeId=".$_GET["groupeId"]);
+            header("location: /Pages/Gestion/Classes/Groupes/Etudiants/index.php?groupeId=".$_GET["groupeId"]);
         }
 
         echo "Unset values.";

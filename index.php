@@ -13,18 +13,19 @@
    <?php 
         session_start();
         if (isset($_SESSION["login"])) {
-            header("location: /User/index.php");
+            header("location: /Pages/User/index.php");
         }
         
+        require_once("Classes/Database/GlobalDB.php");
+        $globalDB = new GlobalDB();
+        $inscriptionEnabled = $globalDB->getInscription();
+
         include("config.php");
 
         if (isset($_POST["INSCRIPTION_CIN"])){
             $cin = $_POST["INSCRIPTION_CIN"];
 
-            require_once("Classes/Database/GlobalDB.php");
-            $globalDB = new GlobalDB();
-
-            if ($globalDB->getInscription() == 0) {
+            if ($inscriptionEnabled == 0) {
                 header("Location: closed.php");
             } elseif (!is_numeric($cin)) {
                 $error = "Erreur! Entrer seulement des nombres!";
@@ -67,7 +68,7 @@
         <p id="bienvenue">BIENVENUE</p>
         <p id="title_2">Presenter votre CIN pour incrire </p>
         <form action="" method="post">
-            <?php if ($enabled_inscription == 0) {
+            <?php if ($inscriptionEnabled == 0) {
                 echo "<input maxlength='8' id='cin' type='text' name='INSCRIPTION_CIN' placeholder='L&lsquo;inscription est fermée.' disabled />";        
             } else {
                 echo"<input maxlength='8' id='cin' type='text' name='INSCRIPTION_CIN' placeholder='CIN' />";

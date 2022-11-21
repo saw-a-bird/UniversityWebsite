@@ -5,7 +5,7 @@
       <?php
           session_start();
           if (isset($_SESSION["login"])) {
-              header("location: /User/index.php");
+              header("location: /Pages/User/index.php");
           }
           require_once("config.php");
       ?>
@@ -54,7 +54,7 @@
             if ($user["isActive"] == 1) {
 
               $_SESSION["login"] = array("matricule" => $user["matricule"], "role" => $user["role"]);
-              header("location: /User/index.php");
+              header("location: /Pages/User/index.php");
 
             } else {
               $message = "<p class = 'red_alert'>Error. Cette compte n'est pas encore active.</p>";

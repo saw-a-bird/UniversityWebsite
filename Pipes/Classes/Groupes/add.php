@@ -10,7 +10,7 @@
             $success = $groupDB->insert($_GET["classeId"], $_GET["numero"]);
             $groupDB = null;
 
-            header("location: /User/Directeur/Gestion/Classes/Groupes/index.php?classeId=".$_GET["classeId"] . "&m=". ($success == true? 1 : 0));
+            header("location: /Pages/Gestion/Classes/Groupes/index.php?classeId=".$_GET["classeId"] . "&m=". ($success == true? 1 : 0));
         }
 
         

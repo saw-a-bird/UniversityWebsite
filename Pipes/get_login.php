@@ -10,8 +10,8 @@
         $sessionRole = $_SESSION["login"]["role"];
 
         // Check authentification (site demands 2 <  you have 3, redirect)
-        if (isset($securityRole) && $securityRole < $sessionRole) {
-            header("location: /User/index.php");
+        if ((isset($securityRoleAbs) && $securityRoleAbs != $sessionRole) || (isset($securityRole) && $securityRole < $sessionRole)) {
+            header("location: /Pages/User/index.php");
         }
 
         // Get user object

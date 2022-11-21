@@ -9,7 +9,7 @@
             $success = $planEtudeDB->delete($_GET["id"]);
             $planEtudeDB = null;
 
-            header("location: /User/Admin/Gestion/PlanEtude/index.php?m=". ($success == true? 1 : 0));
+            header("location: /Pages/Gestion/PlanEtude/index.php?m=". ($success == true? 1 : 0));
         }
 
         

@@ -29,6 +29,14 @@
 
         /* QUERY METHODS */
 
+        public function get($matiereId) {
+            return $this->request(
+                "SELECT * FROM matiere WHERE id = :matiereId",
+                array(":matiereId" => $matiereId),
+                1
+            );
+        }
+
         public function getAll($uniteID) {
             return $this->request(
                 "SELECT id,nom,coefficient_mat,credit_mat,heursCours,heursTP FROM matiere WHERE uniteID = :uniteID",

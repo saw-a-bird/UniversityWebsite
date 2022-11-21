@@ -4,7 +4,7 @@
     <?php
         session_start();
         if (isset($_SESSION["login"])) {
-            header("location: /User/index.php");
+            header("location: /Pages/User/index.php");
         }
 
         require_once("config.php");
