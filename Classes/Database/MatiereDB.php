@@ -39,9 +39,26 @@
 
         public function getAll($uniteID) {
             return $this->request(
-                "SELECT id,nom,coefficient_mat,credit_mat,heursCours,heursTP FROM matiere WHERE uniteID = :uniteID",
+                "SELECT * FROM matiere WHERE uniteID = :uniteID",
                 array(
                     ":uniteID" => $uniteID
+                ),
+                2
+            );
+        }
+
+        /* Emploi */
+
+        public function getByPlanEtd($planId) {
+            return $this->request(
+                "SELECT m.id as id, m.nom as nom, u.planEtudeId as plan 
+                FROM matiere as m
+                JOIN unite u ON (m.uniteID = u.id)
+                JOIN planetude pe ON (u.planEtudeID = pe.id and pe.id = :planId)
+                WHERE pe.id = :planId",
+
+                array(
+                    ":planId" => $planId
                 ),
                 2
             );

@@ -90,13 +90,13 @@
         const classeId = <?= $classeId ?>;
 
         function ajouterGroupe() {
-            if (confirm("Are you sure you want to add another group to this classe?")) {
+            if (confirm("Voulez-vous vraiment ajouter un group à cette classe?")) {
                 window.location.href = "/Pipes/Classes/Groupes/add.php?numero="+(countGroups+1)+"&classeId="+classeId; // (0+1) % 2 = 1 // (1+1) % 2 = 0
             }
         }
 
         function supprimerGroupe(groupeId) {
-            if (confirm("Are you sure you want to delete this group?")) {
+            if (confirm("Voulez-vous vraiment supprimer ce groupe?")) {
                 window.location.href = "/Pipes/Classes/Groupes/delete.php?groupeId="+groupeId+"&classeId="+classeId; // (0+1) % 2 = 1 // (1+1) % 2 = 0
             }
         }

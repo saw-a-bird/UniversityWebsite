@@ -22,6 +22,17 @@
             $this->_cnx = null;
         }
 
+        /** 
+         * RETURN VALUES:
+         * 
+         * @param return false, checks if query worked and returns true.
+         * @param return 0, checks if there are any elements and returns true/false.
+         * @param return 1, return first element.
+         * @param return 2, return all elements.
+         * @param return 3, return last inserted id.
+         * 
+         * ALL PARAMETERS
+         * */
         public function request($query, $array, $return = false) {
             
             // The prepare function sends a query to the database once and readies itself for user input. You only have to send the variables to it which reduces the brandwidth required.

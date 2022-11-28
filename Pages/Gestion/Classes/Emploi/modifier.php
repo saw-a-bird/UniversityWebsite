@@ -22,16 +22,18 @@
     <link rel="stylesheet" href="/Assets/css/tables.css">
     <link rel="stylesheet" href="/Assets/css/buttons.css">
     <link rel="stylesheet" href="/Assets/css/general.css">
+
+
     <link rel="stylesheet" href="/Assets/css/emploi.css">
 </head>
 <body>
 
 <?php
-    //require_once(ROOT."/Classes/Roles.php");
-    // require_once(ROOT."/Classes/Database/EmploiDB.php");
-    // $emploiDB = new EmploiDB();
-    // $emploi = $emploiDB->getAll($classeId); // byAnne
-    // $emploiDB = null;
+    require_once(ROOT."/Classes/Roles.php");
+    require_once(ROOT."/Classes/Database/EmploiDB.php");
+    $emploiDB = new EmploiDB();
+    $emploi = $emploiDB->getAll($classeId); // byAnne
+    $emploiDB = null;
 ?>
 
 <div class="logo">  
@@ -52,49 +54,101 @@
     <form action="" method="post" >
         <!--the options of class and group-->
         <div class="form_cl">
-            <label for="class" class="lab_param">Class : </label>
-            <select name="classes"  class="op" id="op_class">
-                <option class="op_text" value="0">--none--</option>
-                <option class="op_text" value="1">DSI3.2</option>
-            </select>
+            <div>
+                <div class = "label_container"><label for="class" class="lab_param">Class : </label></div>
+                <select name="classes"  class="op" id="op_class" disabled>
+                    <option class="op_text"><?=$classe["nom"].".".$classe["numero"]?></option>
+                </select>
+            </div>
+
+            <div style = "margin-top: 10px">
+                <div class = "label_container"><label for="group" class="lab_param" onchange="byGroup(this.value);">Group : </label></div>
+                <select name="classes"  class="op" id="op_class">
+                    <?php
+                        require_once(ROOT."/Classes/Database/GroupeDB.php");
+                        $groupDB = new GroupeDB();
+                        $groups = $groupDB->getAllSimple($classeId);
+                        foreach ($groups as $row) {
+                            echo "<option value='".$row["id"]."'>".$row["numero"]."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div style = "margin-top: 10px">
+                <div class = "label_container"><label for="semestre" class="lab_param" onchange="bySemestre(this.value);">Semestre : </label></div>
+                <select name="semesters"  class="op" id="op_class">
+                    <option class="op_text" value="1">1</option>
+                    <option class="op_text" value="2">2</option>
+                </select>
+            </div>
         </div><br>
 
-        <div class="form_cl" id="grp">
-            <label for="group" class="lab_param">Group : </label>
-            <select name="classes"  class="op" id="op_class">
-                <option class="op_text" value="0">1</option>
-            </select>
-        </div>
+
 
         <!--the details of the form-->
         <div class="detail">
-            
-            <label for="matiere" class="detail_lab">Matiere</label>
-            <select name="matiere" id="mat_op" class="detail_op">
-                <option value="0">POO</option>
-            </select>
-            
-            <label for="Salle" class="detail_lab">Salle</label>
-            <select name="Salle" id="mat_op" class="detail_op">
-                <option value="0">G003</option>
-            </select>
+            <div style = "justify-content: space-evenly; display: flex;">
+                <div style = "display: inline-block;">
+                    <label for="matiere" class="detail_lab">Matiere</label>
+                    <select name="matiere" id="mat_op" class="detail_op" onchange="changerEnseignants(this.value);">
+                        <?php
+                            require_once(ROOT."/Classes/Database/MatiereDB.php");
+                            $matiereDB = new MatiereDB();
 
-            <label for="Prof" class="detail_lab">Prof</label>
-            <select name="Prof" id="mat_op" class="detail_op">
-                <option value="0">Mr.Mourad Hadhtri</option>
-            </select>
-            <br>
+                            require_once(ROOT."/Classes/Database/EnseignantMatiereDB.php");
+                            $ensMatiereDB = new EnseignantMatiereDB();
+
+                            $matieres = $matiereDB->getByPlanEtd($classe["planEtudeID"]);
+                            $matiereEns = [];
+                            
+                            foreach ($matieres as $row) {
+                                $matiereId = $row["id"];
+                                $matiereEns[$matiereId] = $ensMatiereDB->getAll($matiereId);
+                                echo "<option value='$matiereId'>".$row["nom"]."</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div style = "display: inline-block;">
+                    <label for="Salle" class="detail_lab">Salle</label>
+                    <select name="Salle" id="mat_op" class="detail_op">
+                    <?php
+                            require_once(ROOT."/Classes/Database/SalleDB.php");
+                            $salleDB = new SalleDB();
+                            $salles = $salleDB->getAll();
+                            foreach ($salles as $row) {
+                                echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div style = "display: inline-block;">  
+                    <label for="enseignant" class="detail_lab">Prof</label>
+                    <select name="enseignant" id="prof_op" class="detail_op">
+                    </select>
+                </div>
+            </div>
             <br>
             <br>
             <span style="margin-left: 20%;"></span>
-            <label for="Seance" class="detail_lab">Seance</label>
-            <select name="Seance" id="mat_op" class="detail_op">
-                <option value="0">S3</option>
+            <label for="seance" class="detail_lab">Seance</label>
+            <select name="seance" id="sceance_op" class="detail_op">
+                <option value="0">S1</option>
+                <option value="1">S2</option>
+                <option value="2">S3</option>
+                <option value="3">S4</option>
+                <option value="4">S5</option>
+                <option value="5">S6</option>
             </select>
 
-            <label for="Jour" class="detail_lab">Jour</label>
-            <select name="Jour" id="mat_op" class="detail_op">
+            <label for="jour" class="detail_lab">Jour</label>
+            <select name="jour" id="ju_op" class="detail_op">
                 <option value="0">Lundi</option>
+                <option value="1">Mardi</option>
+                <option value="2">Mercredi</option>
+                <option value="3">Jeudi</option>
+                <option value="4">Vendredi</option>
+                <option value="5">Samedi</option>
             </select>
             <br>
             <!--button Submit-->
@@ -191,5 +245,51 @@
             </tr>
         </table>
     </div>
+
+    <script>
+        var emplois =  <?= json_encode($emploi) ?>;
+        var matiereEns = <?= json_encode($matiereEns) ?>;
+        var selectedSemestre = 1
+        var selectedGroup = <?= count($groups) > 0 ? 1 : 0 ?>;
+
+        function ByGroup(group) {
+            selectedGroup = group
+            display()
+        }
+
+        function BySemestre(semester) {
+            selectedSemestre = semester
+            display()
+        }
+
+        function display(filtered_items) {
+            // stuff here
+        }
+
+        var selectMatiere = document.getElementById("mat_op")
+        var selectEnseignant = document.getElementById("prof_op")
+        function changerEnseignants(matiere, remove = true) {
+            if (remove == true)
+                removeOptions(selectEnseignant)
+
+            if (matiereEns[matiere] != undefined) {
+                matiereEns[matiere].forEach((v) => {
+                    var option = document.createElement("option");
+                    option.value = v["id"]; 
+                    option.text = v["nomprenom"];
+                    selectEnseignant.add(option);
+                })
+            }
+        }
+
+        function removeOptions(selectElement) {
+            var i, L = selectElement.options.length - 1;
+            for(i = L; i >= 0; i--) {
+                selectElement.remove(i);
+            }
+        }
+
+        changerEnseignants(selectMatiere.value)
+    </script>
 </body>
 </html>

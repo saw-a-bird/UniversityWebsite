@@ -27,7 +27,7 @@
         
 
         if (isset($_POST["confirm_btn"])) {
-            if (isset($_POST["parcours"]) && isset($_POST["numero"])) {
+            if (isset($_POST["parcours"]) && isset($_POST["numero"]) && isset($_POST["planId"])) {
                 require_once(ROOT."/Classes/Database/ClasseDB.php");
                 $classeDB = new ClasseDB();
 
@@ -35,8 +35,12 @@
                 $globalDB = new GlobalDB();
                 $currentSession = $globalDB->getSession();
                 if (!empty($currentSession)) {
-                    $classeDB->insert($_POST["parcours"], $_POST["numero"], $currentSession["anne"]);
-                    $message = "<p class = 'green_alert'>La classe est ajouté avec succes.</p>"; 
+                    if (!$classeDB->exists($_POST["parcours"], $_POST["numero"], $currentSession["anne"])) {
+                        $classeDB->insert($_POST["parcours"], $_POST["numero"], $currentSession["anne"], $_POST["planId"]);
+                        $message = "<p class = 'green_alert'>La classe est ajouté avec succes.</p>"; 
+                    } else {
+                        $message = "<p class = 'red_alert'>Cette classe déja existe dans la session courant!</p>";
+                    }
                 } else {
                     $message = "<p class = 'red_alert'>Veuillez à selectionner un session avant de créer des classes!</p>";
                 }
@@ -59,16 +63,24 @@
                 <?= $message ?>
 
                 <label for="parcours" class="lab_form"> Parcours :</label>
-                <select class="drop_form" name="parcours" id = "dep_form" required>
+                <select class="drop_form" name="parcours" id = "parcours_form" onchange="changePlan(this.value)" required>
                     <?php
                          require_once(ROOT."/Classes/Database/ParcoursDB.php");
                         $parcoursDB = new ParcoursDB();
+                        require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
+                        $planEtdDB = new PlanEtudeDB();
+                        $planEtds = [];
                         foreach ($parcoursDB->getAllByDepartment($user["departmentID"]) as $row) {
+                            $parcoursId = $row["id"];
+                            $planEtds[$parcoursId] = $planEtdDB->getAllByParcoursID($parcoursId);
                             echo "<option value='".$row["id"]."'>".$row["nom"]."</option>";
                         }
                     ?>
                 </select>
 
+                <label for="planId" class="lab_form"> Plan Etude :</label>
+                <select class="drop_form" name="planId" id = "plan_form" style = "width: 200px;" required>
+                </select>
 
                 <label for="numero" class="lab_form"> Numero :</label>
                 <input type="number" class="lab_in_txt"  name = "numero" required>
@@ -86,5 +98,35 @@
       <!--the img-->
       <img src="/Assets/imgs/person_form.png" alt="person" id="form_img">
   
+      <script>
+        var selectParcours = document.getElementById("parcours_form");
+        var selectPlan = document.getElementById("plan_form");
+        var planEtds = <?= json_encode($planEtds) ?>;
+        var currentPlan = <?= json_encode($planEtds) ?>;
+
+        
+        function changePlan(parcours, remove = true) {
+            if (remove == true)
+                removeOptions(selectPlan)
+
+            if (planEtds[parcours] != undefined) {
+                planEtds[parcours].forEach((v) => {
+                    var option = document.createElement("option");
+                    option.value = v["id"];
+                    option.text = v["dateDebut"]+" - "+ v["dateFin"];
+                    selectPlan.add(option);
+                })
+            }
+        }
+
+        function removeOptions(selectElement) {
+            var i, L = selectElement.options.length - 1;
+            for(i = L; i >= 0; i--) {
+                selectElement.remove(i);
+            }
+        }
+
+        changePlan(selectParcours.value)
+    </script>
   </body>
   </html>

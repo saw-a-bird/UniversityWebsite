@@ -79,4 +79,16 @@
                 2
             );
         }
+
+        public function getAllByParcoursID($parcoursId) {
+            return $this->request(
+                "SELECT pl.id as id, parcoursID, pr.nom as 'parcoursNom', dateDebut, dateFin FROM planetude pl
+                JOIN parcours pr ON (pr.id = pl.parcoursID)
+                 WHERE pr.id = :parcoursId",
+                array(
+                    ":parcoursId" => $parcoursId
+                ),
+                2
+            );
+        }
     }

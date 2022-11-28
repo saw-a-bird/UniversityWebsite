@@ -71,11 +71,6 @@
                         <img src="/Assets/imgs/etds_crowd.png" />
                         <a href = "/Pages/Gestion/Classes/index.php"> <h4> Gestion des classes </h4> </a>
                     </div>
-
-                    <div>
-                        <img src="/Assets/imgs/etds_crowd.png" />
-                        <a href = "/Pages/Gestion/Classes/index.php"> <h4> Gestion des salles </h4> </a>
-                    </div>
                 </aside>
             </div>
             <button class="carousel-prev-btn">&larr;</button>

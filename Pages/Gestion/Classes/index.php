@@ -48,10 +48,11 @@
     <table id ="table_" class="scrollable-table">
         <thead>
             <tr> 
-                <th style = "width:30%"><span class = "table_header">Parcours</span></th>
-                <th style = "width:20%"><span class = "table_header">Numero</span></th>
-                <!-- <th style = "width:20%"><span class = "table_header">Nombre de groups</span></th> -->
+                <th style = "width:5%"><span class = "table_header">Parcours</span></th>
+                <th style = "width:15%"><span class = "table_header">Numero</span></th>
+                <th style = "width:20%"><span class = "table_header">Nombre de groups</span></th>
                 <th style = "width:20%"><span class = "table_header">Nombre d'etudiants</span></th>
+                <th style = "width:25%"><span class = "table_header">Plan d'etude</span></th>
                 <th><span class = "table_header">Actions</span></th>
             </tr>
         </thead>
@@ -62,11 +63,13 @@
                         <tr>
                             <td>".$classe["parcoursNom"]."</td>
                             <td>".$classe["numero"]."</td>
+                            <td>".$classe["groupes"]."</td>
                             <td>".$classe["etudiants"]."</td>
+                            <td>".$classe["planEtude"]."</td>
                             <td>
                                 <a class = 'link_ref' href = 'Emploi/modifier.php?classeId=".$classe["id"]."'>Emploi</a>
                                 <a class = 'link_ref' href = 'Groupes/index.php?classeId=".$classe["id"]."'>Groupes</a>
-                                <a class = 'link_ref' href = '/Pipes/Classes/supprimer.php?id=".$classe["id"]."'>Supprimer classe</a>
+                                <a class = 'link_ref' href = '#' onclick='supprimerClasse(".$classe["id"].");'>Supprimer classe</a>
                             </td>
                         </tr>
                     ";
@@ -79,5 +82,12 @@
 
 <script src="/Assets/js/specific_search.js" tables ="cadre"></script>
 
+<script>
+    function supprimerClasse(classeId) {
+        if (confirm("WARNING!!!!! Voulez-vous vraiment supprimer cette classe?")) {
+            window.location.href = "/Pipes/Classes/supprimer.php?id="+classeId; // (0+1) % 2 = 1 // (1+1) % 2 = 0
+        }
+    }
+</script>
 </body>
 </html>

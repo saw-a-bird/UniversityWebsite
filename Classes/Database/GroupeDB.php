@@ -15,15 +15,41 @@
         }
 
         public function delete($id) {
-            $query = "DELETE FROM groupe WHERE id = :id"; 
-            $secureArray = array( 
-                ":id" => $id,
+            $groupe = $this->getSimple($id);
+            $this->decrementNumberAfter($groupe["numero"], $groupe["classeId"]);
+            
+            $this->request(
+                "DELETE FROM groupe WHERE id = :id", 
+                array( 
+                    ":id" => $id,
+                )
             );
 
-            return $this->request($query, $secureArray);
+            
         }
 
+        public function decrementNumberAfter($numero, $classeId) {
+            return $this->request(
+                "UPDATE groupe SET numero = numero - 1 WHERE numero > :numero AND classeId = :classeId", 
+                array( 
+                    ":numero" => $numero,
+                    ":classeId" => $classeId
+                )
+            );
+        }
+
+        
         /* QUERY METHODS */
+        
+        public function getSimple($groupeId) {
+            return $this->request(
+                "SELECT numero, classeId FROM groupe
+                WHERE id = :groupeId",
+                array(':groupeId' => $groupeId),
+                1
+            );
+        }
+
         public function get($groupeId) { // gets a group by its id (adds parcours Nom) 
 
             // returns NUMERO, parcoursNom
@@ -34,6 +60,16 @@
                 WHERE g.id = :groupeId",
                 array(':groupeId' => $groupeId),
                 1
+            );
+        }
+
+        public function getAllSimple($classeId) {
+            return $this->request(
+                "SELECT id, numero FROM groupe
+                WHERE classeId = :classeId
+                ORDER BY numero",
+                array(':classeId' => $classeId),
+                2
             );
         }
 

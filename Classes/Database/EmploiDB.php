@@ -37,7 +37,20 @@
         //     );
         // }
 
-        public function getAll($classeId, $semestreNum) {
+        public function getAll($classeId) {
+            return $this->request(
+                "SELECT * FROM affecter af
+                JOIN matiere ON (af.matiereId = matiere.id)
+                JOIN groupe ON (af.groupId = groupe.id AND groupe.classeId = :classeId)
+                JOIN utilisateur as enseignant ON (enseignant.matricule = af.enseignantMatricule)",
+                array(
+                    ':classeId' => $classeId
+                ),
+                2
+            );
+        }
+
+        public function getAllBySemestre($classeId, $semestreNum) {
             return $this->request(
                 "SELECT * FROM affecter af
                 JOIN matiere ON (af.matiereId = matiere.id)

@@ -13,7 +13,6 @@
             header("location: /Pages/Gestion/Classes/Groupes/index.php?classeId=".$_GET["classeId"] . "&m=". ($success == true? 1 : 0));
         }
 
-        
         exit();
     }
     
