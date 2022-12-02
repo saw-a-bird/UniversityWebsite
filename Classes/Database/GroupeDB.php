@@ -54,7 +54,7 @@
 
             // returns NUMERO, parcoursNom
             return $this->request(
-                "SELECT g.numero as numero, p.nom as parcoursNom, c.id as classeID FROM groupe g
+                "SELECT c.numero as classeNumero, g.numero as groupeNumero, p.nom as parcoursNom, c.id as classeID FROM groupe g
                 JOIN classe c ON (g.classeId = c.id)
                 JOIN parcours p ON (c.parcoursID = p.id)
                 WHERE g.id = :groupeId",

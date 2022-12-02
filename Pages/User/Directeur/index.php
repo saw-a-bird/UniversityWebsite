@@ -14,6 +14,13 @@
     <?php
         include(ROOT."/Classes/Database/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
+
+        require_once(ROOT."/Classes/Database/BoiteDB.php");
+        $boiteDB = new BoiteDB();
+        $unseenMessage = $boiteDB->countUnseen($user["matricule"]);
+        $hasUnseen = $unseenMessage["c"] > 0;
+        $boiteDB = null;
+
     ?>
 
     <div class="logo">  
@@ -25,7 +32,7 @@
     </div>
 
     <div class="content">
-        <h1 class = "_block">Salut <?= $authName ?> </h1>
+        <h1 class = "_block">Bonjour, <?= $authName ?> </h1>
         <h2 class = "_block" style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
         <h3>Department: <?= $departmentDB->getNom($user["departmentID"]) ?><br>  </h3>
             
@@ -36,17 +43,15 @@
                         <img src="/Assets/imgs/account_icon.png"> 
                         <a href = "/Pages/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
                     </div>
-                    
+                    <div>
+                        <img src="/Assets/imgs/account_icon.png"> 
+                        <a href = "/Pages/Gestion/Boite/inbox.php"> <h4> Boite de messages <?= ($hasUnseen? "(".$unseenMessage["c"].")" : "") ?> </h4> </a>
+                    </div>
                     <div>
                         <img src="/Assets/imgs/adm_inscription.png" />
                         <a href = "/Pages/Gestion/PlanEtude/index.php"> <h4> Gestion de plans d'etude </h4> </a>
                     </div>
                     
-                    <div>
-                        <img src="/Assets/imgs/adm_inscription.png" />
-                        <a href = "/Pages/Gestion/Parcours/index.php"> <h4> Gestion de parcours </h4> </a>
-                    </div>
-
                 </aside>
                 <aside class="slide-item">
                     <div>
@@ -68,8 +73,16 @@
 
                 <aside class="slide-item">
                     <div>
+                        <img src="/Assets/imgs/adm_inscription.png" />
+                        <a href = "/Pages/Gestion/Parcours/index.php"> <h4> Gestion de parcours </h4> </a>
+                    </div>
+                    <div>
                         <img src="/Assets/imgs/etds_crowd.png" />
                         <a href = "/Pages/Gestion/Classes/index.php"> <h4> Gestion des classes </h4> </a>
+                    </div>
+                    <div>
+                        <img src="/Assets/imgs/account_icon.png"> 
+                        <a href = "/Pages/Gestion/Salles/consulter.php"> <h4> Consulter les salles </h4> </a>
                     </div>
                 </aside>
             </div>

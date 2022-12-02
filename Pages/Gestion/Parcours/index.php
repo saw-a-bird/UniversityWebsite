@@ -37,7 +37,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau de parcours: </h1>
     <div class = "cadre_header">
         
@@ -66,7 +66,7 @@
                             <td>".$parcours["filiere"]."</td>
                             <td>
                                 <a class = 'link_ref' href = 'modifier.php?id=".$parcours["id"]."'>Modifier</a>
-                                <a class = 'link_ref' href = '/Pipes/Parcours/supprimer.php?id=".$parcours["id"]."'>Supprimer</a>
+                                <a class = 'link_ref' href = '/Pipes/Parcours/supprimer.php?id=".$parcours["id"]."' onclick=\"return confirm('DELETION: Vous avez sûre de supprimer cette parcours?? CETTE ACTION EST PERMINANT!');\">Supprimer</a>
                             </td>
                         </tr>
                     ";

@@ -1,12 +1,12 @@
 
 const tables = document.currentScript.getAttribute('tables').split(',');
 const defaultMax = 5; // default max items per page;
-const cadreDefault = 2;
+const cadreDefault = 10;
 var navDiv;
 
 function advanced_table(tableId, maxItems) {
     this.maxItems = maxItems - 1;
-    this.tableElement = document.querySelector("#"+tableId+" #table_");
+    this.tableElement = document.querySelector("#"+tableId+" table");
     this.trList = this.tableElement.querySelectorAll("tbody tr");
     this.input = document.querySelector("#"+tableId+" #search_input");
     this.filterSelect = document.querySelector("#"+tableId+" #search_filter_form");

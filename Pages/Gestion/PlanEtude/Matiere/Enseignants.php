@@ -15,26 +15,8 @@
     <link rel="stylesheet" href="/Assets/css/profil.css">
     <link rel="stylesheet" href="/Assets/css/tables.css">
     <link rel="stylesheet" href="/Assets/css/buttons.css">
-
-    <style>
-
-        .selected_student {
-            background-color: rgb(239 206 155);
-        }
-
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .dialog_link:hover {
-            font-weight:bold
-        }
-        
-        .dialog_link .link_ref:hover {
-            background-color: transparent;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="/Assets/css/dialogwindow.css">
+   
 </head>
 <body>
 

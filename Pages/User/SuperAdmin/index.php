@@ -7,11 +7,18 @@
         include(ROOT."/Pipes/get_login.php");
     ?>
 
-    <title> Bonsoir - <?= $authName ?> </title>
+    <title> Bonjour - <?= $authName ?> </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
     <link rel="stylesheet" href="/Assets/css/pagination.css">
 </head>
 <body>
+    <?php
+        require_once(ROOT."/Classes/Database/BoiteDB.php");
+        $boiteDB = new BoiteDB();
+        $unseenMessage = $boiteDB->countUnseen($user["matricule"]);
+        $hasUnseen = $unseenMessage["c"] > 0;
+        $boiteDB = null;
+    ?>
     <div class="logo">  
         <div class = "header_div">
             <img src="/Assets/imgs/LOGO.png">
@@ -21,7 +28,7 @@
     </div>
 
     <div class="content">
-        <h1 class = "_block">Bonsoir <?= $authName ?> </h1>
+        <h1 class = "_block">Coucou, <?= $authName ?>. </h1>
         <h2 style = "margin-top: 0">Nom & Prenom: <?= $user["nom"]." ".$user["prenom"] ?></h2>
 
         <div class = "user_ability_list">
@@ -33,15 +40,14 @@
                             <a href = "/Pages/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
                         </div>
                         <div>
+                            <img src="/Assets/imgs/account_icon.png"> 
+                            <a href = "/Pages/Gestion/Boite/inbox.php"> <h4> Boite de messages <?= ($hasUnseen? "(".$unseenMessage["c"].")" : "") ?> </h4> </a>
+                        </div>
+                        <div>
                             <img src="/Assets/imgs/adm_inscription.png" />
                             <a href = "/Pages/Gestion/Inscriptions/index.php"> <h4> Configurer l'inscription </h4> </a>
                         </div>
-                        
-                        <div>
-                            <img src="/Assets/imgs/adm_inscription.png" />
-                            <a href = "/Pages/Gestion/Sessions/index.php"> <h4> Liste des sessions </h4> </a>
-                        </div>
-
+                    
                     </aside>
                     <aside class="slide-item">
                         <div>
@@ -51,6 +57,16 @@
                         <div>
                             <img src="/Assets/imgs/classroom.png" />
                             <a href = "/Pages/Gestion/Salles/index.php"> <h4> Gestion des salles </h4> </a>
+                        </div>
+                        <div>
+                            <img src="/Assets/imgs/adm_inscription.png" />
+                            <a href = "/Pages/Gestion/Sessions/index.php"> <h4> Liste des sessions </h4> </a>
+                        </div>
+                    </aside>
+                    <aside class="slide-item">                         
+                        <div>
+                            <img src="/Assets/imgs/account_icon.png"> 
+                            <a href = "/Pages/Gestion/Salles/consulter.php"> <h4> Consulter les salles </h4> </a>
                         </div>
                     </aside>
                 </div>

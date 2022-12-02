@@ -36,6 +36,18 @@
             );
         }
 
+        public function getAllGroups($classeId) {
+            return $this->request(
+                "SELECT g.numero as numero, eg.matricule as matricule, CONCAT(u.nom, ' ', u.prenom) as nomprenom FROM etudiant_group eg
+                JOIN utilisateur u ON (u.matricule = eg.matricule)
+                JOIN groupe g ON (g.id = eg.groupID AND g.classeId = :classeId)
+               	GROUP BY eg.matricule
+                ORDER BY eg.groupID, nomprenom",
+                array(':classeId' => $classeId),
+                2
+            );
+        }
+
 
         /* ADVANCED QUERY METHODS */
 

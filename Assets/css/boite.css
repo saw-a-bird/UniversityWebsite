@@ -1,0 +1,31 @@
+#messaging_box {
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    background: #FFFFFF;
+    box-shadow: 10px 10px 4px rgb(0 0 0 / 25%);
+    border-radius: 45px;
+}
+
+#message_first {
+    margin: 24px 20px 24px 70px;
+}
+
+.lab_in_textarea {
+    background-color: #ededed;
+    min-width: 92%;
+    max-width: 92%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 20px;
+    padding:20px;
+    
+}
+
+#Confirmer {
+    margin:0;
+    display: inline-block
+}

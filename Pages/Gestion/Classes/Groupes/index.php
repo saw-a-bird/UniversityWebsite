@@ -14,7 +14,7 @@
         $classeDB = null;
     ?>
 
-    <title><?= $authName ?> - Classe <?=$classe["nom"].".".$classe["numero"]?> - Liste d'etudiants </title>
+    <title><?= $authName ?> - Classe <?=$classe["nom"].".".$classe["numero"]?> - Liste des groupes </title>
     <link rel="stylesheet" href="/Assets/css/user.css">
     <link rel="stylesheet" href="/Assets/css/profil.css">
     <link rel="stylesheet" href="/Assets/css/tables.css">
@@ -48,7 +48,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau de groupes de la classe <?=$classe["nom"].".".$classe["numero"]?>: </h1>
     <div class = "cadre_header">
         <div class = "forms"></div>
@@ -74,7 +74,7 @@
                             <td>".$groupe["nombreEtudiant"]."</td>
                             <td>
                                 <a class = 'link_ref' href = '#' onclick='supprimerGroupe(".$groupe["id"].");'>Supprimer groupe</a>
-                                <a class = 'link_ref' href = 'Etudiants/index.php?groupeId=".$groupe["id"]."' >Liste d'etudiants</a>
+                                <a class = 'link_ref' href = 'Etudiants/index.php?classeId=$classeId&groupeId=".$groupe["id"]."' >Liste d'etudiants</a>
                             </td>
                         </tr>
                     ";

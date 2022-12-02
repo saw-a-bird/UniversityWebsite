@@ -1,0 +1,16 @@
+.selected_student, .selected_user {
+    background-color: rgb(239 206 155);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.dialog_link:hover {
+    font-weight:bold
+}
+
+.dialog_link .link_ref:hover {
+    background-color: transparent;
+    cursor: pointer;
+}

@@ -14,6 +14,13 @@
     <?php
         include(ROOT."/Classes/Database/DepartmentDB.php");
         $departmentDB = new DepartmentDB();
+        
+        require_once(ROOT."/Classes/Database/BoiteDB.php");
+        $boiteDB = new BoiteDB();
+        $unseenMessage = $boiteDB->countUnseen($user["matricule"]);
+        $hasUnseen = $unseenMessage["c"] > 0;
+        $boiteDB = null;
+
     ?>
     <div class="logo">  
         <div class = "header_div">
@@ -36,8 +43,18 @@
                         <a href = "/Pages/User/Account/profile.php"> <h4> Consulter votre compte </h4> </a>
                     </div>
                     <div>
+                        <img src="/Assets/imgs/account_icon.png"> 
+                        <a href = "/Pages/Gestion/Boite/inbox.php"> <h4> Boite de messages <?= ($hasUnseen? "(".$unseenMessage["c"].")" : "") ?> </h4> </a>
+                    </div>
+                    <div>
                         <img src="/Assets/imgs/adm_inscription.png" />
                         <a href = "/Pages/Gestion/PlanEtude/index.php"> <h4> Gestion de plans d'etude </h4> </a>
+                    </div>
+                </aside>
+                <aside class="slide-item">
+                    <div>
+                        <img src="/Assets/imgs/account_icon.png"> 
+                        <a href = "/Pages/Gestion/Salles/consulter.php"> <h4> Consulter les salles </h4> </a>
                     </div>
                 </aside>
             </div>

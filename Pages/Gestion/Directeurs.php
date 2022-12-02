@@ -37,7 +37,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau de directeurs: </h1>
     <table id ="table_" class="scrollable-table">
         <thead>

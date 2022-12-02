@@ -73,8 +73,18 @@
         /* QUERY METHODS */
         public function getAll() {
             return $this->request(
-                "SELECT * FROM utilisateur WHERE role <> 0",
+                "SELECT * FROM utilisateur WHERE role <> 0  AND u.isBanned = 0",
                 array(),
+                2
+            );
+        }
+
+        public function getAllByDepartmentID($matricule, $departmentId) {
+            return $this->request(
+                "SELECT matricule, CONCAT(u.nom, ' ', u.prenom) as nomprenom, d.nom as departmentNom, u.role as role FROM utilisateur as u
+                JOIN department d ON (d.id = u.departmentID)
+                WHERE u.departmentID = :departmentId AND u.matricule <> :matricule AND u.isBanned = 0",
+                array(":departmentId" => $departmentId, ":matricule" => $matricule),
                 2
             );
         }

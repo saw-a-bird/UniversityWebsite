@@ -46,7 +46,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau d'utilisateurs: </h1>
     <?= $message ?>
     <div class = "cadre_header">

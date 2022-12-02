@@ -5,6 +5,11 @@ body{
     
 }
 
+.website_title{
+    font-family: "Segoe UI",Arial,sans-serif;
+    color: white;  
+  }
+
 /*logo and name*/
 #nom_uni{
     position: absolute;

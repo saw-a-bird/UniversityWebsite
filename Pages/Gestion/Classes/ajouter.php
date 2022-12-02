@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Assets/css/secondary_form.css">
     <link rel="stylesheet" href="/Assets/css/general.css">
+    <link rel="stylesheet" href="/Assets/css/user.css">
 </head>
 <body>
     <?php
@@ -50,9 +51,17 @@
         }
     ?>
          <!--logo and name--> 
-    <div>
-        <img src="/Assets/imgs/LOGO.png" alt="LOGO" id="logo">
-        <h1 id="nom_uni"> <?= NOM_SITE ?> </h1>
+    <div class="logo">  
+        <div class = "seperated_div">
+            <div class = "header_div">
+                <img src="/Assets/imgs/LOGO.png">
+                <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
+            </div>
+            <div class = "buttons_div">
+                <h3 class = "go_back"> <a href="index.php">Retourner</a></h3>
+                <h3 class = "deconnection"> <a href="/Pipes/deconnexion.php">Se deconnecter</a></h3>
+            </div>
+        </div>
     </div>
     <!--form-->
     <div id="container" style = "top: 15%;">

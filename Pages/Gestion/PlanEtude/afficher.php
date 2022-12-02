@@ -20,6 +20,10 @@
             font-size: 14px;
         } */
 
+        .table_name {     
+            font-size: 30px;
+        }
+
         tr > th {
             border: 1px solid rgb(206, 140, 41);
         }
@@ -60,7 +64,8 @@
             require_once(ROOT."/Classes/Database/PlanEtudeDB.php");
             $planEtudeDB = new PlanEtudeDB();
 
-            if ($planEtudeDB->exists($planId)) {
+            $planEtude = $planEtudeDB->get($planId);
+            if (!empty($planEtude)) {
                 $planEtudeDB = null;
                 require_once(ROOT."/Classes/Database/UniteDB.php");
                 $uniteDB = new UniteDB();
@@ -85,6 +90,7 @@
                 <h2 class = "website_title"> <?= NOM_SITE ?> </h2>
             </div>
             <div class = "buttons_div">
+                <h3 class = "print_page"> <a onclick = "print_page()">Imprimer </a></h3>
                 <h3 class = "go_back"> <a href="index.php">Retourner</a></h3>
                 <h3 class = "deconnection"> <a href="/Pipes/deconnexion.php">Se deconnecter</a></h3>
             </div>
@@ -93,7 +99,7 @@
 
     <div class="cd">
         <div class="cadre" >
-        <h1 class = "table_name"> Plan etude #<?= $planId ?>: </h1>
+        <h1 class = "table_name"> Plan etude <?= $planEtude["parcoursNom"] ?> (<?= $planEtude["dateDebut"]." -- ".$planEtude["dateFin"] ?>): </h1>
             <div class = "cadre_header">
                 <div class = "forms">
 
@@ -104,7 +110,7 @@
                     <a href = "Matiere/ajouter.php?planId=<?= $planId ?>"><button class = "_btn _green_btn"> Ajouter un matiere </button></a>
                 </div>
             </div>
-            <table id="table_" class="scrollable-table">
+            <table id="table_" class="scrollable-table" border='1' cellpadding='0' style = "border: 1px solid rgb(206, 140, 41);">
             <thead>
                 <tr>
                     <th rowspan="2" style="width:1%"><span class="table_header">Semestre</span></th>
@@ -193,5 +199,40 @@
         </div>
     </div>
  
+    
+    <script>
+        divToPrint = document.getElementById("table_");
+
+        function print_page() {
+            deletebtns = document.querySelectorAll(".delete_x");
+            deletebtns.forEach((v, k) => {
+                v.style.display = "none"
+            })
+
+            enseignantBtns = document.querySelectorAll(".enseignant_x");
+            enseignantBtns.forEach((v, k) => {
+                v.style.display = "none"
+            })
+
+            tableTitle = document.querySelector(".table_name").innerHTML;
+            var newWin = window.open(
+                            "http://isetso.local/",
+                            tableTitle,
+                            "width=420,height=230,resizable,scrollbars=yes,status=1"
+                            )
+            newWin.document.write(tableTitle);
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+
+            deletebtns.forEach((v, k) => {
+                v.style.display = ""
+            })
+
+            enseignantBtns.forEach((v, k) => {
+                v.style.display = ""
+            })
+        }
+    </script>
 </body>
 </html>

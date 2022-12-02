@@ -37,7 +37,7 @@
 </div>
 
 <div class="cd">
-<div class="cadre">
+<div class="cadre" id = "cadre">
     <h1> Tableau de salles: </h1>
     <div class = "cadre_header">
         

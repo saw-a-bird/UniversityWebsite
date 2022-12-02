@@ -17,10 +17,10 @@
         }
 
         
-        public function delete($classId) {
-            $query = "DELETE FROM classe WHERE id = :classId"; 
+        public function delete($classeId) {
+            $query = "DELETE FROM classe WHERE id = :classeId"; 
             $secureArray = array( 
-                ":classId" => $classId
+                ":classeId" => $classeId
             );
 
             $this->request($query, $secureArray);
@@ -31,6 +31,7 @@
 
         public function exists($parcoursID, $numero, $anne) {
             $query = "SELECT * from classe WHERE parcoursID = :parcoursID AND numero = :numero AND anne = :anne"; 
+
             $secureArray = array( 
                 ":parcoursID" => $parcoursID,
                 ":numero" => $numero,
@@ -47,6 +48,20 @@
                 WHERE classe.id = :classId",
                 array(':classId' => $classId),
                 1
+            );
+        }
+
+        public function getAllByDepartmentSimple($departmentID) {
+            return $this->request(
+                "SELECT c.id as id, CONCAT(p.nom,'.',c.numero) as classe
+                FROM classe c 
+                JOIN parcours p ON (p.departmentID = :departmentID AND c.parcoursID = p.id)
+                JOIN session as s ON (s.anne = c.anne)
+                JOIN website_config config ON (config.sessionNumero = s.numero) 
+                GROUP BY c.id",
+
+                array(':departmentID' => $departmentID),
+                2
             );
         }
 
@@ -67,6 +82,19 @@
 
                 array(':departmentID' => $departmentID),
                 2
+            );
+        }
+
+        /* QUERY METHODS */
+        public function getByEtudiant($matricule) {
+            return $this->request(
+                "SELECT c.id as id, p.nom as parcoursNom, c.numero as classNumero, g.id as groupId, g.numero as groupNumero FROM classe c
+                JOIN etudiant_group eg ON (eg.matricule = :matricule)
+                JOIN groupe g ON (g.id = eg.groupID)
+                JOIN parcours p ON (c.parcoursID = p.id)
+                WHERE c.anne = (SELECT anne FROM session JOIN website_config wc ON (session.numero = wc.sessionNumero))",
+                array(':matricule' => $matricule),
+                1
             );
         }
     }
