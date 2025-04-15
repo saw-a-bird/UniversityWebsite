@@ -180,7 +180,7 @@ auth_password=yfebrxnecjwpppli
 
   ```
 
-Please try not to spam emails, it'll block all email-related functionality for a day, which will be really inconvenient for all of us.
+Please try not to spam emails, it'll block all email-related functionality for a day, which will be really inconvenient for all of us (UPDATE: The emails are no longer working)
 
 I already taken care of the server-side code inside the Class ``` Emailer.php ```. Feel free to check it.
 
