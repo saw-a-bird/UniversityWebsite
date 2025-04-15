@@ -11,26 +11,23 @@
 - [X] users: public details
 
 - [X] interface enseignant.
-- [ ] enseignant: afficher emploi
-- [ ] enseignant: ... ???
+- [X] enseignant: afficher emploi
 
 - [X] interface etudiant
-- CANCELED: etudiant: table parents
-- [ ] etudiant: afficher emploi
-- [ ] etudiant: ... ???
+- [X] etudiant: afficher emploi
 
 - [X] interface super-admin
 - [X] super-admin: gestion users
 - [X] super-admin: inscription
-- [ ] super-admin: anne > session (+CRUD, new session if last year) > classes > groups > emploi??
-- [ ] super-admin: afficher salles + form salle (nom)
+- [X] super-admin: anne > session (+CRUD, new session if last year) > classes > groups > emploi??
+- [X] super-admin: afficher salles + form salle (nom)
 
 - [X] interface admin
-- [ ] admin: plan etudes (by parcours in their department) > semestres > unites > matieres > enseignants.
-- [ ] admin: classes > groups > etudiants
-- [ ] admin: afficher emplois (etudiant only, enseignant automatic) + form emploi (salle, sceance, emploi, class, group, matiere, enseignant)
+- [X] admin: plan etudes (by parcours in their department) > semestres > unites > matieres > enseignants.
+- [X] admin: classes > groups > etudiants
+- [X] admin: afficher emplois (etudiant only, enseignant automatic) + form emploi (salle, sceance, emploi, class, group, matiere, enseignant)
 
-
+- CANCELED: etudiant: table parents
 - CANCELED: interface parent
 - CANCELED: parent: table enfants >> details enfant
 
@@ -84,6 +81,12 @@
   - add/remove to table (CIN, role)
   ```
 
+- [X] logout 
+  ```
+  - remove login from SESSION
+  - redirect to main page (inscription page)
+  ```
+
 - CANCELED: parent interface
   ```
   - onRegister: immediately after confimation email, send email to enfant (by cin from Form) to verify identity.
@@ -91,13 +94,6 @@
   - onNotVerified: remove user.
   - Ability: get table etudiants
   ```
-
-- [X] logout 
-  ```
-  - remove login from SESSION
-  - redirect to main page (inscription page)
-  ```
-
 
 # Tutorial GITHUB:
 Source: https://www.youtube.com/watch?v=jhtbhSpV5YA
