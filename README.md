@@ -54,20 +54,20 @@
   - activation link not accepted in 24hours
   ```
 
-- [X]  create login function 
+- [X] create login function 
   ```
   - use email + password
   - save login to SESSION
   - redirect to specific interface per role
   ```
 
-- [X]: forgot password button 
+- [X] forgot password button 
   ```
   - email from form
   - send password
   ```
 
-- [X]: reconfirmation send button 
+- [X] reconfirmation send button 
   ```
   - email from form
   - send confirmation email
