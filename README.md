@@ -1,4 +1,13 @@
 
+
+<img width="1880" height="882" alt="image" src="https://github.com/user-attachments/assets/2e8c2400-ba60-47d3-86ae-8092a0fea22c" />
+<img width="1053" height="768" alt="ob_pass" src="https://github.com/user-attachments/assets/e55ac74a-fecd-4817-85a0-def8c7dc6b95" />
+<img width="1053" height="768" alt="creation password" src="https://github.com/user-attachments/assets/898cb5ef-8e78-4b5a-8154-bfd379e132dc" />
+<img width="1061" height="769" alt="inter_admin" src="https://github.com/user-attachments/assets/7bb4356d-8035-4ffc-a147-4209a3490967" />
+<img width="1061" height="768" alt="list_account" src="https://github.com/user-attachments/assets/78edc1c9-cc8a-41f7-9c82-bbe213768145" />
+<img width="1128" height="824" alt="s_form" src="https://github.com/user-attachments/assets/d84bca5d-5965-4f75-9fa7-2f7bf65b1c0d" />
+<img width="1110" height="768" alt="site_closed" src="https://github.com/user-attachments/assets/aea522d4-da11-494f-87f2-0c7aebfcaf24" />
+
 # TODO
 
 ### Frontend:
