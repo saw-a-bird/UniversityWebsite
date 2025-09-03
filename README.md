@@ -1,12 +1,23 @@
+## Introduction
 
+This project is a collaborative team effort developed by **6 students**, supervised by the **Department Chief**. It is designed to provide a comprehensive solution for managing academic and administrative tasks efficiently.
 
-<img width="1880" height="882" alt="image" src="https://github.com/user-attachments/assets/2e8c2400-ba60-47d3-86ae-8092a0fea22c" />
-<img width="1053" height="768" alt="ob_pass" src="https://github.com/user-attachments/assets/e55ac74a-fecd-4817-85a0-def8c7dc6b95" />
-<img width="1053" height="768" alt="creation password" src="https://github.com/user-attachments/assets/898cb5ef-8e78-4b5a-8154-bfd379e132dc" />
-<img width="1061" height="769" alt="inter_admin" src="https://github.com/user-attachments/assets/7bb4356d-8035-4ffc-a147-4209a3490967" />
-<img width="1061" height="768" alt="list_account" src="https://github.com/user-attachments/assets/78edc1c9-cc8a-41f7-9c82-bbe213768145" />
-<img width="1128" height="824" alt="s_form" src="https://github.com/user-attachments/assets/d84bca5d-5965-4f75-9fa7-2f7bf65b1c0d" />
-<img width="1110" height="768" alt="site_closed" src="https://github.com/user-attachments/assets/aea522d4-da11-494f-87f2-0c7aebfcaf24" />
+In this project, I mainly worked on the **backend development**, designed the **database structure**, and helped **synchronize the backend with the frontend**. My teammates contributed by developing the **frontend**, performing **testing**, creating **useful diagrams**, and **fine-tuning the backend** to ensure smooth operation. Together, we built a robust and user-friendly application with a variety of features such as user management, registration lists, mail handling, study plans, scheduling, and more, making it a complete tool for departmental use.
+
+## Screenshots
+
+| Feature | Screenshot |
+|---------|------------|
+| Bienvenue Screen | ![Bienvenue](https://github.com/user-attachments/assets/1397bd3a-ef95-42f6-89a1-7ca3b20fd68f) |
+| User List | ![User List](https://github.com/user-attachments/assets/1573a70f-6458-4d66-8540-0942dfe432e0) |
+| Inscriptions List | ![Inscriptions List](https://github.com/user-attachments/assets/108dfe5b-0129-42a4-9f1f-2b5b6cb98ee7) |
+| Mail Box | ![Mail Box](https://github.com/user-attachments/assets/4a487c63-c208-440b-b8b2-4bffef83cb5b) |
+| Plan d'étude | ![Plan d'étude](https://github.com/user-attachments/assets/6f81b1e6-b9ec-4aa5-aca0-98701247ea01) |
+| Ajouter Plan d'étude Row | ![Ajouter Plan d'étude](https://github.com/user-attachments/assets/f28dec6b-611f-48d6-9758-56c5d5ee66b6) |
+| Emploi Screen | ![Emploi](https://github.com/user-attachments/assets/ce00b24b-268b-4995-8f65-0aca67f1f110) |
+
+*…and many more features! This project is very thorough.*
+
 
 # TODO
 
