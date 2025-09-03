@@ -186,7 +186,7 @@ I already taken care of the server-side code inside the Class ``` Emailer.php ``
 
 # HOW TO SET UP WEBSITE (NECESSARY):
 
-This was actually done, not because it looks pretty cool, it helps with routing especially for images.
+This wasn’t done just because it looks cool; it actually helps with routing, especially for images.
 
 Go to ```C:\xampp\apache\conf\extra```, and open ```httpd-vhosts.conf```. Add this:
 
